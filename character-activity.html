@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>עבודת הגשה - בנה את הדמות שלך 🎬</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: #e8e8e8;
+            direction: rtl;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            margin: 20px auto;
+            background: white;
+            padding: 10mm 13mm;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+            page-break-after: always;
+        }
+
+        .page::before {
+            content: "🎬";
+            position: absolute;
+            font-size: 320px;
+            opacity: 0.03;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-20deg);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .page > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-2::before {
+            content: "✍️";
+        }
+
+        @media print {
+            @page { size: A4; margin: 0; }
+            body { background: white; margin: 0; }
+            .page {
+                margin: 0;
+                box-shadow: none;
+                padding: 8mm 11mm;
+                width: 210mm;
+                height: 297mm;
+                overflow: hidden;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+            .no-print { display: none !important; }
+        }
+
+        /* =================== HEADER =================== */
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #c41e3a 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 7px;
+        }
+
+        .header h1 {
+            font-size: 1.6em;
+            font-weight: 900;
+            line-height: 1.1;
+        }
+
+        .header h1 span { color: #ff9999; }
+        .header-sub { font-size: 0.75em; opacity: 0.8; font-weight: 300; }
+        .header-icon { font-size: 2.8em; opacity: 0.8; }
+
+        /* ASSIGNMENT BADGE */
+        .assignment-badge {
+            display: inline-block;
+            background: #ffd700;
+            color: #5a4200;
+            font-weight: 900;
+            font-size: 0.75em;
+            padding: 3px 12px;
+            border-radius: 20px;
+            margin-bottom: 7px;
+        }
+
+        /* NAME ROW */
+        .name-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 7px;
+            padding: 5px 10px;
+            background: #f8f8f8;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .name-field {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .name-field label {
+            font-weight: 700;
+            font-size: 0.8em;
+            color: #555;
+            white-space: nowrap;
+        }
+
+        .name-field .line {
+            flex: 1;
+            border-bottom: 1.5px solid #999;
+            min-height: 16px;
+        }
+
+        /* MAIN GRID */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7px;
+            margin-bottom: 7px;
+        }
+
+        .full-width { grid-column: 1 / -1; }
+
+        /* SECTION */
+        .section {
+            border: 1.5px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 10px;
+            font-weight: 900;
+            font-size: 0.82em;
+        }
+
+        .section-title .num {
+            width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.78em;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        .section-body {
+            padding: 7px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .s1 .section-title { background: #fdecea; color: #c41e3a; }
+        .s1 .section-title .num { background: #c41e3a; }
+        .s1 { border-color: #f5b7b1; }
+
+        .s2 .section-title { background: #eaf2f8; color: #1a5276; }
+        .s2 .section-title .num { background: #1a5276; }
+        .s2 { border-color: #aed6f1; }
+
+        .s3 .section-title { background: #eafaf1; color: #1e8449; }
+        .s3 .section-title .num { background: #1e8449; }
+        .s3 { border-color: #a9dfbf; }
+
+        .s4 .section-title { background: #f4ecf7; color: #7d3c98; }
+        .s4 .section-title .num { background: #7d3c98; }
+        .s4 { border-color: #d7bde2; }
+
+        .s5 .section-title { background: #fef9e7; color: #d35400; }
+        .s5 .section-title .num { background: #d35400; }
+        .s5 { border-color: #f9e79f; }
+
+        .field-label {
+            font-size: 0.71em;
+            font-weight: 700;
+            color: #666;
+            margin-bottom: 2px;
+        }
+
+        .write-line {
+            border: none;
+            border-bottom: 1.5px solid #bbb;
+            width: 100%;
+            min-height: 15px;
+            display: block;
+        }
+
+        .write-line-tall {
+            border: 1.5px solid #bbb;
+            border-radius: 4px;
+            width: 100%;
+            min-height: 26px;
+            display: block;
+        }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .contradiction {
+            background: #fff5f5;
+            border: 1.5px solid #f1948a;
+            border-radius: 6px;
+            padding: 7px 10px;
+        }
+
+        .contradiction-sentence {
+            font-size: 0.86em;
+            font-weight: 700;
+            color: #922b21;
+            line-height: 2.1;
+            margin-bottom: 4px;
+        }
+
+        .blank {
+            display: inline-block;
+            border-bottom: 1.5px solid #c41e3a;
+            min-width: 95px;
+            margin: 0 3px;
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 3px;
+        }
+
+        .chip {
+            background: white;
+            border: 1px solid #f1948a;
+            border-radius: 12px;
+            padding: 2px 7px;
+            font-size: 0.66em;
+            color: #922b21;
+        }
+
+        .genre-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 3px;
+            margin-bottom: 5px;
+        }
+
+        .genre-box {
+            border: 1.5px solid #e0cc99;
+            border-radius: 5px;
+            padding: 3px 4px;
+            text-align: center;
+            font-size: 0.65em;
+            background: #fffdf0;
+        }
+
+        .genre-box .check {
+            width: 9px;
+            height: 9px;
+            border: 1.5px solid #999;
+            border-radius: 2px;
+            display: inline-block;
+            margin-left: 2px;
+            vertical-align: middle;
+        }
+
+        .draw-box {
+            border: 1.5px dashed #bbb;
+            border-radius: 6px;
+            height: 68px;
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            font-size: 0.78em;
+        }
+
+        .bonus {
+            background: linear-gradient(135deg, #fff8e7, #fff3d4);
+            border: 1.5px solid #ffc947;
+            border-radius: 8px;
+            padding: 6px 10px;
+        }
+
+        .bonus-title {
+            font-weight: 900;
+            font-size: 0.8em;
+            color: #7d6608;
+            margin-bottom: 4px;
+        }
+
+        .bonus-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #1a1a2e 0%, #c41e3a 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 6px 14px;
+            text-align: center;
+            font-size: 0.75em;
+            margin-top: 7px;
+        }
+
+        /* =================== PAGE 2 =================== */
+
+        .header-p2 {
+            background: linear-gradient(135deg, #1a1a2e 0%, #1e8449 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 7px;
+        }
+
+        .header-p2 h1 {
+            font-size: 1.5em;
+            font-weight: 900;
+            line-height: 1.1;
+        }
+
+        .header-p2 h1 span { color: #90ee90; }
+        .header-p2 .header-sub { font-size: 0.72em; opacity: 0.8; }
+        .header-p2 .header-icon { font-size: 2.8em; opacity: 0.8; }
+
+        /* PRINCIPLES BOX */
+        .principles-box {
+            background: linear-gradient(135deg, #eaf2f8, #d6eaf8);
+            border: 2px solid #2e86c1;
+            border-radius: 10px;
+            padding: 9px 14px;
+            margin-bottom: 9px;
+        }
+
+        .principles-title {
+            font-weight: 900;
+            font-size: 0.88em;
+            color: #1a5276;
+            margin-bottom: 7px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 7px;
+        }
+
+        .principle-card {
+            background: white;
+            border-radius: 8px;
+            padding: 8px 10px;
+            border-right: 3px solid;
+        }
+
+        .principle-card.p1 { border-color: #c41e3a; }
+        .principle-card.p2 { border-color: #1e8449; }
+        .principle-card.p3 { border-color: #7d3c98; }
+
+        .principle-num {
+            font-size: 0.65em;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 3px;
+        }
+
+        .principle-card.p1 .principle-num { color: #c41e3a; }
+        .principle-card.p2 .principle-num { color: #1e8449; }
+        .principle-card.p3 .principle-num { color: #7d3c98; }
+
+        .principle-title {
+            font-size: 0.82em;
+            font-weight: 900;
+            color: #1a1a2e;
+            margin-bottom: 3px;
+        }
+
+        .principle-desc {
+            font-size: 0.7em;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .principle-example {
+            font-size: 0.65em;
+            color: #888;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        /* TASK BOX */
+        .task-box {
+            background: linear-gradient(135deg, #fff8e7, #fff3d4);
+            border: 2px solid #ffc947;
+            border-radius: 10px;
+            padding: 9px 14px;
+            margin-bottom: 9px;
+        }
+
+        .task-title {
+            font-weight: 900;
+            font-size: 0.9em;
+            color: #7d6608;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .task-requirements {
+            display: flex;
+            gap: 20px;
+        }
+
+        .req {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            font-size: 0.75em;
+            color: #5a4200;
+        }
+
+        .req-icon {
+            font-size: 1.1em;
+            flex-shrink: 0;
+        }
+
+        /* STORY LINES */
+        .story-section {
+            margin-bottom: 8px;
+        }
+
+        .story-label {
+            font-size: 0.8em;
+            font-weight: 900;
+            color: #1a1a2e;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .story-label .badge {
+            background: #1a1a2e;
+            color: white;
+            border-radius: 4px;
+            padding: 1px 8px;
+            font-size: 0.85em;
+        }
+
+        .story-line {
+            border: none;
+            border-bottom: 1.5px solid #ccc;
+            width: 100%;
+            height: 22px;
+            display: block;
+            margin-bottom: 4px;
+            background: transparent;
+        }
+
+        .story-line:nth-child(odd) {
+            background: #fafafa;
+        }
+
+        /* CHECKLIST */
+        .checklist-box {
+            background: #f4f6f7;
+            border: 1.5px solid #bdc3c7;
+            border-radius: 8px;
+            padding: 7px 12px;
+            margin-bottom: 7px;
+        }
+
+        .checklist-title {
+            font-weight: 900;
+            font-size: 0.78em;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .checklist-items {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72em;
+            color: #444;
+        }
+
+        .check-item .box {
+            width: 12px;
+            height: 12px;
+            border: 1.5px solid #888;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        /* GRADE ROW */
+        .grade-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .grade-box {
+            flex: 1;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .grade-box label {
+            font-weight: 700;
+            font-size: 0.75em;
+            color: #666;
+            white-space: nowrap;
+        }
+
+        .grade-box .line {
+            flex: 1;
+            border-bottom: 1.5px solid #bbb;
+            min-height: 16px;
+        }
+
+        .footer-p2 {
+            background: linear-gradient(135deg, #1a1a2e 0%, #1e8449 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 6px 14px;
+            text-align: center;
+            font-size: 0.73em;
+            margin-top: 7px;
+        }
+
+        /* PRINT BTN */
+        .print-btn {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: #c41e3a;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 25px;
+            font-size: 0.95em;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            box-shadow: 0 4px 15px rgba(196,30,58,0.4);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== PAGE 1: CHARACTER BUILDER ========== -->
+<div class="page">
+
+    <div class="assignment-badge">⭐ עבודת הגשה - חלק א' מתוך ב'</div>
+
+    <div class="header">
+        <div>
+            <div class="header-sub">תוכנית פלאש · סטוריטלינג וקולנוע</div>
+            <h1>בנה את <span>הדמות</span> שלך 🎬</h1>
+        </div>
+        <div class="header-icon">🎬</div>
+    </div>
+
+    <div class="name-row">
+        <div class="name-field"><label>שם:</label><div class="line"></div></div>
+        <div class="name-field"><label>כיתה:</label><div class="line"></div></div>
+        <div class="name-field"><label>תאריך:</label><div class="line"></div></div>
+    </div>
+
+    <div class="main-grid">
+
+        <div class="section s1">
+            <div class="section-title">
+                <div class="num">1</div>
+                הכרות עם הדמות
+            </div>
+            <div class="section-body">
+                <div>
+                    <div class="field-label">שם הדמות</div>
+                    <div class="write-line"></div>
+                </div>
+                <div class="field-row">
+                    <div>
+                        <div class="field-label">גיל</div>
+                        <div class="write-line"></div>
+                    </div>
+                    <div>
+                        <div class="field-label">מקצוע / מי הם?</div>
+                        <div class="write-line"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="field-label">באיזה עולם הם חיים?</div>
+                    <div class="write-line"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section s2">
+            <div class="section-title">
+                <div class="num">2</div>
+                הפוך אותה לספציפית
+            </div>
+            <div class="section-body">
+                <div>
+                    <div class="field-label">🎯 הכישרון הכי מיוחד שלהם?</div>
+                    <div class="write-line"></div>
+                </div>
+                <div>
+                    <div class="field-label">💔 מה הם אוהבים שאף אחד לא יאמין?</div>
+                    <div class="write-line"></div>
+                </div>
+                <div>
+                    <div class="field-label">🧩 פרט אחד ספציפי שמגדיר אותם</div>
+                    <div class="write-line"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section s3 full-width">
+            <div class="section-title">
+                <div class="num">3</div>
+                הסתירה - הלב של הדמות ❤️ (זה מה שהופך אותה לבלתי נשכחת!)
+            </div>
+            <div class="section-body">
+                <div class="contradiction">
+                    <div class="contradiction-sentence">
+                        הדמות שלי היא
+                        <span class="blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        אבל גם
+                        <span class="blank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </div>
+                    <div class="chips">
+                        <span class="chip">🐀 עכבר → שף</span>
+                        <span class="chip">🦸 גיבור → מפחד מחושך</span>
+                        <span class="chip">🔥 כבאי → מפחד מאש</span>
+                        <span class="chip">💪 אלוף → רגיש מאוד</span>
+                        <span class="chip">🔬 מדען → לא מאמין במדע</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="field-label">למה הסתירה הזו מעניינת? ספרו יותר:</div>
+                    <div class="write-line-tall"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section s4">
+            <div class="section-title">
+                <div class="num">4</div>
+                הקונפליקט
+            </div>
+            <div class="section-body">
+                <div>
+                    <div class="field-label">מה הדמות רוצה?</div>
+                    <div class="write-line"></div>
+                </div>
+                <div>
+                    <div class="field-label">מה עומד בדרכה?</div>
+                    <div class="write-line"></div>
+                </div>
+                <div>
+                    <div class="field-label">📝 תמצתו בשורה אחת - מה הסיפור?</div>
+                    <div class="write-line-tall"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section s5">
+            <div class="section-title">
+                <div class="num">5</div>
+                ז'אנר + ציור הדמות
+            </div>
+            <div class="section-body">
+                <div>
+                    <div class="field-label">סמנו ✓ על הז'אנר שמתאים:</div>
+                    <div class="genre-grid">
+                        <div class="genre-box"><span class="check"></span>😂 קומדיה</div>
+                        <div class="genre-box"><span class="check"></span>😨 אימה</div>
+                        <div class="genre-box"><span class="check"></span>🚀 מדע בדיוני</div>
+                        <div class="genre-box"><span class="check"></span>💥 אקשן</div>
+                        <div class="genre-box"><span class="check"></span>🏹 הרפתקאות</div>
+                        <div class="genre-box"><span class="check"></span>🧙 פנטזיה</div>
+                        <div class="genre-box"><span class="check"></span>💕 רומנטי</div>
+                        <div class="genre-box"><span class="check"></span>🕵️ מתח</div>
+                        <div class="genre-box"><span class="check"></span>🎭 דרמה</div>
+                        <div class="genre-box"><span class="check"></span>🤠 מערבון</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="field-label">✏️ ציירו את הדמות:</div>
+                    <div class="draw-box">מקום לציור ✏️</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bonus">
+        <div class="bonus-title">⭐ בונוס: תנו שם לסרט שלכם!</div>
+        <div class="bonus-row">
+            <div>
+                <div class="field-label">שם הסרט:</div>
+                <div class="write-line"></div>
+            </div>
+            <div>
+                <div class="field-label">סלוגן (משפט שיפרסם את הסרט):</div>
+                <div class="write-line"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        🎬 חלק א' מתוך ב' · המשיכו לעמוד הבא לכתיבת הסיפור! ←
+    </div>
+
+</div>
+
+
+<!-- ========== PAGE 2: STORY WRITING ========== -->
+<div class="page page-2">
+
+    <div class="assignment-badge">✍️ עבודת הגשה - חלק ב' מתוך ב'</div>
+
+    <div class="header-p2">
+        <div>
+            <div class="header-sub">תוכנית פלאש · סטוריטלינג וקולנוע</div>
+            <h1>כתבו את <span>הסיפור</span> ✍️</h1>
+        </div>
+        <div class="header-icon">✍️</div>
+    </div>
+
+    <div class="name-row">
+        <div class="name-field"><label>שם:</label><div class="line"></div></div>
+        <div class="name-field"><label>שם הדמות:</label><div class="line"></div></div>
+    </div>
+
+    <!-- PRINCIPLES -->
+    <div class="principles-box">
+        <div class="principles-title">
+            📚 עקרונות הסיפור - זכרו אותם!
+        </div>
+        <div class="principles-grid">
+            <div class="principle-card p1">
+                <div class="principle-num">עיקרון 1</div>
+                <div class="principle-title">🎭 דמות ספציפית</div>
+                <div class="principle-desc">הדמות צריכה להיות ספציפית עם פרטים ייחודיים. לא "ילד" אלא "ילד שיודע לדבר עם בעלי חיים אבל מפחד מחתולים".</div>
+                <div class="principle-example">← ספציפי = מעניין!</div>
+            </div>
+            <div class="principle-card p2">
+                <div class="principle-num">עיקרון 2</div>
+                <div class="principle-title">⚡ קונפליקט</div>
+                <div class="principle-desc">הדמות חייבת להתמודד עם משהו שקשה לה. קונפליקט = מה שמניע את הסיפור. בלי קונפליקט - אין סיפור!</div>
+                <div class="principle-example">← קונפליקט = מנוע הסיפור</div>
+            </div>
+            <div class="principle-card p3">
+                <div class="principle-num">עיקרון 3</div>
+                <div class="principle-title">🤔 החלטה</div>
+                <div class="principle-desc">בשיא הסיפור הדמות חייבת לקבל החלטה חשובה. ההחלטה מגלה מי היא באמת - ומה היא מוכנה להקריב.</div>
+                <div class="principle-example">← ההחלטה = הלב של הסיפור</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TASK -->
+    <div class="task-box">
+        <div class="task-title">📝 המשימה שלכם</div>
+        <div class="task-requirements">
+            <div class="req">
+                <div class="req-icon">✍️</div>
+                <div>כתבו <strong>סיפור קצר</strong> על הדמות שיצרתם. הסיפור חייב לכלול <strong>קונפליקט אחד</strong> והחלטה שהדמות צריכה לקבל.</div>
+            </div>
+            <div class="req">
+                <div class="req-icon">📏</div>
+                <div><strong>8 שורות לפחות</strong> (כ-100 מילים). אתם יכולים לכתוב יותר!</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STORY LINES -->
+    <div class="story-section">
+        <div class="story-label">
+            <span class="badge">הסיפור שלי</span>
+            כתבו כאן - תנו לדמות לחיות!
+        </div>
+        <div class="write-line" style="height:22px;"></div>
+        <div class="write-line" style="height:22px; background:#fafafa;"></div>
+        <div class="write-line" style="height:22px;"></div>
+        <div class="write-line" style="height:22px; background:#fafafa;"></div>
+        <div class="write-line" style="height:22px;"></div>
+        <div class="write-line" style="height:22px; background:#fafafa;"></div>
+        <div class="write-line" style="height:22px;"></div>
+        <div class="write-line" style="height:22px; background:#fafafa;"></div>
+        <div class="write-line" style="height:22px;"></div>
+        <div class="write-line" style="height:22px; background:#fafafa;"></div>
+        <div class="write-line" style="height:22px;"></div>
+        <div class="write-line" style="height:22px; background:#fafafa;"></div>
+    </div>
+
+    <!-- CHECKLIST -->
+    <div class="checklist-box">
+        <div class="checklist-title">✅ לפני שמגישים - בדקו שיש בסיפור:</div>
+        <div class="checklist-items">
+            <div class="check-item"><div class="box"></div>הדמות ספציפית עם פרטים ייחודיים</div>
+            <div class="check-item"><div class="box"></div>יש קונפליקט ברור בסיפור</div>
+            <div class="check-item"><div class="box"></div>הדמות צריכה לקבל החלטה</div>
+            <div class="check-item"><div class="box"></div>הסיפור לפחות 8 שורות</div>
+            <div class="check-item"><div class="box"></div>הסתירה של הדמות מופיעה בסיפור</div>
+            <div class="check-item"><div class="box"></div>כתבתי שם בחלק א' וב'</div>
+        </div>
+    </div>
+
+    <!-- GRADE ROW -->
+    <div class="grade-row">
+        <div class="grade-box">
+            <label>הערות המורה:</label>
+            <div class="line"></div>
+        </div>
+        <div class="grade-box" style="max-width: 120px;">
+            <label>ציון:</label>
+            <div class="line"></div>
+        </div>
+    </div>
+
+    <div class="footer-p2">
+        ✍️ כל סיפור גדול התחיל מדמות אחת עם קונפליקט אחד · תוכנית פלאש
+    </div>
+
+</div>
+
+<button class="print-btn no-print" onclick="window.print()">🖨️ הדפס (2 עמודים)</button>
+
+</body>
+</html>

@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קולנוע ישראלי - זהות ומציאות | תוכנית פלאש</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            line-height: 1.8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        /* Section */
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 35px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #e74c3c;
+            margin-bottom: 20px;
+            border-right: 5px solid #e74c3c;
+            padding-right: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 1.3em;
+            color: #ecf0f1;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        /* Text content */
+        .text-content {
+            font-size: 1.15em;
+            line-height: 1.9;
+            margin-bottom: 20px;
+            color: #ecf0f1;
+        }
+
+        .text-content strong {
+            color: #e74c3c;
+        }
+
+        /* Video Container - SMALLER! */
+        .video-container {
+            position: relative;
+            padding-bottom: 35%; /* Reduced from 56.25% */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            margin: 25px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 700px; /* Maximum width */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-caption {
+            text-align: center;
+            font-style: italic;
+            color: #bdc3c7;
+            margin-top: 10px;
+            margin-bottom: 30px;
+            font-size: 0.95em;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.2) 0%, rgba(41, 128, 185, 0.2) 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border-right: 4px solid #3498db;
+        }
+
+        .info-box h3 {
+            color: #3498db;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .info-box p, .info-box ul {
+            color: #ecf0f1;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .info-box ul {
+            list-style-position: inside;
+            margin-right: 20px;
+        }
+
+        .info-box li {
+            margin-bottom: 10px;
+        }
+
+        /* Period Box */
+        .period-box {
+            background: rgba(231, 76, 60, 0.15);
+            border: 2px solid #e74c3c;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .period-title {
+            font-size: 1.8em;
+            color: #e74c3c;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .period-years {
+            color: #f39c12;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Series Box */
+        .series-box {
+            background: rgba(155, 89, 182, 0.15);
+            border-right: 4px solid #9b59b6;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .series-title {
+            color: #9b59b6;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        /* Discussion Box */
+        .discussion {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.2) 0%, rgba(39, 174, 96, 0.2) 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border-right: 4px solid #2ecc71;
+        }
+
+        .discussion h4 {
+            color: #2ecc71;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .discussion p {
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        /* Transition Box */
+        .transition-box {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 35px 0;
+            text-align: center;
+        }
+
+        .transition-box p {
+            font-size: 1.25em;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        /* Highlight */
+        .highlight {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: #fff;
+            padding: 3px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* Success Stats */
+        .success-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.2) 0%, rgba(39, 174, 96, 0.2) 100%);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #2ecc71;
+        }
+
+        .stat-card .number {
+            font-size: 2.2em;
+            color: #2ecc71;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .label {
+            font-size: 1em;
+            color: #ecf0f1;
+        }
+
+        /* Key Takeaway */
+        .key-takeaway {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 35px 0;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
+        }
+
+        .key-takeaway h3 {
+            font-size: 1.9em;
+            margin-bottom: 15px;
+        }
+
+        .key-takeaway p {
+            font-size: 1.25em;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+        }
+
+        .footer p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .section-title {
+                font-size: 1.6em;
+            }
+
+            .video-container {
+                padding-bottom: 56.25%; /* Full size on mobile */
+                max-width: 100%;
+            }
+            
+            .success-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+            .video-link-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            background: linear-gradient(135deg, #c0392b 0%, #8e44ad 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            margin: 25px auto;
+            padding: 18px 30px;
+            max-width: 700px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: transform 0.2s ease;
+        }
+        .video-link-box:hover {
+            transform: translateY(-3px);
+        }
+        .video-link-box .play-icon {
+            font-size: 1.4em;
+        }
+
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎬 קולנוע ישראלי - זהות ומציאות</h1>
+            <p>מסע בזמן: איך הקולנוע והסדרות שלנו מספרים את הסיפור של המדינה</p>
+        </div>
+
+        <!-- Part 1: Israeli Cinema Beginnings -->
+        <div class="section">
+            <h2 class="section-title">🎞️ בהתחלה היה הקולנוע - שנות ה-60 וה-70</h2>
+            
+            <p class="text-content">
+                כשישראל עוד הייתה מדינה צעירה, בשנות ה-60 וה-70, הקולנוע הישראלי התחיל להתפתח. 
+                אנשים רצו לראות <strong>סרטים ישראליים</strong> - משהו שלנו, משהו שמדבר על החיים שלנו.
+            </p>
+
+            <p class="text-content">
+                והנה, באמצע שנות ה-60, נולד ז'אנר חדש שכבש את כולם: <span class="highlight">סרטי בורקס!</span>
+            </p>
+
+            <div class="info-box">
+                <h3>🥐 מה זה בכלל "סרטי בורקס"?</h3>
+                <p><strong>השם:</strong> הבמאי בועז דוידזון נתן את השם הזה - "כמו שבאיטליה יש מערבוני ספגטי, בישראל יש סרטי בורקס!"</p>
+                <p style="margin-top: 15px;"><strong>מה מאפיין אותם?</strong></p>
+                <ul>
+                    <li><strong>דמויות עממיות</strong> - אנשים רגילים מהשכונה</li>
+                    <li><strong>קונפליקט עדתי</strong> - מזרחים מול אשכנזים (תמיד בהומור!)</li>
+                    <li><strong>קומדיה + דרמה</strong> - צוחקים וגם בוכים</li>
+                    <li><strong>סוף טוב</strong> - בדרך כלל חתונה בין בני העדות השונות</li>
+                    <li><strong>שפה ישראלית</strong> - מבטאים, סלנג, הומור מקומי</li>
+                </ul>
+            </div>
+
+            <p class="text-content">
+                <strong>סרטים מפורסמים מהתקופה:</strong> "סאלח שבתי" (1964), "צ'רלי וחצי" (1974), "חגיגה בסנוקר" (1976), "כץ וקרסו" (1971), ועוד המון!
+            </p>
+
+            <p class="text-content">
+                <strong>מה קרה אז?</strong> בתי הקולנוע היו מלאים! כולם רצו לראות סרטים ישראליים. 
+                המבקרים שנאו את הסרטים האלה ("רמה נמוכה!"), אבל הקהל אהב ועף על זה! 🎬❤️
+            </p>
+
+            <div class="discussion">
+                <h4>🤔 מה זה אומר על המדינה אז?</h4>
+                <p>ישראל הייתה מדינה צעירה שעדיין בונה את הזהות שלה. כולם באו מעדות שונות, והסרטים האלה עזרו לנו לצחוק על עצמנו, להבין זה את זה, ולהרגיש ישראלים ביחד.</p>
+            </div>
+
+            <p class="text-content">
+                <strong>דוגמה קלאסית:</strong> "גבעת חלפון אינה עונה" (1976) - אחד הסרטים הכי מפורסמים! 
+                על משפחה מזרחית שמנסה להשתלב בחברה הישראלית. מלא הומור ישראלי אותנטי.
+            </p>
+
+            <a href="https://www.youtube.com/watch?v=3h87QA-6MZw" target="_blank" rel="noopener" class="video-link-box"><span class="play-icon">▶</span> לצפייה בסרטון ביוטיוב</a>
+            <p class="video-caption">גבעת חלפון אינה עונה - קומדיה ישראלית קלאסית</p>
+        </div>
+
+        <!-- Transition to TV Series -->
+        <div class="transition-box">
+            <p>⏩ <strong>ועכשיו קפיצה קדימה:</strong> משנות ה-80 והלאה, הקולנוע הישראלי התפצל לכמה כיוונים - 
+            יש סרטים אמנותיים, סרטים מסחריים, וגם משהו חדש נכנס לתמונה: <strong>סדרות טלוויזיה ישראליות!</strong></p>
+        </div>
+
+        <!-- Part 2: Youth TV Series Evolution -->
+        <div class="section">
+            <h2 class="section-title">📺 סדרות נוער בישראל - המסע שלנו</h2>
+            
+            <p class="text-content">
+                בשנות ה-90 התחילו לייצר בישראל <strong>סדרות נוער</strong> - סדרות על בני נוער, לבני נוער. 
+                זה היה משהו חדש! עד אז היו רק סרטים ותוכניות למבוגרים.
+            </p>
+
+            <p class="text-content">
+                בואו נעקוב אחרי המסע הזה ונראה איך הוא השתנה - <strong>כי השינויים האלה מספרים לנו על איך המדינה שלנו השתנתה!</strong>
+            </p>
+
+            <!-- Period 1: 1990s -->
+            <div class="period-box">
+                <div class="period-title">תקופה ראשונה: שנות ה-90 - ההתחלה</div>
+                <div class="period-years">📅 1992-1997</div>
+                
+                <p class="text-content">
+                    <strong>הרקע ההיסטורי:</strong> שנות ה-90 היו תקופה אופטימית בישראל. הסכמי אוסלו, תקווה לשלום, 
+                    כלכלה שגדלה, והרבה תקווה. גם הטלוויזיה התחילה להתפתח - עברנו מערוץ אחד לכמה ערוצים!
+                </p>
+
+                <div class="series-box">
+                    <div class="series-title">🎬 "עניין של זמן" (1992-1997)</div>
+                    
+                    <p class="text-content">
+                        <strong>מה הסדרה הזו?</strong> אחת מסדרות הנוער הישראליות הראשונות! 
+                        עוקבת אחר קבוצת תלמידים בתיכון בצפון תל אביב.
+                    </p>
+
+                    <p class="text-content">
+                        <strong>על מה הם מדברים?</strong> לימודים, אהבות ראשונות, גיוס לצבא, בעיות אמיתיות של התבגרות - 
+                        אבל עדיין בצורה די תמימה ואופטימית.
+                    </p>
+
+                    <p class="text-content">
+                        <strong>מי שיחק?</strong> אביב גפן, דנה ברגר, אורי גוטליב - כוכבים שהפכו מפורסמים!
+                    </p>
+
+                    <p class="text-content">
+                        <strong>למה זה חשוב?</strong> זו הפעם הראשונה שבני נוער ישראליים ראו את עצמם על המסך! 
+                        עד אז הכל היה סרטים למבוגרים או תוכניות ילדים.
+                    </p>
+
+                    <a href="https://www.youtube.com/watch?v=Qpn2UFFSknc" target="_blank" rel="noopener" class="video-link-box"><span class="play-icon">▶</span> לצפייה בסרטון ביוטיוב</a>
+                    <p class="video-caption">עניין של זמן - סדרת הנוער הראשונה</p>
+                </div>
+
+                <div class="discussion">
+                    <h4>🤔 מה זה אומר על המדינה בשנות ה-90?</h4>
+                    <p><strong>אופטימיות וחלומות:</strong> החיים נראו פשוטים יותר. היו בעיות, אבל הכל היה ניתן לפתרון. 
+                    התמקדות בחברות ובקבוצה. עדיין לא מדברים על הכל - יש דברים ש"לא עושים".</p>
+                </div>
+            </div>
+
+            <!-- Period 2: 2000s - Golden Age -->
+            <div class="period-box">
+                <div class="period-title">תקופה שנייה: שנות ה-2000 - תור הזהב! 🌟</div>
+                <div class="period-years">📅 2001-2009</div>
+                
+                <p class="text-content">
+                    <strong>הרקע ההיסטורי:</strong> אינתיפאדה שנייה, פיגועים, מלחמות - אבל גם תקופה של צמיחה תרבותית עצומה! 
+                    הטלוויזיה הישראלית פורחת. ערוץ הילדים, HOT, YES - כולם משקיעים בתוכן ישראלי איכותי.
+                </p>
+
+                <p class="text-content">
+                    זו <span class="highlight">תקופת הזוהר של סדרות הנוער הישראליות!</span> 
+                    הרבה כסף, הרבה יצירתיות, והרבה סדרות מעולות שכל בני הנוער דבוקים אליהן!
+                </p>
+
+                <!-- השמיניה -->
+                <div class="series-box">
+                    <div class="series-title">🔮 "השמיניה" (2005-2007)</div>
+                    
+                    <p class="text-content">
+                        <strong>העלילה:</strong> חבורת ילדים מחוננים משתתפת בפרויקט ממשלתי סודי לחקירת האנרגיה המוחית האנושית! 
+                        יש פה כוחות על, סודות, מתח - וגם אהבות, חברויות, ובעיות רגילות של בני נוער.
+                    </p>
+
+                    <p class="text-content">
+                        <strong>הז'אנר:</strong> דרמת נוער + מדע בדיוני + מתח. שילוב שלא היה לפני זה בישראל!
+                    </p>
+
+                    <p class="text-content">
+                        <strong>ההצלחה:</strong> 3 עונות, 165 פרקים! כל בני הנוער היו דבוקים למסך. 
+                        זו הייתה <strong>התופעה</strong> של התקופה. כולם דיברו על זה בבית הספר למחרת!
+                    </p>
+
+                    <p class="text-content">
+                        <strong>למה זה היה מיוחד?</strong> ראשית - איכות הפקה גבוהה! מסתורין שמושך אותך פנימה. 
+                        ושנית - התלמידים היו מחוננים, לא "רגילים" - זה נתן להם תחושה מיוחדת.
+                    </p>
+
+                    <a href="https://www.youtube.com/watch?v=dXD08YjnD8A" target="_blank" rel="noopener" class="video-link-box"><span class="play-icon">▶</span> לצפייה בסרטון ביוטיוב</a>
+                    <p class="video-caption">השמיניה - הסדרה שכבשה את כל בני הנוער</p>
+                </div>
+
+                <!-- הפיג'מות -->
+                <div class="series-box" style="margin-top: 30px;">
+                    <div class="series-title">👕 "הפיג'מות" (2003-2009)</div>
+                    
+                    <p class="text-content">
+                        <strong>העלילה:</strong> ארבעה חברים שחולמים להיות כוכבים ויוצרים ביחד להקה. 
+                        בדרך הם עוברים הרפתקאות, מתאהבים, רבים וחוזרים להיות חברים.
+                    </p>
+
+                    <p class="text-content">
+                        <strong>הז'אנר:</strong> קומדיה מוזיקלית + דרמת נוער. <strong>מלא שירים!</strong> 
+                        כל פרק היו שירים חדשים שכולם שרו אחר כך.
+                    </p>
+
+                    <p class="text-content">
+                        <strong>למה זה היה אהוב?</strong> שילוב מנצח של בידור וסיפורים אמיתיים. 
+                        המוזיקה הייתה ממכרת, והסיפורים על חברות וחלומות נגעו בלב.
+                    </p>
+
+                    <a href="https://www.youtube.com/watch?v=-XWGlJOEEww" target="_blank" rel="noopener" class="video-link-box"><span class="play-icon">▶</span> לצפייה בסרטון ביוטיוב</a>
+                    <p class="video-caption">הפיג'מות - מוזיקה, חברות, וחלומות</p>
+                </div>
+
+                <!-- הילדים מגבעת נפוליאון -->
+                <div class="series-box" style="margin-top: 30px;">
+                    <div class="series-title">🔍 "הילדים מגבעת נפוליאון" (2001-2004)</div>
+                    
+                    <p class="text-content">
+                        <strong>העלילה:</strong> חבורת בני נוער הרפתקנית שפותרת תעלומות ופשעים ברמת גן! 
+                        כמו "חבורת חמש" אבל ישראלי - עם הרבה הומור ישראלי.
+                    </p>
+
+                    <p class="text-content">
+                        <strong>הז'אנר:</strong> דרמת מתח בלשית לנוער. כל עונה - תעלומה חדשה לפתור!
+                    </p>
+
+                    <p class="text-content">
+                        <strong>ההצלחה:</strong> 3 עונות, זכתה פעמיים בפרס האקדמיה לטלוויזיה! 
+                        כולם רצו להיות כמו הילדים שפותרים תעלומות.
+                    </p>
+
+                    <p class="text-content">
+                        <strong>למה זה עבד?</strong> שילוב של הרפתקאות, מתח, חברות - וגם קצת רומנטיקה! 
+                        ובעיקר - התחושה שאתה יכול לשנות דברים, לפתור בעיות, להיות גיבור.
+                    </p>
+
+                    <a href="https://www.youtube.com/watch?v=Ixjab3L6Gl4" target="_blank" rel="noopener" class="video-link-box"><span class="play-icon">▶</span> לצפייה בסרטון ביוטיוב</a>
+                    <p class="video-caption">הילדים מגבעת נפוליאון - פתיח אגדי</p>
+
+                    <a href="https://www.youtube.com/watch?v=bFRIYIwrVVc" target="_blank" rel="noopener" class="video-link-box"><span class="play-icon">▶</span> לצפייה בסרטון ביוטיוב</a>
+                    <p class="video-caption">עוד מהסדרה - תעלומות, הרפתקאות, חברות</p>
+                </div>
+
+                <div class="key-takeaway">
+                    <h3>⭐ למה שנות ה-2000 היו תור הזהב?</h3>
+                    <p>תקציבים גבוהים + יצירתיות + ערוצים שהשקיעו בתוכן ישראלי = סדרות איכותיות שכל בני הנוער אהבו! 
+                    זו הייתה תקופת השיא של הטלוויזיה הישראלית.</p>
+                </div>
+
+                <div class="discussion">
+                    <h4>🤔 מה זה אומר על המדינה בשנות ה-2000?</h4>
+                    <p><strong>פתיחות וביטוי עצמי:</strong> החברה הישראלית נפתחת! מתחילים לדבר על דברים שלא דיברו עליהם קודם. 
+                    יותר מגוון, יותר יצירתיות, יותר ביקורת. זו תקופה של צמיחה תרבותית ענקית!</p>
+                </div>
+            </div>
+
+            <!-- Period 3: Today - The Disappearance -->
+            <div class="period-box">
+                <div class="period-title">תקופה שלישית: היום (2020-2026) - לאן נעלמו הסדרות? 🤔</div>
+                <div class="period-years">📅 2020 ואילך</div>
+                
+                <p class="text-content">
+                    <strong>הרקע:</strong> קורונה, מלחמות, שינויים טכנולוגיים ענקיים. 
+                    אבל הדבר המשמעותי ביותר - <span class="highlight">כמעט אין יותר סדרות נוער ישראליות חדשות!</span>
+                </p>
+
+                <div class="info-box">
+                    <h3>❓ מה קרה? למה הסדרות נעלמו?</h3>
+                    <ul>
+                        <li><strong>🌍 נטפליקס ושידור זר:</strong> למה לצפות בישראלי כשיש "Stranger Things", "Wednesday", "The Summer I Turned Pretty"? 
+                        בני נוער מעדיפים סדרות אמריקאיות עם תקציבים ענקיים.</li>
+                        
+                        <li><strong>📱 רשתות חברתיות:</strong> TikTok, YouTube, Instagram - בני נוער צורכים תוכן אחרת היום! 
+                        וידאו קצרים, לא סדרות ארוכות.</li>
+                        
+                        <li><strong>📺 ריאליטי:</strong> "האח הגדול", "הישרדות", ריאליטי דיטס - זה מה שמושך צפייה היום. 
+                        זול יותר לייצר, ומושך יותר קהל.</li>
+                        
+                        <li><strong>💰 תקציבים:</strong> יקר מאוד לייצר סדרות איכותיות! הערוצים לא מוכנים להשקיע כמו פעם.</li>
+                        
+                        <li><strong>🎯 פיצול קהלים:</strong> כל אחד צופה במשהו אחר. אין יותר "סדרה שכולם צופים בה".</li>
+                    </ul>
+                </div>
+
+                <div class="discussion">
+                    <h4>💭 שאלות לדיון:</h4>
+                    <p><strong>זה טוב או רע?</strong></p>
+                    <p><strong>מצד אחד:</strong> יש לנו גישה לכל העולם! אפשר לצפות בכל מה שרוצים, בכל שפה, מכל מקום.</p>
+                    <p style="margin-top: 15px;"><strong>מצד שני:</strong> איפה הסיפורים הישראליים שלנו? האם בני נוער ישראליים צריכים סדרות משלהם? 
+                    האם חשוב שנראה את עצמנו על המסך?</p>
+                </div>
+
+                <div class="key-takeaway">
+                    <h3>📌 המסקנה החשובה:</h3>
+                    <p>העלמות סדרות הנוער מלמדת אותנו משהו עמוק על החברה שלנו: אנחנו יותר גלובליים מתמיד, 
+                    יש לנו גישה לכל העולם - אבל אולי מאבדים בדרך משהו ייחודי ומקומי. <strong>הסיפורים שלנו.</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transition to Current Israeli Content -->
+        <div class="transition-box">
+            <p>⏩ <strong>אז אם אין יותר סדרות נוער, מה כן יש?</strong><br>
+            התשובה: סדרות ישראליות למבוגרים שכבשו את העולם! בואו נדבר על הסדרות והסרטים הישראליים שהפכו לתופעה עולמית.</p>
+        </div>
+
+        <!-- Part 3: Fauda -->
+        <div class="section">
+            <h2 class="section-title">🌍 פאודה - האקשן הישראלי שכבש את העולם</h2>
+            
+            <p class="text-content">
+                בשנת 2015 יצאה סדרה ישראלית שאף אחד לא ציפה שתצליח ככה. 
+                היום, <span class="highlight">מיליונים ברחבי העולם</span> צופים בה!
+            </p>
+
+            <div class="info-box">
+                <h3>📖 על מה הסדרה?</h3>
+                <p><strong>העלילה:</strong> יחידה סמויה של המוסד הישראלי נלחמת בטרור. מבצעים סודיים, מתח עצום, אקשן אמיתי.</p>
+                <p style="margin-top: 15px;"><strong>הייחודיות:</strong> הסדרה מראה <strong>את שני הצדדים</strong> של הסכסוך - 
+                גם ישראלים וגם פלסטינים, עם כל המורכבות שבזה.</p>
+                <p style="margin-top: 15px;"><strong>מה רואים?</strong> אקשן אמיתי - לא CGI מפוברק! צילומים בשטח, ברחובות האמיתיים, 
+                עם שחקנים שדיברים עברית וערבית.</p>
+            </div>
+
+            <p class="text-content">
+                <strong>למה לצפות?</strong> כדי להבין איך סדרה ישראלית יכולה להיות מותחת, מורכבת, ומרתקת - 
+                ולכבוש את העולם!
+            </p>
+
+            <a href="https://www.youtube.com/watch?v=dpbvL73ZoTQ" target="_blank" rel="noopener" class="video-link-box"><span class="play-icon">▶</span> לצפייה בסרטון ביוטיוב</a>
+            <p class="video-caption">טריילר פאודה - אקשן ישראלי ברמה עולמית</p>
+
+            <div class="success-stats">
+                <div class="stat-card">
+                    <div class="number">מיליונים</div>
+                    <div class="label">צופים ברחבי העולם</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">20+</div>
+                    <div class="label">שפות דיבוב</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">Top 10</div>
+                    <div class="label">נטפליקס עולמי</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">4 עונות</div>
+                    <div class="label">והספינאוף "Shawadron"</div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>✨ למה פאודה הצליחה בעולם?</h3>
+                <ul>
+                    <li><span class="highlight">אקשן אמיתי</span> - לא מפוברק, לא CGI מוגזם. צילומים בשטח, סצנות אמיתיות.</li>
+                    <li><span class="highlight">סיפור מעניין</span> - העולם רוצה להבין את הסכסוך הישראלי-פלסטיני, ופאודה מספרת את זה בצורה מרתקת.</li>
+                    <li><span class="highlight">מורכבות</span> - לא שחור ולבן! מראה את שני הצדדים, את האנושיות של כולם.</li>
+                    <li><span class="highlight">מתח אמיתי</span> - כי זה קורה באמת, לא רק בטלוויזיה. זה נותן למתח משמעות אחרת.</li>
+                    <li><span class="highlight">שחקנים מעולים</span> - ליאור רז וכל צוות השחקנים משחקים ברמה עולמית.</li>
+                </ul>
+            </div>
+
+            <div class="discussion">
+                <h4>🎯 איך הסדרה מציגה את הסכסוך?</h4>
+                <p><strong>בצורה מורכבת:</strong> לא מלאכים נגד שדים. כל דמות - ישראלית או פלסטינית - מוצגת עם המורכבות שלה, 
+                עם המניעים שלה, עם האנושיות שלה.</p>
+                <p style="margin-top: 15px;"><strong>מעורר שאלות:</strong> הסדרה לא נותנת תשובות פשוטות. היא מעוררת שאלות קשות ונותנת לצופים לחשוב בעצמם.</p>
+                <p style="margin-top: 15px;"><strong>שאלה לכיתה:</strong> למה לדעתכם העולם כל כך מתעניין בסכסוך שלנו? 
+                מה יש בסיפורים הישראליים שמושך אנשים מכל העולם?</p>
+            </div>
+        </div>
+
+        <!-- Part 4: Shtisel -->
+        <div class="section">
+            <h2 class="section-title">👨‍👩‍👦 שטיסל - חלון לעולם שלא מכירים</h2>
+            
+            <p class="text-content">
+                <strong>מה קורה כשסדרה על משפחה חרדית בירושלים הופכת להיט עולמי?</strong> 
+                זה בדיוק מה שקרה עם "שטיסל" - סדרה שכבשה את לב העולם!
+            </p>
+
+            <div class="info-box">
+                <h3>📖 על מה הסדרה?</h3>
+                <p><strong>העלילה:</strong> משפחת שטיסל - משפחה חרדית בשכונת גאולה בירושלים. 
+                עקיבא, בן המשפחה, הוא אמן צעיר שמחפש אהבה. סבא שטיסל מנסה להחזיק את המשפחה ביחד.</p>
+                <p style="margin-top: 15px;"><strong>הנושאים:</strong> אהבה, משפחה, מסורת מול מודרניות, חלומות מול ציפיות - 
+                נושאים <strong>אוניברסליים</strong> שכל אחד יכול להתחבר אליהם!</p>
+            </div>
+
+            <p class="text-content">
+                <strong>מה מיוחד כאן?</strong> הסדרה מצליחה להראות עולם שרוב האנשים (גם בישראל!) לא מכירים - 
+                העולם החרדי - בצורה חמה, אנושית, ומלאת הומור ולב.
+            </p>
+
+            <div class="info-box">
+                <h3>🎭 למה שטיסל מיוחדת?</h3>
+                <p><strong>מראה מורכבות:</strong> חרדים לא מוצגים כ"אחרים" או כסטריאוטיפ. הם אנשים אמיתיים עם בעיות, 
+                חלומות, אהבות - בדיוק כמו כולם!</p>
+                <p style="margin-top: 15px;"><strong>הומור ודרמה:</strong> הסדרה גם מצחיקה וגם מרגשת. רגע אחד אתה צוחק, 
+                רגע אחרי אתה בוכה.</p>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=CxeaBCob4yY" target="_blank" rel="noopener" class="video-link-box"><span class="play-icon">▶</span> לצפייה בסרטון ביוטיוב</a>
+            <p class="video-caption">שטיסל - קטעים מצחיקים שמראים את המורכבות</p>
+
+            <a href="https://www.youtube.com/watch?v=bFRIYIwrVVc" target="_blank" rel="noopener" class="video-link-box"><span class="play-icon">▶</span> לצפייה בסרטון ביוטיוב</a>
+            <p class="video-caption">עקיבא וליבי - דייט ראשון על הקרח (חמוד מאוד!)</p>
+
+            <div class="success-stats">
+                <div class="stat-card">
+                    <div class="number">15+</div>
+                    <div class="label">שפות דיבוב</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">אמריקה!</div>
+                    <div class="label">הצלחה גדולה ב-Netflix</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">עברית</div>
+                    <div class="label">אנשים למדו עברית בגללה!</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">3 עונות</div>
+                    <div class="label">וסרט עטרול מיוחד</div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h3>✨ למה שטיסל הצליחה בעולם?</h3>
+                <ul>
+                    <li><span class="highlight">עולם שלא מכירים</span> - חרדים הם תעלומה לרוב העולם. זו הזדמנות להציץ פנימה!</li>
+                    <li><span class="highlight">סיפורים אוניברסליים</span> - אהבה, משפחה, חלומות - נושאים שכל אחד מבין!</li>
+                    <li><span class="highlight">אנושיות</span> - מראה שחרדים זה לא "אחרים", זה פשוט אנשים עם אמונות וחיים שונים.</li>
+                    <li><span class="highlight">איכות</span> - משחק מעולה, כתיבה חכמה, צילום יפהפה.</li>
+                </ul>
+            </div>
+
+            <div class="key-takeaway">
+                <h3>🎯 מה שטיסל מלמדת אותנו על ישראל?</h3>
+                <p>ישראל היא מדינה <strong>מגוונת</strong> - יש פה הרבה "עולמות" שחיים בצורה שונה לגמרי. 
+                אשכנזים, מזרחים, חרדים, חילונים, ערבים, דרוזים - כל אחד עם התרבות שלו. 
+                אבל בסוף - <strong>כולנו פה ביחד</strong> במדינה אחת קטנה, ומנסים להבין אחד את השני.</p>
+            </div>
+
+            <div class="discussion">
+                <h4>💬 שאלות לדיון:</h4>
+                <ul>
+                    <li>כמה מכם יש חברים חרדים? מה אתם יודעים על החיים שלהם?</li>
+                    <li>האם הסדרה שינתה לכם את הדעה על חרדים? איך?</li>
+                    <li>למה לדעתכם זה כל כך מעניין אנשים בחו"ל לראות על חרדים בירושלים?</li>
+                    <li>האם חשוב שנכיר עולמות שונים בתוך המדינה שלנו?</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Part 5: Asfur -->
+        <div class="section">
+            <h2 class="section-title">🕵️ עספור - הסיפור האמיתי שכבש את המזרח התיכון</h2>
+            
+            <p class="text-content">
+                יש סיפורים בהיסטוריה הישראלית שנשמעים כמו סרט הוליוודי. 
+                הסיפור של <strong>אלי כהן</strong>, המרגל הישראלי בסוריה, הוא אחד מהם!
+            </p>
+
+            <div class="info-box">
+                <h3>📖 על מה הסדרה?</h3>
+                <p><strong>הסיפור האמיתי:</strong> אלי כהן, מרגל ישראלי, חדר לסוריה בשנות ה-60 כ"קאמל אמין ת'אבת" - 
+                איש עסקים עשיר. הוא הצליח לחדור לשורות הגבוהות בממשלה הסורית ולהעביר מידע חיוני לישראל.</p>
+                <p style="margin-top: 15px;"><strong>הסדרה:</strong> "עספור" (ערבית: "ציפור", שם הקוד שלו) מספרת את סיפורו המדהים הזה 
+                בצורה מותחת ומרגשת.</p>
+            </div>
+
+            <p class="text-content">
+                <strong>למה זה חשוב?</strong> זה לא סתם סיפור ריגול - זה סיפור על קורבנות, על חזון, ועל אדם שהקריב הכל למען המדינה שלו.
+            </p>
+
+            <a href="https://www.youtube.com/watch?v=OHFDmuHlcAk" target="_blank" rel="noopener" class="video-link-box"><span class="play-icon">▶</span> לצפייה בסרטון ביוטיוב</a>
+            <p class="video-caption">עספור - סצנת מתח מהסדרה</p>
+
+            <div class="info-box">
+                <h3>✨ למה עספור הצליחה במזרח התיכון?</h3>
+                <ul>
+                    <li><span class="highlight">מבוסס על אמת</span> - הסיפור האמיתי של אלי כהן מרתק עוד יותר מכל בדיה!</li>
+                    <li><span class="highlight">מראה את האזור</span> - הסדרה מתרחשת בסוריה, לבנון, ארגנטינה - מראה את המזרח התיכון.</li>
+                    <li><span class="highlight">שפות ערביות</span> - הרבה ערבית בסדרה, מה שעזר לה להתקבל גם במדינות ערביות!</li>
+                    <li><span class="highlight">מורכבות</span> - מי טוב? מי רע? לא פשוט. גם הסורים מוצגים כבני אדם.</li>
+                </ul>
+            </div>
+
+            <div class="key-takeaway">
+                <h3>💡 העובדה המדהימה!</h3>
+                <p>סורים, לבנונים, ומצרים צפו בסדרה הזו (למרות שזה על מרגל ישראלי שריגל עליהם!) - <strong>למה?</strong></p>
+                <p style="margin-top: 15px;"><strong>כי הסיפור טוב!</strong> קולנוע טוב חוצה גבולות. גם האויבים שלנו מכירים בכך שזה סיפור מרתק, 
+                שמסופר בצורה מכבדת ומורכבת.</p>
+            </div>
+
+            <div class="discussion">
+                <h4>🤔 מה עספור מלמדת אותנו?</h4>
+                <p><strong>על ישראל:</strong> אנחנו חיים במזרח התיכון. הסכסוך מורכב. אבל יש לנו גם סיפורים של גבורה, הקרבה, ואנשים יוצאי דופן.</p>
+                <p style="margin-top: 15px;"><strong>על קולנוע:</strong> כשמספרים סיפור טוב, בצורה מכבדת ומורכבת - גם האויבים מקשיבים. 
+                זה כוח הקולנוע!</p>
+            </div>
+        </div>
+
+        <!-- Final Summary -->
+        <div class="section">
+            <h2 class="section-title">📝 סיכום המסע שלנו</h2>
+            
+            <p class="text-content">
+                עברנו היום מסע מדהים בקולנוע והטלוויזיה הישראלית:
+            </p>
+
+            <div class="info-box">
+                <h3>🎬 מה ראינו?</h3>
+                <ul>
+                    <li><strong>שנות ה-60-70:</strong> סרטי בורקס - הקולנוע העממי שכבש את הקהל הישראלי</li>
+                    <li><strong>שנות ה-90:</strong> סדרות נוער ראשונות - "עניין של זמן" ותחושת האופטימיות</li>
+                    <li><strong>שנות ה-2000:</strong> תור הזהב - "השמיניה", "הפיג'מות", "הילדים מגבעת נפוליאון"</li>
+                    <li><strong>היום:</strong> סדרות למבוגרים שכובשות את העולם - "פאודה", "שטיסל", "עספור"</li>
+                </ul>
+            </div>
+
+            <div class="key-takeaway">
+                <h3>🎯 מה למדנו מהמסע הזה?</h3>
+                <p>✅ הקולנוע והטלוויזיה הישראלית <strong>משקפים את מי שאנחנו</strong> - עם כל השינויים לאורך השנים</p>
+                <p>✅ הם השתנו עם השנים - כמו שהמדינה שלנו השתנתה</p>
+                <p>✅ הם מראים את <strong>המורכבות</strong> שלנו - זה לא שחור-לבן, זה מלא גוונים</p>
+                <p>✅ <strong>העולם מתעניין בנו</strong> - הסיפורים שלנו מרתקים אנשים בכל העולם!</p>
+                <p>✅ אנחנו מספרים סיפורים <strong>ייחודיים</strong> - שאף אחד אחר לא יכול לספר</p>
+            </div>
+
+            <div class="discussion">
+                <h4>💭 שאלות אחרונות למחשבה:</h4>
+                <ul>
+                    <li><strong>איזו סדרה או סרט ישראלי אתם הכי אוהבים? למה?</strong></li>
+                    <li><strong>אם חבר שלכם מחו"ל שואל - איזו סדרה/סרט ישראלי תמליצו לו?</strong></li>
+                    <li><strong>מה הדבר הכי ישראלי שיש בסדרות והסרטים שלנו?</strong></li>
+                    <li><strong>האם חשוב שיהיו לנו סדרות נוער ישראליות? למה?</strong></li>
+                    <li><strong>מה החסר לנו היום בטלוויזיה הישראלית?</strong></li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h3>🎯 משימה בונוס (אופציונלי):</h3>
+                <p>בחרו סרט או סדרה ישראלית אחת (מהדברים שדיברנו עליהם או משהו אחר) - צפו בפרק/בסרט, 
+                וכתבו פסקה קצרה:</p>
+                <ul>
+                    <li>מה הפתיע אתכם?</li>
+                    <li>מה למדתם על החברה הישראלית?</li>
+                    <li>איך זה שונה מסדרות/סרטים שאתם רגילים לראות?</li>
+                </ul>
+                <p style="margin-top: 15px;"><strong>שתפו את זה בכיתה בשיעור הבא!</strong></p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>🎬 <strong>תוכנית פלאש</strong> - מהפכה בלימוד קולנוע</p>
+            <p>📧 <a href="mailto:matangaber@mail.tau.ac.il" style="color: #3498db; text-decoration: none;">matangaber@mail.tau.ac.il</a> | 📞 054-4842543</p>
+            <p style="margin-top: 20px; font-size: 1em; opacity: 0.8;">
+                <strong>תוכנית שנתית | 30 נושאים מרתקים | 5 פרקים מקיפים</strong>
+            </p>
+            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.7;">
+                שיעור זה הוא חלק מתוכנית קולנוע שנתית שלמה המיועדת לכיתות ז'-ט'
+            </p>
+        </div>
+    </div>
+</body>
+</html>

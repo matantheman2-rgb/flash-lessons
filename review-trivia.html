@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חזרה כללית - טריוויית קבוצות 🏆</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #6610f2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #6610f2 100%);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+        }
+        
+        .header h1 { font-size: 2.6em; margin-bottom: 8px; }
+        .header p { font-size: 1.15em; opacity: 0.85; }
+        
+        .round-indicator {
+            background: rgba(255,255,255,0.15);
+            padding: 10px 26px;
+            border-radius: 20px;
+            margin-top: 16px;
+            font-size: 1.3em;
+            font-weight: bold;
+            display: inline-block;
+        }
+        
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            height: 8px;
+            border-radius: 10px;
+            margin-top: 14px;
+            overflow: hidden;
+        }
+        .progress-fill { background: #ffd700; height: 100%; transition: width 0.3s ease; }
+        
+        .start-screen, .game-screen, .end-screen { padding: 40px; }
+        .start-screen { text-align: center; }
+        .start-screen h2 { font-size: 2em; color: #1a1a2e; margin-bottom: 14px; }
+        .start-screen p { font-size: 1.1em; color: #666; margin-bottom: 20px; }
+        
+        .rounds-info {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 22px;
+            margin: 20px 0;
+            text-align: right;
+        }
+        .rounds-info h3 { color: #1a1a2e; margin-bottom: 12px; font-size: 1.2em; }
+        .round-item { padding: 8px; margin: 6px 0; border-right: 4px solid; padding-right: 14px; font-size: 1.05em; }
+        .round-1 { border-color: #28a745; }
+        .round-2 { border-color: #ffc107; }
+        .round-3 { border-color: #fd7e14; }
+        .round-4 { border-color: #dc3545; }
+        
+        .team-setup {
+            background: #f4f6ff;
+            border-radius: 15px;
+            padding: 22px;
+            margin: 20px 0;
+        }
+        .team-setup h3 { color: #6610f2; margin-bottom: 14px; font-size: 1.2em; text-align: right; }
+        .team-input-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+        .team-input-wrap { display: flex; flex-direction: column; gap: 6px; }
+        .team-input-wrap label { font-size: 0.85em; color: #6610f2; font-weight: bold; }
+        .team-input-wrap input {
+            padding: 10px; border-radius: 8px; border: 2px solid #ddd;
+            font-family: 'Rubik', sans-serif; font-size: 1em; text-align: center;
+        }
+        .team-input-wrap input:focus { outline: none; border-color: #6610f2; }
+        
+        .btn {
+            background: linear-gradient(135deg, #6610f2, #c41e3a);
+            color: white; border: none; padding: 18px 46px; border-radius: 50px;
+            font-size: 1.35em; font-weight: bold; cursor: pointer;
+            transition: transform 0.3s ease; font-family: 'Rubik', sans-serif;
+        }
+        .btn:hover { transform: translateY(-4px); }
+        
+        /* SCOREBOARD */
+        .scoreboard {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .score-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 12px 8px;
+            text-align: center;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .score-card.leader { border-color: #ffd700; background: #fffbea; }
+        .score-name { font-size: 0.85em; font-weight: bold; color: #333; margin-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .score-points { font-size: 1.8em; font-weight: 900; color: #6610f2; }
+        
+        /* QUESTION */
+        .question-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px; padding: 34px; margin-bottom: 24px;
+            border-right: 8px solid #6610f2;
+        }
+        .question-box.round-1 { border-right-color: #28a745; }
+        .question-box.round-2 { border-right-color: #ffc107; }
+        .question-box.round-3 { border-right-color: #fd7e14; }
+        .question-box.round-4 { border-right-color: #dc3545; }
+        
+        .question-number { font-size: 1.1em; font-weight: bold; margin-bottom: 8px; color: #555; }
+        .question-points {
+            display: inline-block; background: #ffd700; color: #333; padding: 5px 15px;
+            border-radius: 20px; font-size: 0.95em; font-weight: bold; margin-bottom: 12px;
+        }
+        .question-text { font-size: 1.6em; color: #1a1a2e; font-weight: bold; line-height: 1.5; }
+        
+        .answers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        .answer-item {
+            background: white; border: 3px solid #e9ecef; border-radius: 12px;
+            padding: 16px 20px; font-size: 1.1em; font-weight: 500; color: #333;
+            transition: all 0.3s ease;
+        }
+        .answer-item.correct-answer {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-color: #28a745; font-weight: bold;
+        }
+        
+        .reveal-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white; border: none; padding: 14px 36px; border-radius: 50px;
+            font-size: 1.15em; font-weight: bold; cursor: pointer;
+            font-family: 'Rubik', sans-serif; display: block; margin: 0 auto 20px;
+        }
+        
+        .explanation-box {
+            background: #fff3cd; border: 2px solid #ffc107; border-radius: 12px;
+            padding: 16px 20px; margin-bottom: 20px; font-size: 1.05em; color: #856404;
+            display: none;
+        }
+        .explanation-box.show { display: block; }
+        
+        .award-section { display: none; }
+        .award-section.show { display: block; }
+        .award-title { text-align: center; font-size: 1.1em; font-weight: bold; color: #555; margin-bottom: 14px; }
+        .award-buttons { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 14px; }
+        .award-btn {
+            background: white; border: 3px solid #6610f2; color: #6610f2;
+            padding: 14px 8px; border-radius: 12px; font-size: 0.95em; font-weight: bold;
+            cursor: pointer; font-family: 'Rubik', sans-serif; transition: all 0.2s ease;
+        }
+        .award-btn:hover, .award-btn.awarded { background: #6610f2; color: white; transform: scale(1.05); }
+        
+        .no-score-btn {
+            display: block; margin: 0 auto 20px; background: #f0f0f0; color: #666;
+            border: none; padding: 10px 28px; border-radius: 20px; font-size: 0.95em;
+            cursor: pointer; font-family: 'Rubik', sans-serif;
+        }
+        
+        .next-btn {
+            background: linear-gradient(135deg, #6610f2, #c41e3a);
+            color: white; border: none; padding: 15px 40px; border-radius: 50px;
+            font-size: 1.2em; font-weight: bold; cursor: pointer; display: none;
+            font-family: 'Rubik', sans-serif; margin: 0 auto;
+        }
+        .next-btn.show { display: block; }
+        
+        .end-screen { text-align: center; }
+        .end-screen h2 { font-size: 2.4em; color: #1a1a2e; margin-bottom: 20px; }
+        .final-scoreboard { display: grid; gap: 12px; max-width: 500px; margin: 0 auto 24px; }
+        .final-score-row {
+            display: flex; justify-content: space-between; align-items: center;
+            background: #f8f9fa; border-radius: 12px; padding: 16px 24px; font-size: 1.2em;
+        }
+        .final-score-row.winner {
+            background: linear-gradient(135deg, #fff3cd, #ffe69c); border: 3px solid #ffd700;
+            font-weight: 900; font-size: 1.4em;
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏆 חזרה כללית 🏆</h1>
+            <p>טריוויית קבוצות - כל מה שלמדנו</p>
+            <div class="round-indicator" id="roundIndicator" style="display: none;">סיבוב 1 מתוך 4</div>
+            <div class="progress-bar" id="progressBar" style="display: none;"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+        
+        <div class="start-screen" id="startScreen">
+            <h2>🎬 מוכנים לחזרה הגדולה? 🎬</h2>
+            <p>30 שאלות, 4 סיבובים - כל סיבוב קשה יותר וקובע יותר נקודות</p>
+            
+            <div class="rounds-info">
+                <h3>מבנה המשחק:</h3>
+                <div class="round-item round-1">🟢 סיבוב 1: 10 שאלות × 1 נקודה</div>
+                <div class="round-item round-2">🟡 סיבוב 2: 10 שאלות × 3 נקודות</div>
+                <div class="round-item round-3">🟠 סיבוב 3: 6 שאלות × 5 נקודות</div>
+                <div class="round-item round-4">🔴 סיבוב 4: 4 שאלות × 10 נקודות</div>
+            </div>
+            
+            <div class="team-setup">
+                <h3>שמות הקבוצות (אפשר לשנות):</h3>
+                <div class="team-input-row">
+                    <div class="team-input-wrap"><label>קבוצה 1</label><input type="text" id="team0" value="קבוצה 1"></div>
+                    <div class="team-input-wrap"><label>קבוצה 2</label><input type="text" id="team1" value="קבוצה 2"></div>
+                    <div class="team-input-wrap"><label>קבוצה 3</label><input type="text" id="team2" value="קבוצה 3"></div>
+                    <div class="team-input-wrap"><label>קבוצה 4</label><input type="text" id="team3" value="קבוצה 4"></div>
+                    <div class="team-input-wrap"><label>קבוצה 5</label><input type="text" id="team4" value="קבוצה 5"></div>
+                </div>
+            </div>
+            
+            <button class="btn" onclick="startGame()">בואו נתחיל! 🚀</button>
+        </div>
+        
+        <div class="game-screen hidden" id="gameScreen">
+            <div class="scoreboard" id="scoreboard"></div>
+            
+            <div class="question-box" id="questionBox">
+                <div class="question-number" id="questionNumber">שאלה 1 מתוך 30</div>
+                <div class="question-points" id="questionPoints">1 נקודה</div>
+                <div class="question-text" id="questionText"></div>
+            </div>
+            
+            <div class="answers-grid" id="answersGrid"></div>
+            
+            <button class="reveal-btn" id="revealBtn" onclick="revealAnswer()">💡 הצג תשובה</button>
+            
+            <div class="explanation-box" id="explanationBox"></div>
+            
+            <div class="award-section" id="awardSection">
+                <div class="award-title">איזו קבוצה ענתה נכון?</div>
+                <div class="award-buttons" id="awardButtons"></div>
+                <button class="no-score-btn" onclick="noScore()">אף קבוצה לא ענתה נכון</button>
+            </div>
+            
+            <button class="next-btn" id="nextBtn" onclick="nextQuestion()">שאלה הבאה ➡️</button>
+        </div>
+        
+        <div class="end-screen hidden" id="endScreen">
+            <h2>🎉 סיימנו! 🎉</h2>
+            <div class="final-scoreboard" id="finalScoreboard"></div>
+            <button class="btn" onclick="restartGame()">משחק חדש 🔄</button>
+        </div>
+    </div>
+    
+    <script>
+        const questions = [
+            // סיבוב 1 - 1 נקודה - 10 שאלות (קל)
+            { round: 1, points: 1, q: "מה הדבר הכי חשוב בסיפור?", a: ["התקציב", "הדמות", "האפקטים", "משך הזמן"], correct: 1, exp: "הדמות היא הדבר הכי חשוב - היא זו שגורמת לנו לאהוב את הסיפור." },
+            { round: 1, points: 1, q: "כמה סוגי צלילים עיקריים יש בסרט?", a: ["2", "5", "3", "4"], correct: 2, exp: "3 סוגים: דיבורים, אפקטים, ומוזיקת רקע." },
+            { round: 1, points: 1, q: "מה זה ז'אנר?", a: ["במאי מפורסם", "טכניקת צילום", "סוג של סרט", "אולם קולנוע"], correct: 2, exp: "ז'אנר = סוג של סרט (קומדיה, אימה, מדע בדיוני...)." },
+            { round: 1, points: 1, q: "איך יוצרים דמות טובה?", a: ["מושלמת לגמרי", "ספציפית, מעניינת, עם סתירות", "חזקה תמיד", "מצחיקה תמיד"], correct: 1, exp: "דמות טובה צריכה להיות ספציפית, מעניינת, ועם סתירות." },
+            { round: 1, points: 1, q: "מה זה נבל טוב?", a: ["דמות שרק מרושעת", "דמות עם מניע הגיוני משלה", "דמות בלי אישיות", "דמות שתמיד מפסידה"], correct: 1, exp: "נבל טוב מאמין שהוא הצודק - יש לו מניע הגיוני, לא רק רשע סתם." },
+            { round: 1, points: 1, q: "מה זה אנטי-גיבור?", a: ["גיבור מושלם", "דמות ראשית עם תכונות לא-גיבוריות", "נבל שהופך לטוב", "דמות משנית"], correct: 1, exp: "אנטי-גיבור הוא דמות ראשית שחסרות בה תכונות גיבור קלאסיות - מוסר מעורער, אנוכיות." },
+            { round: 1, points: 1, q: "מה זו תנועת מצלמה?", a: ["עריכת קול", "איך המצלמה זזה בסצנה", "בחירת שחקנים", "כתיבת תסריט"], correct: 1, exp: "תנועת מצלמה = איך המצלמה זזה (זום, פאן, טילט, טרולי) ומשפיעה על התחושה." },
+            { round: 1, points: 1, q: "קולנוע תיעודי מתאר בעיקר...", a: ["סיפורים בדיוניים", "אירועים ואנשים אמיתיים", "רק בעלי חיים", "רק היסטוריה עתיקה"], correct: 1, exp: "קולנוע תיעודי מתעד מציאות אמיתית - אנשים, אירועים, תופעות." },
+            { round: 1, points: 1, q: "מה זה קרוס-ז'אנר?", a: ["ז'אנר ישן", "שילוב של 2 ז'אנרים", "ז'אנר שנכשל", "ז'אנר רק לילדים"], correct: 1, exp: "קרוס-ז'אנר = שילוב של 2 ז'אנרים ומעלה ליצירת משהו חדש." },
+            { round: 1, points: 1, q: "מה זה מאבק פנימי בדמות?", a: ["ריב עם דמות אחרת", "התלבטות/קונפליקט בתוך הדמות עצמה", "קרב פיזי", "בעיה טכנית בצילום"], correct: 1, exp: "מאבק פנימי הוא קונפליקט בתוך הדמות עצמה - בין רצון לפחד, בין ערכים סותרים." },
+            
+            // סיבוב 2 - 3 נקודות - 10 שאלות (בינוני)
+            { round: 2, points: 3, q: "למה סתירות בדמות הופכות אותה למעניינת?", a: ["כי זה מצחיק", "כי גם בנו יש סתירות - זה גורם לנו להזדהות", "כי זה עושה אותה חלשה", "כי זה מבלבל"], correct: 1, exp: "גם בנו יש סתירות! זה גורם לדמות להרגיש אמיתית ולנו להזדהות." },
+            { round: 2, points: 3, q: "מה הסדר הנכון ביצירת סיפור?", a: ["קודם עלילה, אחר כך דמויות", "קודם דמויות, אחר כך עלילה", "ביחד", "לא משנה"], correct: 1, exp: "קודם דמויות מעניינות, אחר כך בונים עליהן את העלילה." },
+            { round: 2, points: 3, q: "איך מזהים ז'אנר של סרט?", a: ["רק לפי תקציב", "לפי אופי הסרט וסביבת הסרט", "רק לפי שחקנים", "רק לפי אורך"], correct: 1, exp: "2 דרכים: אופי הסרט (איך מוצג) וסביבת הסרט (היכן מתרחש)." },
+            { round: 2, points: 3, q: "מה ההבדל בין נבל לאנטי-גיבור?", a: ["אין הבדל", "נבל מנוגד לגיבור, אנטי-גיבור הוא הגיבור עצמו עם פגמים", "נבל תמיד מנצח", "אנטי-גיבור תמיד מפסיד"], correct: 1, exp: "הנבל מתנגד לגיבור. אנטי-גיבור הוא הדמות הראשית עצמה - עם תכונות לא שגרתיות לגיבור." },
+            { round: 2, points: 3, q: "המוח שלנו רגיש יותר למה?", a: ["תמונה", "סאונד", "שניהם שווה", "צבעים"], correct: 1, exp: "המוח שלנו רגיש יותר לסאונד מאשר לתמונה!" },
+            { round: 2, points: 3, q: "מה זה תת-ז'אנר?", a: ["ז'אנר בתוך ז'אנר", "ז'אנר גרוע", "ז'אנר ישן", "אין דבר כזה"], correct: 0, exp: "תת-ז'אנר = ז'אנר בתוך ז'אנר, למשל אקשן מדע בדיוני." },
+            { round: 2, points: 3, q: "למה מאבק פנימי חשוב לסיפור?", a: ["הוא לא חשוב", "הוא מניע את הדמות לפעולה וגורם לצמיחה", "הוא רק מבלבל את הצופה", "הוא מיועד רק לסרטי דרמה"], correct: 1, exp: "מאבק פנימי מניע את הדמות לפעולה, יוצר מתח, וגורם לה לצמוח לאורך הסיפור." },
+            { round: 2, points: 3, q: "מה תפקיד תנועת מצלמה בסצנה?", a: ["רק לצלם רחב", "ליצור רגש ולכוון את תשומת הלב של הצופה", "רק לחסוך זמן", "אין לה תפקיד אמיתי"], correct: 1, exp: "תנועת מצלמה יוצרת רגש ומכוונת את הצופה לאן להסתכל ומה להרגיש." },
+            { round: 2, points: 3, q: "מה מייחד קולנוע תיעודי מסרט רגיל?", a: ["הוא תמיד משעמם", "הוא מבוסס על מציאות ולא בדיה", "אין בו דמויות", "הוא תמיד קצר"], correct: 1, exp: "קולנוע תיעודי מבוסס על מציאות אמיתית, לא סיפור בדיוני שהומצא." },
+            { round: 2, points: 3, q: "איזה מהבאים הוא אפקט סאונד ולא מוזיקת רקע?", a: ["שיר עם מילים", "דלת נטרקת", "פסנתר עצוב", "תזמורת ברקע"], correct: 1, exp: "דלת נטרקת = אפקט, צליל מהסביבה. מוזיקה נוספת ליצור אווירה." },
+            
+            // סיבוב 3 - 5 נקודות - 6 שאלות (קשה)
+            { round: 3, points: 5, q: "למה קרוס-ז'אנר מאפשר לפתוח את הדמיון?", a: ["כי זה יקר יותר", "כי הוא משלב ז'אנרים ושובר חוקים של ז'אנר אחד", "כי זה רק לילדים", "כי זה קל לעשות"], correct: 1, exp: "קרוס-ז'אנר משלב ז'אנרים שונים - שובר חוקים ופותח את הדמיון." },
+            { round: 3, points: 5, q: "מה הופך נבל למעניין באמת (לא סתם רשע)?", a: ["שהוא חזק פיזית", "שיש לו מניע שמובן לנו, גם אם לא מסכימים איתו", "שהוא תמיד מפחיד", "שהוא לא מדבר בכלל"], correct: 1, exp: "נבל מעניין הוא כזה שיש לו מניע הגיוני - אנחנו מבינים למה הוא עושה את מה שהוא עושה." },
+            { round: 3, points: 5, q: "מה ההבדל בין ז'אנר לפי 'אופי' לז'אנר לפי 'סביבה'?", a: ["אופי = איך מוצג, סביבה = היכן מתרחש", "זה אותו דבר", "אין הבדל", "אופי = רק צבעים"], correct: 0, exp: "אופי = הטון (קומי/דרמטי). סביבה = מקום וזמן (חלל/מערב)." },
+            { round: 3, points: 5, q: "איך תנועת מצלמה יכולה לשנות את המשמעות של סצנה זהה?", a: ["היא לא יכולה", "זום פנימה יוצר מתח, זום החוצה יוצר ריחוק - אותה סצנה מרגישה אחרת לגמרי", "רק הצבע משנה משמעות", "רק השחקנים משנים משמעות"], correct: 1, exp: "אותה סצנה יכולה להרגיש שונה לגמרי בהתאם לתנועת המצלמה - זום, פאן, זווית." },
+            { round: 3, points: 5, q: "למה סאונד גרוע יכול להרוס סרט טוב?", a: ["כי זה זול", "כי המוח רגיש לסאונד - סאונד גרוע יגרום לנו לעזוב גם אם התמונה מעולה", "זה לא נכון", "רק בסרטים ישנים"], correct: 1, exp: "המוח רגיש לסאונד! סאונד גרוע ישפיע על החוויה גם אם התמונה מצוינת." },
+            { round: 3, points: 5, q: "מה ההבדל בין מאבק פנימי לקונפליקט חיצוני?", a: ["אין הבדל", "פנימי הוא בתוך הדמות (פחד, ספק), חיצוני הוא מול משהו מחוץ לה", "פנימי תמיד יותר חשוב", "חיצוני קורה רק בסוף הסרט"], correct: 1, exp: "מאבק פנימי הוא בתוך הדמות עצמה. קונפליקט חיצוני הוא מולה מול העולם, דמות אחרת, או נסיבות." },
+            
+            // סיבוב 4 - 10 נקודות - 4 שאלות (הכי קשה)
+            { round: 4, points: 10, q: "איזה מהבאים לא נכון על דמות בלתי נשכחת?", a: ["היא ספציפית עם פרטים ייחודיים", "יש לה סתירה פנימית", "היא תמיד מצליחה בלי בעיות", "אנחנו מזדהים איתה"], correct: 2, exp: "דמות שתמיד מצליחה = משעממת! דמות בלתי נשכחת חייבת סתירות וקשיים." },
+            { round: 4, points: 10, q: "איך אנטי-גיבור ונבל שונים בעיצוב שלהם, למרות ששניהם 'לא מושלמים'?", a: ["אין הבדל בכלל", "אנטי-גיבור הוא עדיין הדמות שאיתה אנחנו, גם עם הפגמים; הנבל מתנגד לה", "נבל תמיד חלש יותר", "אנטי-גיבור תמיד הופך לנבל"], correct: 1, exp: "אנטי-גיבור נשאר במרכז הסיפור ואנחנו איתו למרות הפגמים. נבל הוא הכוח שמתנגד לדמות הראשית." },
+            { round: 4, points: 10, q: "מה מהבאים לא ז'אנר לפי סביבה?", a: ["מערבונים - במערב הפרוע", "מדע בדיוני - בחלל", "קומדיה - מצחיק", "אימה ימית - בים"], correct: 2, exp: "קומדיה = ז'אנר לפי אופי (מצחיק), לא לפי סביבה - היא לא קשורה למקום מסוים." },
+            { round: 4, points: 10, q: "למה מוזיקה יכולה להציל סרט עם ויזואליה חלשה, אבל סאונד גרוע יכול להרוס סרט עם ויזואליה מעולה?", a: ["זה לא נכון בכלל", "המוח רגיש יותר לסאונד - הוא שולט על התחושה שלנו יותר מהתמונה", "זה תלוי רק בתקציב הסרט", "זה קורה רק בסרטים ישנים"], correct: 1, exp: "המוח רגיש יותר לסאונד מאשר לתמונה - זה עובד לשני הכיוונים: סאונד טוב מפצה, סאונד רע הורס." },
+        ];
+        
+        let currentIndex = 0;
+        let teamNames = [];
+        let teamScores = [0, 0, 0, 0, 0];
+        let pointsAwarded = false;
+        
+        function startGame() {
+            teamNames = [
+                document.getElementById('team0').value || 'קבוצה 1',
+                document.getElementById('team1').value || 'קבוצה 2',
+                document.getElementById('team2').value || 'קבוצה 3',
+                document.getElementById('team3').value || 'קבוצה 4',
+                document.getElementById('team4').value || 'קבוצה 5',
+            ];
+            teamScores = [0, 0, 0, 0, 0];
+            currentIndex = 0;
+            
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('gameScreen').classList.remove('hidden');
+            document.getElementById('roundIndicator').style.display = 'inline-block';
+            document.getElementById('progressBar').style.display = 'block';
+            
+            renderScoreboard();
+            showQuestion();
+        }
+        
+        function renderScoreboard() {
+            const sb = document.getElementById('scoreboard');
+            sb.innerHTML = '';
+            const maxScore = Math.max(...teamScores);
+            teamNames.forEach((name, i) => {
+                const card = document.createElement('div');
+                card.className = 'score-card' + (teamScores[i] === maxScore && maxScore > 0 ? ' leader' : '');
+                card.innerHTML = `<div class="score-name">${name}</div><div class="score-points">${teamScores[i]}</div>`;
+                sb.appendChild(card);
+            });
+        }
+        
+        function showQuestion() {
+            const q = questions[currentIndex];
+            pointsAwarded = false;
+            
+            document.getElementById('roundIndicator').textContent = `סיבוב ${q.round} מתוך 4`;
+            document.getElementById('questionNumber').textContent = `שאלה ${currentIndex + 1} מתוך ${questions.length}`;
+            document.getElementById('questionPoints').textContent = q.points === 1 ? '1 נקודה' : `${q.points} נקודות`;
+            document.getElementById('questionText').textContent = q.q;
+            
+            const qBox = document.getElementById('questionBox');
+            qBox.className = 'question-box round-' + q.round;
+            
+            const grid = document.getElementById('answersGrid');
+            grid.innerHTML = '';
+            q.a.forEach((ans) => {
+                const div = document.createElement('div');
+                div.className = 'answer-item';
+                div.textContent = ans;
+                grid.appendChild(div);
+            });
+            
+            document.getElementById('revealBtn').style.display = 'block';
+            document.getElementById('explanationBox').classList.remove('show');
+            document.getElementById('awardSection').classList.remove('show');
+            document.getElementById('nextBtn').classList.remove('show');
+            
+            const progress = (currentIndex / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+        
+        function revealAnswer() {
+            const q = questions[currentIndex];
+            const answerItems = document.querySelectorAll('.answer-item');
+            answerItems[q.correct].classList.add('correct-answer');
+            
+            const expBox = document.getElementById('explanationBox');
+            expBox.innerHTML = `<strong>✅ התשובה הנכונה:</strong> ${q.a[q.correct]}<br>${q.exp}`;
+            expBox.classList.add('show');
+            
+            document.getElementById('revealBtn').style.display = 'none';
+            
+            const awardSection = document.getElementById('awardSection');
+            awardSection.classList.add('show');
+            const awardButtons = document.getElementById('awardButtons');
+            awardButtons.innerHTML = '';
+            teamNames.forEach((name, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'award-btn';
+                btn.textContent = name;
+                btn.onclick = () => awardPoints(i);
+                awardButtons.appendChild(btn);
+            });
+        }
+        
+        function awardPoints(teamIndex) {
+            if (pointsAwarded) return;
+            const q = questions[currentIndex];
+            teamScores[teamIndex] += q.points;
+            pointsAwarded = true;
+            
+            document.querySelectorAll('.award-btn')[teamIndex].classList.add('awarded');
+            document.querySelectorAll('.award-btn').forEach(b => b.style.pointerEvents = 'none');
+            document.querySelector('.no-score-btn').style.pointerEvents = 'none';
+            document.querySelector('.no-score-btn').style.opacity = '0.5';
+            
+            renderScoreboard();
+            document.getElementById('nextBtn').classList.add('show');
+        }
+        
+        function noScore() {
+            if (pointsAwarded) return;
+            pointsAwarded = true;
+            document.querySelectorAll('.award-btn').forEach(b => b.style.pointerEvents = 'none');
+            document.querySelector('.no-score-btn').style.pointerEvents = 'none';
+            document.querySelector('.no-score-btn').style.opacity = '0.5';
+            document.getElementById('nextBtn').classList.add('show');
+        }
+        
+        function nextQuestion() {
+            currentIndex++;
+            if (currentIndex < questions.length) {
+                showQuestion();
+            } else {
+                endGame();
+            }
+        }
+        
+        function endGame() {
+            document.getElementById('gameScreen').classList.add('hidden');
+            document.getElementById('endScreen').classList.remove('hidden');
+            document.getElementById('roundIndicator').style.display = 'none';
+            document.getElementById('progressBar').style.display = 'none';
+            
+            const finalBoard = document.getElementById('finalScoreboard');
+            const ranked = teamNames.map((name, i) => ({ name, score: teamScores[i] }))
+                                     .sort((a, b) => b.score - a.score);
+            
+            finalBoard.innerHTML = '';
+            ranked.forEach((team, i) => {
+                const row = document.createElement('div');
+                row.className = 'final-score-row' + (i === 0 ? ' winner' : '');
+                row.innerHTML = `<span>${i === 0 ? '🏆 ' : ''}${team.name}</span><span>${team.score} נק'</span>`;
+                finalBoard.appendChild(row);
+            });
+        }
+        
+        function restartGame() {
+            document.getElementById('endScreen').classList.add('hidden');
+            document.getElementById('startScreen').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

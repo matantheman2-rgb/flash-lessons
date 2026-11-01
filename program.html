@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תוכנית פלאש - קולנוע</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            border-radius: 20px 20px 0 0;
+        }
+        .header h1 { font-size: 4em; margin-bottom: 10px; }
+        .header p { font-size: 1.3em; }
+        .content { padding: 40px; }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 30px;
+            background: #f8f9fa;
+            margin: 40px 0;
+            border-radius: 12px;
+        }
+        .stat-box { text-align: center; }
+        .stat-number { font-size: 3em; color: #667eea; font-weight: bold; }
+        .stat-label { color: #666; margin-top: 10px; }
+        .topic-section { margin-bottom: 50px; border-right: 5px solid #667eea; padding-right: 30px; }
+        .topic-title {
+            font-size: 2em;
+            color: #1e3c72;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .topic-number {
+            background: #667eea;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .topic-description { color: #666; margin-bottom: 25px; font-style: italic; padding-right: 65px; }
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding-right: 65px;
+        }
+        .lesson-card {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        .lesson-card.special {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+            border: 3px solid #ffc107;
+        }
+        .lesson-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .lesson-title { font-size: 1.2em; color: #1e3c72; margin-bottom: 15px; font-weight: bold; }
+        .lesson-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-bottom: 10px;
+            background: #4caf50;
+            color: white;
+            font-weight: bold;
+        }
+        .status-coming { background: #ffc107; color: #333; }
+        .lesson-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .lesson-link:hover { background: #764ba2; transform: scale(1.05); }
+        .footer { background: #1e3c72; color: white; padding: 30px; text-align: center; border-radius: 0 0 20px 20px; }
+    </style>
+</head>
+<body><a href="index.html" style="position:fixed;top:14px;left:14px;z-index:9999;background:#1a1a2e;color:#fff;text-decoration:none;font-family:Heebo,sans-serif;font-weight:700;padding:8px 14px;border-radius:20px;font-size:14px;box-shadow:0 2px 10px rgba(0,0,0,.3)">&#8594; לדף הראשי</a>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 תוכנית פלאש 🎬</h1>
+            <p>מדריך מקיף לשיעורי קולנוע - 34 מפגשים</p>
+        </div>
+        
+        <div class="content">
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-number">34</div>
+                    <div class="stat-label">שיעורים בסך הכל</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">34</div>
+                    <div class="stat-label">שיעורים מוכנים</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">נושאים</div>
+                </div>
+            </div>
+            
+            <!-- נושא 1 -->
+            <div class="topic-section">
+                <div class="topic-title">
+                    <span class="topic-number">1</span>
+                    <span>סיפור ודמויות</span>
+                </div>
+                <p class="topic-description">עלילות ודמויות מרתקות</p>
+                <div class="lessons-grid">
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">דמות בלתי נשכחת</div>
+                        <a href="https://my.visme.co/view/mxwjzggw-6ep5dwyjq6we2dz3" target="_blank" class="lesson-link">צפייה במצגת</a>
+                        <a href="character-activity.html" target="_blank" class="lesson-link" style="background: #d35400; display: block; margin-top: 8px;">📝 פעילות: בניית דמות</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">תסריטאות</div>
+                        <a href="https://www.canva.com/design/DAF8OnCqmAw/HlO6UygQYwLH-ZnNbfWsHA/view" target="_blank" class="lesson-link">צפייה במצגת</a>
+                        <a href="three-acts-activity.html" target="_blank" class="lesson-link" style="background: #d35400; display: block; margin-top: 8px;">📝 פעילות</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">סיפור אמיתי</div>
+                        <a href="https://www.canva.com/design/DAFXeQer8zM/XS2E1XFXi48TlObvZuTAhg/view" target="_blank" class="lesson-link">צפייה במצגת</a>
+                        <a href="true-story-activity.html" target="_blank" class="lesson-link" style="background: #1e8449; display: block; margin-top: 8px;">📝 פעילות: מבוסס על סיפור אמיתי</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">אנטי-גיבור</div>
+                        <a href="anti-hero.html" target="_blank" class="lesson-link">שיעור אינטראקטיבי</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">נבל מושלם</div>
+                        <a href="villain.html" target="_blank" class="lesson-link">שיעור אינטראקטיבי</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">מאבק פנימי</div>
+                        <a href="internal-struggle.html" target="_blank" class="lesson-link">שיעור אינטראקטיבי</a>
+                    </div>
+            </div>
+            
+            <!-- נושא 2 -->
+            <div class="topic-section">
+                <div class="topic-title">
+                    <span class="topic-number">2</span>
+                    <span>יסודות השפה הקולנועית</span>
+                </div>
+                <p class="topic-description">הכלים הטכניים והאמנותיים</p>
+                <div class="lessons-grid">
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">תנועות מצלמה</div>
+                        <a href="https://gamma.app/docs/-61p4iz369p3ocyh?mode=doc" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">סאונדטרק (פסקול)</div>
+                        <a href="https://my.visme.co/view/epgvyo7x-z4p5zz6nrovx57n1" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">קולנוע תיעודי</div>
+                        <a href="https://my.visme.co/view/01non9kr-g8n5opg6nz142qvz" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- נושא 3 -->
+            <div class="topic-section">
+                <div class="topic-title">
+                    <span class="topic-number">3</span>
+                    <span>ז'אנרים</span>
+                </div>
+                <p class="topic-description">קטגוריות וסגנונות</p>
+                <div class="lessons-grid">
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">ז'אנרים בקולנוע</div>
+                        <a href="https://my.visme.co/view/1j6qdw0m-64r50vppmo612pz1" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">קומדיה</div>
+                        <a href="https://www.canva.com/design/DAGBh6n-wR0/JxY_IGIsBIXrxZeoGCVL0A/view" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">אימה</div>
+                        <a href="https://www.canva.com/design/DAFW0hNzI3k/RrSCwkVmY76-ckcJQ1qknQ/view" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">אפוקליפסה</div>
+                        <a href="https://www.canva.com/design/DAGEFDyCRMI/OfmWFW4k-FoBM29HPFBk9w/view" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">מדע בדיוני</div>
+                        <a href="https://www.canva.com/design/DAGFa0Np0i4/CUmBHpXx72mD7ixC-q48cg/view" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">דיסני</div>
+                        <a href="https://www.canva.com/design/DAF-5ZLMKrk/PwqWbZS1upkrlKX5zmRU6w/view" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- נושא 4 -->
+            <div class="topic-section">
+                <div class="topic-title">
+                    <span class="topic-number">4</span>
+                    <span>קולנוע וחברה</span>
+                </div>
+                <p class="topic-description">הקשר בין קולנוע למציאות</p>
+                <div class="lessons-grid">
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">קולנוע במלחמה</div>
+                        <a href="https://www.canva.com/design/DAFiroQws3o/y9irmR5Ryo8j9WrdEkiSGw/view" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">קולנוע יוצר מציאות</div>
+                        <a href="https://www.canva.com/design/DAF7kbNdVPs/zvmmC42L5Di-631vgmzuVA/view" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">פרסומות</div>
+                        <a href="https://www.canva.com/design/DAFkpNtHRX8/8BUbLcwCVYznRPGpxPwh5Q/view" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">מסך הכסף</div>
+                        <a href="https://www.canva.com/design/DAGjJpjcveg/ZH6DCQ2VNCA51VB-QBUreg/view" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">קולנוע ישראלי</div>
+                        <a href="israeli-cinema.html" target="_blank" class="lesson-link">שיעור אינטראקטיבי</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- נושא 5 -->
+            <div class="topic-section">
+                <div class="topic-title">
+                    <span class="topic-number">5</span>
+                    <span>צורות והיברידיות</span>
+                </div>
+                <p class="topic-description">צורות לא שגרתיות</p>
+                <div class="lessons-grid">
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">סרט קצר</div>
+                        <a href="https://my.visme.co/view/dmgjnr4v-pmx2vm7pgpyd2qvz" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">קליפ</div>
+                        <a href="https://my.visme.co/view/rxmp4v68-x835wpzyqdzklmpr" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">קרוס ז'אנר</div>
+                        <a href="https://gamma.app/docs/-61p4iz369p3ocyh" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">אוונגארד</div>
+                        <a href="https://www.canva.com/design/DAGGEAOtGsQ/ER60lp4jcW3eh1KXjBW1Sw/view" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">פאונד פוטאג'</div>
+                        <a href="found-footage.html" target="_blank" class="lesson-link">שיעור אינטראקטיבי</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- נושא 6 -->
+            <div class="topic-section">
+                <div class="topic-title">
+                    <span class="topic-number">6</span>
+                    <span>אנימה ומשחקי וידאו</span>
+                </div>
+                <p class="topic-description">עולמות סיפור חדשים</p>
+                <div class="lessons-grid">
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">אנימציה</div>
+                        <a href="https://www.canva.com/design/DAFYLZftre8/C_ev80GjBFAS-j-ojFMSfw/view" target="_blank" class="lesson-link">צפייה במצגת</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">אנימה</div>
+                        <a href="anime.html" target="_blank" class="lesson-link">שיעור אינטראקטיבי</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">משחקים 1 - עקרונות</div>
+                        <a href="games-1-principles.html" target="_blank" class="lesson-link">שיעור אינטראקטיבי</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">משחקים 2 - אומנות</div>
+                        <a href="games-2-art.html" target="_blank" class="lesson-link">שיעור אינטראקטיבי</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">משחקים 3 - אתה הסיפור</div>
+                        <a href="games-3-you-are-the-story.html" target="_blank" class="lesson-link">שיעור אינטראקטיבי</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- נושא 7 -->
+            <div class="topic-section" style="border-right-color: #ffc107;">
+                <div class="topic-title">
+                    <span class="topic-number" style="background: linear-gradient(135deg, #ffc107, #ff9800);">7</span>
+                    <span>חזרה למבחן ושיעורים נוספים</span>
+                </div>
+                <p class="topic-description">משחקים, תרגולים, ופרויקטים יצירתיים</p>
+                <div class="lessons-grid">
+                    <div class="lesson-card special">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">🎮 משחק טריוויה למבחן</div>
+                        <a href="exam-trivia.html" target="_blank" class="lesson-link" style="background: linear-gradient(135deg, #ffc107, #ff9800);">שחקו עכשיו!</a>
+                    </div>
+                    <div class="lesson-card special">
+                        <span class="lesson-status">✓ מוכן</span>
+                        <div class="lesson-title">📚 חומר לימוד למבחן</div>
+                        <a href="study-guide.html" target="_blank" class="lesson-link" style="background: linear-gradient(135deg, #ffc107, #ff9800);">צפייה בחומר</a>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status status-coming">🔜 בקרוב</span>
+                        <div class="lesson-title">כתיבת תסריט - סצנה קצרה</div>
+                        <p style="margin-top: 10px; color: #666; font-size: 0.9em;">תרגול כתיבת דיאלוג ופעולה</p>
+                    </div>
+                    <div class="lesson-card">
+                        <span class="lesson-status status-coming">🔜 בקרוב</span>
+                        <div class="lesson-title">צילום סצנה - תרגיל מעשי</div>
+                        <p style="margin-top: 10px; color: #666; font-size: 0.9em;">תכנון, צילום, עריכה</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="footer">
+            <p>תוכנית פלאש - קולנוע | מתן © 2026</p>
+        </div>
+    </div>
+</body>
+</html>

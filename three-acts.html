@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שלוש המערכות</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&family=Heebo:wght@300;400;600&display=swap');
+
+  :root {
+    --ink: #0d0d1a;
+    --paper: #f2ede1;
+    --gold: #e8b64a;
+    --act1: #7fc8b8;
+    --act2: #e0635a;
+    --act3: #e8b64a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: var(--ink);
+    color: var(--paper);
+    direction: rtl;
+    line-height: 1.6;
+  }
+
+  .display { font-family: 'Rubik', sans-serif; font-weight: 900; }
+
+  /* HERO - QUESTION SCREEN */
+  .hero-question {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-question::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(127,200,184,0.10), transparent 40%),
+      radial-gradient(circle at 80% 30%, rgba(224,99,90,0.10), transparent 40%),
+      radial-gradient(circle at 50% 85%, rgba(232,182,74,0.10), transparent 45%);
+    pointer-events: none;
+  }
+
+  .kicker {
+    font-size: 1.05em;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+    margin-bottom: 18px;
+    position: relative;
+  }
+
+  .hero-question h1 {
+    font-size: clamp(2.2em, 6vw, 4.2em);
+    line-height: 1.15;
+    max-width: 15ch;
+    position: relative;
+  }
+
+  .scroll-hint {
+    margin-top: 50px;
+    font-size: 1em;
+    color: rgba(242,237,225,0.5);
+    position: relative;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+  }
+
+  /* HERO - ANSWER SCREEN */
+  .hero-answer {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px;
+  }
+
+  .answer-label {
+    font-size: 0.95em;
+    color: rgba(242,237,225,0.45);
+    margin-bottom: 26px;
+  }
+
+  .equation {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    font-size: clamp(1.2em, 3vw, 1.8em);
+  }
+
+  .eq-term {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .eq-word { font-family: 'Rubik', sans-serif; font-weight: 700; }
+  .eq-word.a { color: var(--act1); }
+  .eq-word.b { color: var(--act2); }
+  .eq-word.c { color: var(--act3); }
+
+  .eq-sign { color: rgba(242,237,225,0.4); font-weight: 300; font-size: 0.8em; }
+
+  .hero-note {
+    margin-top: 46px;
+    font-size: 0.95em;
+    color: rgba(242,237,225,0.55);
+    max-width: 44ch;
+  }
+
+  /* ACT SECTIONS */
+  .act-intro {
+    text-align: center;
+    padding: 70px 24px 20px;
+  }
+  .act-intro h2 { font-size: clamp(1.5em, 3.2vw, 2.2em); margin-bottom: 10px; }
+  .act-intro p { color: rgba(242,237,225,0.55); max-width: 46ch; margin: 0 auto; }
+
+  .act {
+    padding: 60px 6vw;
+    max-width: 900px;
+    margin: 0 auto;
+    border-right: 4px solid;
+    margin-bottom: 10px;
+  }
+  .act1 { border-color: var(--act1); }
+  .act2 { border-color: var(--act2); }
+  .act3 { border-color: var(--act3); }
+
+  .act-label {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 900;
+    font-size: 0.85em;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .act1 .act-label { color: var(--act1); }
+  .act2 .act-label { color: var(--act2); }
+  .act3 .act-label { color: var(--act3); }
+
+  .act-name {
+    font-size: clamp(1.5em, 3vw, 2.1em);
+    margin-bottom: 14px;
+  }
+
+  .act-text {
+    color: rgba(242,237,225,0.8);
+    font-size: 1.02em;
+    max-width: 62ch;
+  }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(242,237,225,0.15), transparent);
+    margin: 40px 8vw;
+  }
+
+  /* BRIDGE */
+  .bridge {
+    padding: 100px 24px 120px;
+    text-align: center;
+  }
+  .bridge h2 { font-size: clamp(1.6em, 3.6vw, 2.4em); margin-bottom: 16px; }
+  .bridge p { color: rgba(242,237,225,0.6); max-width: 48ch; margin: 0 auto; font-size: 1.05em; }
+  .bridge .spark { color: var(--gold); }
+</style>
+</head>
+<body>
+
+  <section class="hero-question">
+    <div class="kicker">תוכנית פלאש מתקדמת</div>
+    <h1 class="display">מה המבנה של כל סיפור טוב?</h1>
+    <p class="scroll-hint">⬇ גללו למטה לתשובה</p>
+  </section>
+
+  <section class="hero-answer">
+    <p class="answer-label">התשובה:</p>
+    <div class="equation">
+      <div class="eq-term"><span class="eq-word a display">פתיחה</span></div>
+      <span class="eq-sign">←</span>
+      <div class="eq-term"><span class="eq-word b display">עימות</span></div>
+      <span class="eq-sign">←</span>
+      <div class="eq-term"><span class="eq-word c display">פתרון</span></div>
+    </div>
+    <p class="hero-note">שלוש מערכות. כל סיפור שאתם מכירים בנוי ככה - בואו נראה איך זה עובד על דמות שכבר מכירים.</p>
+  </section>
+
+  <div class="act-intro">
+    <h2 class="display">רמי העכבר - שלוש המערכות</h2>
+    <p>Ratatouille, מפורק לשלד הסיפור</p>
+  </div>
+
+  <div class="act act1">
+    <div class="act-label">מערכה 1 · פתיחה</div>
+    <h3 class="act-name display">מי הוא, ומה הוא רוצה</h3>
+    <p class="act-text">רמי הוא עכבר עם חוש ריח יוצא דופן, שחי עם משפחתו בכפר בצרפת. הוא חולם להיות שף - אבל עכברים לא אמורים לבשל, הם אמורים לגנוב אוכל. כבר כאן יש קונפליקט: מי שהוא, מול מה שהעולם מצפה ממנו.</p>
+  </div>
+
+  <div class="act act2">
+    <div class="act-label">מערכה 2 · עימות</div>
+    <h3 class="act-name display">ההימור עולה</h3>
+    <p class="act-text">רמי מגיע לפריז ומוצא דרך לבשל - בסתר, דרך לינגוויני, טבח מתלמד שלא יודע לבשל בכלל. רמי שולט על ידיו מתחת לכובע שלו. הוא חייב להסתיר שהוא עכבר, להתמודד עם שף חשדן, ועם המשפחה שלו שלא מבינה למה הוא בכלל טורח.</p>
+  </div>
+
+  <div class="act act3">
+    <div class="act-label">מערכה 3 · פתרון</div>
+    <h3 class="act-name display">ההחלטה שמשנה הכל</h3>
+    <p class="act-text">כשהכל מתגלה והמסעדה על סף קריסה, רמי מחליט לבשל בגלוי, בלי הסתרות - מול המבקר הכי מפחיד בפריז. הוא מסכן הכל כדי להיות מי שהוא באמת. הסיכון משתלם: "כל אחד יכול לבשל" - כולל עכבר.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <section class="bridge">
+    <h2 class="display">עכשיו <span class="spark">תורכם</span></h2>
+    <p>קחו את הדמות שיצרתם במפגש הקודם, ותבנו לה שלד סיפור: מה קורה בפתיחה, מה העימות שלה, ואיך זה נפתר.</p>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>המשימה: תמציאו נבל | תוכנית פלאש</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{
+  font-family:'Heebo',sans-serif;direction:rtl;color:#fff;
+  background:radial-gradient(ellipse at 80% 0%,#3a0d17 0%,#120a10 55%,#09070b 100%);
+  display:flex;flex-direction:column;
+  padding:3.2vh 3.5vw 3vh;gap:2.6vh;
+}
+.top{display:flex;align-items:center;justify-content:space-between}
+.top h1{font-size:min(5.6vw,10vh);font-weight:900;line-height:1}
+.top h1 span{color:#ff3b55}
+.top p{font-size:min(1.7vw,3.1vh);color:#c9b8be;margin-top:1vh}
+.badge{border:0.35vw solid #ff3b55;color:#ff3b55;font-weight:900;font-size:min(1.9vw,3.4vh);padding:1vh 1.4vw;border-radius:0.6vw;transform:rotate(-6deg);text-align:center;line-height:1.15}
+.grid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:1.6vh 1.3vw;min-height:0}
+.card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:1vw;padding:2.2vh 1.4vw;display:flex;flex-direction:column;gap:1.2vh;min-height:0}
+.card h2{display:flex;align-items:center;gap:0.8vw;font-size:min(2.25vw,4.1vh);font-weight:900;line-height:1.15}
+.n{background:#ff3b55;color:#fff;flex:none;width:min(3vw,5.4vh);height:min(3vw,5.4vh);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:min(1.7vw,3.1vh)}
+.card p{font-size:min(1.55vw,2.85vh);line-height:1.45;color:#d9cdd1}
+.card p b{color:#fff}
+.opts{display:flex;flex-wrap:wrap;gap:0.8vh 0.5vw}
+.opt{background:rgba(255,59,85,.16);border:1px solid rgba(255,59,85,.5);border-radius:2vw;padding:0.5vh 0.8vw;font-size:min(1.35vw,2.5vh);font-weight:700}
+.en{direction:ltr;text-align:left;font-size:min(1.8vw,3.3vh);font-weight:900;color:#ff8a9a}
+.bottom{display:flex;align-items:center;justify-content:center;gap:1.2vw;font-size:min(1.75vw,3.2vh);font-weight:700;color:#d9cdd1}
+.bottom b{color:#fff}
+.bottom .opt{font-size:min(1.6vw,2.9vh)}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div>
+    <h1>המשימה: תמציאו <span>נבל</span></h1>
+    <p>במחברת. תענו על כל השאלות, ובסוף תכתבו את סצנת הכניסה שלו.</p>
+  </div>
+  <div class="badge">סודי<br>ביותר</div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2><span class="n">1</span>מאיזה דור הוא?</h2>
+    <div class="opts">
+      <span class="opt">הרשע הטהור</span>
+      <span class="opt">המורכב והאפל</span>
+      <span class="opt">עם נקודת מבט</span>
+      <span class="opt">מאתגר את המוסר</span>
+    </div>
+    <p>קרואלה? ויידר? סקאר? תאנוס?</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">2</span>שם וסימן מזהה</h2>
+    <p>איך קוראים לו, ואיך קוראים לו <b>מאחורי הגב</b>?</p>
+    <p>מה הסימן שלו? לוויידר יש נשימה, לג'וקר יש חיוך.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">3</span>הפצע</h2>
+    <p>הוא לא נולד רע. <b>מה קרה לו?</b></p>
+    <div class="opts">
+      <span class="opt">חי בצל של אח</span>
+      <span class="opt">הגיבור שלו דחה אותו</span>
+      <span class="opt">היה גיבור ונפל</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">4</span>למה הוא בטוח שהוא צודק?</h2>
+    <p>מה הוא רוצה, ולמה לדעתו זה טוב לעולם?</p>
+    <p>תאנוס לא חושב שהוא נבל. <b>הוא חושב שהוא מושיע.</b></p>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">5</span>משפט החתימה</h2>
+    <p>משפט אחד שכולם יצטטו אחרי הסרט:</p>
+    <div class="en">"Why so serious?"</div>
+    <div class="en">"I am inevitable."</div>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">6</span>סצנת הכניסה</h2>
+    <p>הרגע הראשון שרואים אותו על המסך. <b>מה הוא עושה שמראה לנו מיד מי הוא?</b></p>
+    <p>לפחות 4 שורות.</p>
+  </div>
+</div>
+
+<div class="bottom">
+  <b>בונוס: איך זה נגמר?</b>
+  <span class="opt">הוא מנצח</span>
+  <span class="opt">הוא נגאל</span>
+  <span class="opt">הוא מובס</span>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חומר למבחן - פלאש 🎬</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Rubik', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '🎬';
+            position: absolute;
+            font-size: 15em;
+            opacity: 0.1;
+            top: -50px;
+            right: -50px;
+        }
+        
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header p {
+            font-size: 1.4em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .content {
+            padding: 50px 40px;
+        }
+        
+        .topic {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border-right: 8px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+        
+        .topic:hover {
+            transform: translateX(-10px);
+        }
+        
+        .topic-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+        
+        .topic-title {
+            font-size: 2.2em;
+            color: #1e3c72;
+            margin-bottom: 25px;
+            font-weight: 900;
+        }
+        
+        .topic-emoji {
+            font-size: 2em;
+            margin-left: 10px;
+        }
+        
+        .key-point {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-right: 5px solid #ffd700;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .key-point h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .key-point p {
+            font-size: 1.2em;
+            color: #444;
+            line-height: 1.8;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+            border: 3px solid #ffc107;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .highlight-box strong {
+            color: #e65100;
+            font-size: 1.3em;
+        }
+        
+        .fact-box {
+            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            border: 3px solid #17a2b8;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .fact-emoji {
+            font-size: 2.5em;
+            margin-left: 15px;
+        }
+        
+        .examples {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .examples h4 {
+            color: #667eea;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+        
+        .examples ul {
+            padding-right: 25px;
+        }
+        
+        .examples li {
+            font-size: 1.15em;
+            margin: 10px 0;
+            color: #555;
+        }
+        
+        .remember-box {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            border: 3px solid #dc3545;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .remember-box p {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #721c24;
+        }
+        
+        .icon {
+            font-size: 1.8em;
+            margin-left: 8px;
+        }
+        
+        .divider {
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            margin: 40px 0;
+            border-radius: 2px;
+        }
+        
+        .summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 50px;
+        }
+        
+        .summary h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .summary-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .summary-card h3 {
+            font-size: 1.4em;
+            margin-bottom: 12px;
+        }
+        
+        .summary-card p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        @media print {
+            body { 
+                background: white; 
+                padding: 0; 
+            }
+            .container { 
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .header {
+                page-break-after: always;
+                padding: 40px;
+            }
+            .topic {
+                page-break-inside: avoid;
+                margin-bottom: 20px;
+                padding: 30px;
+            }
+            .topic:hover { 
+                transform: none; 
+            }
+            .summary {
+                page-break-before: always;
+            }
+            .divider {
+                display: none;
+            }
+            .topic-title {
+                font-size: 1.8em;
+            }
+            .key-point {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            .highlight-box, .fact-box, .remember-box {
+                padding: 15px;
+                margin: 15px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 חומר למבחן 📚</h1>
+            <p>תוכנית פלאש - סטוריטלינג וקולנוע</p>
+            <p style="margin-top: 10px; font-size: 1.1em;">כל מה שצריך לדעת למבחן! 🎯</p>
+        </div>
+        
+        <div class="content">
+            
+            <!-- נושא 1 -->
+            <div class="topic">
+                <h2 class="topic-title">
+                    <span class="topic-number">1</span>
+                    גדלי שוטים 
+                    <span class="topic-emoji">🎥</span>
+                </h2>
+                
+                <div class="key-point">
+                    <h3>3 גדלים עיקריים:</h3>
+                    <p><strong>1. CLOSE UP (תקריב)</strong> <span class="icon">😊</span> - פרצוף מקרוב, רואים רגשות</p>
+                    <p><strong>2. MEDIUM SHOT (בינוני)</strong> <span class="icon">🧍</span> - מהמותניים למעלה, שיחה</p>
+                    <p><strong>3. LONG SHOT (רחוק)</strong> <span class="icon">🏃</span> - הדמות כולה + הסביבה</p>
+                </div>
+            </div>
+
+            <!-- נושא 2 -->
+            <div class="topic">
+                <h2 class="topic-title">
+                    <span class="topic-number">2</span>
+                    צלילים בסרטים
+                    <span class="topic-emoji">🔊</span>
+                </h2>
+                
+                <div class="key-point">
+                    <h3>3 סוגי צלילים:</h3>
+                    <p><strong>1. טקסט (דיבורים)</strong> <span class="icon">💬</span> - מה שהדמויות אומרות</p>
+                    <p><strong>2. צלילים (אפקטים)</strong> <span class="icon">🚪</span> - שולחן חורק, דלת נסגרת, רעם</p>
+                    <p><strong>3. מוזיקת רקע</strong> <span class="icon">🎵</span> - המוזיקה שמלווה</p>
+                </div>
+            </div>
+
+            <!-- נושא 3 -->
+            <div class="topic">
+                <h2 class="topic-title">
+                    <span class="topic-number">3</span>
+                    קולנוע תיעודי
+                    <span class="topic-emoji">📹</span>
+                </h2>
+                
+                <div class="key-point">
+                    <h3>מה זה קולנוע תיעודי?</h3>
+                    <p><strong>סרט שמתעד את המציאות</strong> - אנשים אמיתיים, אירועים אמיתיים, מקומות אמיתיים</p>
+                    <p>לא שחקנים, לא תפאורות - אלא <strong>חיים אמיתיים</strong>!</p>
+                    <p>דוגמאות: סרטי טבע, סרטים היסטוריים, ביוגרפיות</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>עובדה חשובה:</strong> <span class="fact-emoji">💡</span></p>
+                    <p style="font-size: 1.3em; margin-top: 15px;">גם לקולנוע תיעודי יש <strong>תסריט</strong>!</p>
+                    <p style="font-size: 1.2em; margin-top: 10px;">יש <strong>סיפור</strong> שמנסים לספר</p>
+                    <p style="font-size: 1.2em; margin-top: 10px;">כלומר: זה <strong>לא הכי אמיתי בוודאות</strong></p>
+                    <p style="font-size: 1.1em; margin-top: 10px; color: #666;">הבמאי בוחר מה להראות, איך לערוך, ואיזה מוזיקה לשים</p>
+                </div>
+            </div>
+
+            <!-- נושא 4 -->
+            <div class="topic">
+                <h2 class="topic-title">
+                    <span class="topic-number">4</span>
+                    סרטי בורקס
+                    <span class="topic-emoji">😂</span>
+                </h2>
+                
+                <div class="key-point">
+                    <h3>מה זה סרטי בורקס?</h3>
+                    <p><strong>קומדיות ישראליות</strong> שהיו פופולריות מאוד בשנות ה-60-70</p>
+                    <p>הסרטים האלה היו מבוססים על <strong>סטריאוטיפים</strong> של קבוצות שונות בחברה הישראלית</p>
+                    <p>שם "בורקס" כי זה אוכל <strong>מזרחי</strong> - הסרטים התמקדו בהבדלים בין עדות</p>
+                </div>
+                
+                <div class="fact-box">
+                    <p style="font-size: 1.3em;"><strong>איך קראו לקומדיות ששברו שיאים בשנות ה-60-70?</strong></p>
+                    <p style="font-size: 2em; margin-top: 15px; font-weight: bold; color: #0056b3;">סרטי בורקס!</p>
+                </div>
+                
+                <div class="examples">
+                    <h4>דוגמאות:</h4>
+                    <ul>
+                        <li>🎬 "חגיגה בסנוקר"</li>
+                        <li>🎬 "הלהקה"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- נושא 5 -->
+            <div class="topic">
+                <h2 class="topic-title">
+                    <span class="topic-number">5</span>
+                    מדע בדיוני
+                    <span class="topic-emoji">🚀</span>
+                </h2>
+                
+                <div class="key-point">
+                    <h3>מה זה ז'אנר?</h3>
+                    <p><strong>ז'אנר = סוג של סרט</strong></p>
+                    <p>כמו שיש סוגים של מוזיקה (רוק, פופ, ראפ) - יש גם סוגים של סרטים!</p>
+                    <p>דוגמאות לז'אנרים: קומדיה, אימה, אקשן, דרמה</p>
+                </div>
+                
+                <div class="fact-box">
+                    <h3 style="margin-bottom: 10px;">מה זה ז'אנר מדע בדיוני?</h3>
+                    <p style="font-size: 1.2em;"><strong>סרטים על עתיד, חלל, טכנולוגיה, חייזרים, רובוטים</strong></p>
+                    <p style="font-size: 1.2em; margin-top: 10px;">משתמשים במדע (אמיתי או בדוי) כדי לספר סיפורים</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <p><strong>שאלת טריוויה:</strong> <span class="icon">❓</span></p>
+                    <p style="font-size: 1.3em; margin-top: 15px;">מה היה הסרט המדע בדיוני <strong>הראשון בהיסטוריה?</strong></p>
+                </div>
+                
+                <div class="fact-box">
+                    <p style="font-size: 1.5em; font-weight: bold; color: #0056b3;">📽️ "מסע לירח" (A Trip to the Moon)</p>
+                    <p style="font-size: 1.2em; margin-top: 10px;">📅 שנת <strong>1902</strong></p>
+                    <p style="font-size: 1.2em;">🎭 במאי: <strong>ג'ורג' מלייס</strong> (צרפת)</p>
+                    <p style="font-size: 1.2em;">⏱️ אורך: <strong>14 דקות</strong></p>
+                    <p style="font-size: 1.2em;">🌙 טיל פוגע בעין של הירח!</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- נושא 6 -->
+            <div class="topic">
+                <h2 class="topic-title">
+                    <span class="topic-number">6</span>
+                    דמות בלתי נשכחת
+                    <span class="topic-emoji">⭐</span>
+                </h2>
+                
+                <div class="remember-box">
+                    <p>🎯 הדבר הכי חשוב בסיפור!</p>
+                </div>
+                
+                <div class="key-point">
+                    <h3>איך יוצרים דמות שמזדהים איתה?</h3>
+                    <p><strong>1. אנושית</strong> <span class="icon">👤</span> - מרגישה כמו אדם אמיתי</p>
+                    <p><strong>2. ספציפית</strong> <span class="icon">✨</span> - יש לה פרטים ייחודיים</p>
+                    <p><strong>3. עם פגמים</strong> <span class="icon">😔</span> - לא מושלמת!</p>
+                    <p><strong>4. עם סתירות</strong> <span class="icon">🤔</span> - לפעמים עושה דברים סותרים</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <strong>למה זה עובד?</strong>
+                    <p style="margin-top: 10px; font-size: 1.2em;">פגמים וסתירות = <strong>מעניין יותר!</strong></p>
+                    <p style="font-size: 1.2em;">זה גורם לנו להאמין שהיא <strong>אמיתית</strong></p>
+                </div>
+                
+                <div class="examples">
+                    <h4>דוגמאות:</h4>
+                    <ul>
+                        <li>🃏 ג'וקר - נבל עם עבר טראגי</li>
+                        <li>🦾 טוני סטארק (Iron Man) - גאון אבל אגואיסט</li>
+                        <li>🦇 באטמן - גיבור אבל אפל ומפחיד</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- נושא 7 -->
+            <div class="topic">
+                <h2 class="topic-title">
+                    <span class="topic-number">7</span>
+                    אנטי-גיבור
+                    <span class="topic-emoji">😈</span>
+                </h2>
+                
+                <div class="key-point">
+                    <h3>מה זה אנטי-גיבור?</h3>
+                    <p><strong>גיבור שעושה דברים לא מוסריים</strong></p>
+                    <p>לא טוב לגמרי ❌ ולא רע לגמרי ❌</p>
+                    <p>אנחנו עדיין <strong>משתתפים איתו</strong> למרות שהוא עושה דברים רעים!</p>
+                </div>
+                
+                <div class="examples">
+                    <h4>דוגמאות מפורסמות:</h4>
+                    <ul>
+                        <li>🖤 <strong>ונום</strong> (Venom) - חייזר שאוכל אנשים אבל גם מציל אותם</li>
+                        <li>🔴 <strong>דדפול</strong> (Deadpool) - גיבור-על שמתבדח ועושה דברים רעים</li>
+                        <li>🦔 <strong>שאדו</strong> (Sonic) - הקיפוד האפל שלוחם בצד הטוב</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <strong>למה אנחנו אוהבים אנטי-גיבורים?</strong>
+                    <p style="margin-top: 10px; font-size: 1.2em;">✅ הם <strong>מורכבים</strong> - לא שחור לבן</p>
+                    <p style="font-size: 1.2em;">✅ הם <strong>אמיתיים</strong> - יש להם פגמים כמונו</p>
+                    <p style="font-size: 1.2em;">✅ הם <strong>מעניינים</strong> - לא יודעים מה יעשו</p>
+                </div>
+            </div>
+
+            <!-- נושא 8 -->
+            <div class="topic">
+                <h2 class="topic-title">
+                    <span class="topic-number">8</span>
+                    הנבל המושלם
+                    <span class="topic-emoji">👿</span>
+                </h2>
+                
+                <div class="key-point">
+                    <h3>איך בונים נבל טוב?</h3>
+                    <p><strong>1. מוטיבציה ברורה</strong> <span class="icon">🎯</span> - יש לו סיבה טובה</p>
+                    <p><strong>2. אמין</strong> <span class="icon">✅</span> - באמת מאמין שהוא צודק</p>
+                    <p><strong>3. עבר טראגי</strong> <span class="icon">😢</span> - משהו קרה לו בעבר</p>
+                    <p><strong>4. חזק</strong> <span class="icon">💪</span> - אתגר אמיתי לגיבור</p>
+                </div>
+                
+                <div class="remember-box">
+                    <p>💎 הכלל הזהב:</p>
+                    <p style="margin-top: 10px; font-size: 1.3em;">"נבל שחושב שהוא הגיבור = נבל מעולה"</p>
+                </div>
+                
+                <div class="examples">
+                    <h4>דוגמאות:</h4>
+                    <ul>
+                        <li>🃏 <strong>ג'וקר</strong> (The Dark Knight) - רוצה להוכיח שכולם רעים</li>
+                        <li>👊 <strong>טאנוס</strong> (Avengers) - חושב שהוא מציל את היקום</li>
+                        <li>⚔️ <strong>דארת' ויידר</strong> (Star Wars) - היה גיבור שנפל</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- נושא 9 -->
+            <div class="topic">
+                <h2 class="topic-title">
+                    <span class="topic-number">9</span>
+                    מאבק פנימי
+                    <span class="topic-emoji">💭</span>
+                </h2>
+                
+                <div class="key-point">
+                    <h3>שני סוגים:</h3>
+                    <p><strong>קונפליקט חיצוני</strong> <span class="icon">⚔️</span> - נלחם מול מישהו/משהו בחוץ</p>
+                    <p style="margin-right: 30px; color: #666;">דוגמאות: מפלצת, נבל, מלחמה</p>
+                    
+                    <p style="margin-top: 15px;"><strong>קונפליקט פנימי</strong> <span class="icon">🧠</span> - נלחם עם עצמו</p>
+                    <p style="margin-right: 30px; color: #666;">דוגמאות: פחד, אשמה, בחירה מוסרית</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <strong>למה קונפליקט פנימי חשוב?</strong>
+                    <p style="margin-top: 10px; font-size: 1.2em;">זה מה שהופך את הסיפור ל<strong>עמוק</strong></p>
+                    <p style="font-size: 1.2em;">הסרטים הכי טובים יש להם <strong>את שני הסוגים ביחד!</strong></p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- נושא 10 -->
+            <div class="topic">
+                <h2 class="topic-title">
+                    <span class="topic-number">10</span>
+                    משחקי וידאו - 5 עקרונות
+                    <span class="topic-emoji">🎮</span>
+                </h2>
+                
+                <div class="key-point">
+                    <h3>העקרונות:</h3>
+                    
+                    <p style="margin-bottom: 15px;"><strong>1. קל ללמוד, קשה לשלוט</strong> <span class="icon">🎯</span></p>
+                    <p style="margin-right: 30px; color: #666;">תוך 5 שניות מבין, אבל לשלוט לוקח שנים!</p>
+                    
+                    <p style="margin: 15px 0;"><strong>2. Loop ממכר</strong> <span class="icon">🔄</span></p>
+                    <p style="margin-right: 30px; color: #666;">מעגל שחוזר ומושך אותך (דוגמה: Pac-Man)</p>
+                    
+                    <p style="margin: 15px 0;"><strong>3. התקדמות והישג</strong> <span class="icon">📈</span></p>
+                    <p style="margin-right: 30px; color: #666;">מרגיש שאתה משתפר (דוגמה: Mario)</p>
+                    
+                    <p style="margin: 15px 0;"><strong>4. Multiplayer - לשחק עם חברים</strong> <span class="icon">👥</span></p>
+                    <p style="margin-right: 30px; color: #666;">Fortnite, Among Us, Fall Guys</p>
+                    
+                    <p style="margin: 15px 0;"><strong>5. יצירתיות וחופש</strong> <span class="icon">🎨</span></p>
+                    <p style="margin-right: 30px; color: #666;">Minecraft, Roblox, The Sims</p>
+                </div>
+            </div>
+
+
+            <!-- סיכום -->
+            <div class="summary">
+                <h2>📌 נקודות מרכזיות לזכור</h2>
+                
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <h3>🎥 טכניקות</h3>
+                        <p>3 גדלי שוטים<br>3 סוגי צלילים<br>תיעודי = יש תסריט</p>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <h3>📜 היסטוריה</h3>
+                        <p>בורקס = שנות 60-70<br>"מסע לירח" = 1902<br>הסרט המדע בדיוני הראשון</p>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <h3>⭐ דמויות</h3>
+                        <p>אנושית + ספציפית<br>פגמים + סתירות<br>אנטי-גיבור + נבל טוב</p>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <h3>🎮 משחקים</h3>
+                        <p>5 עקרונות<br>קל ללמוד קשה לשלוט<br>Loop + התקדמות</p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 40px; font-size: 1.5em;">
+                    <p>🌟 בהצלחה במבחן! 🌟</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

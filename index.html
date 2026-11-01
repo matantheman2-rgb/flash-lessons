@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>תוכנית פלאש - שיעורים</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0d16;--card:#171724;--line:#2a2a3d;--text:#f2eee6;--muted:#a19fb4;--gold:#e8b64a;--red:#e0635a;--teal:#7fc8b8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Heebo',sans-serif;background:radial-gradient(ellipse at 80% 0%,#2a1420 0%,var(--bg) 55%);background-color:var(--bg);color:var(--text);min-height:100vh;padding:48px 16px 64px}
+.wrap{max-width:960px;margin:0 auto}
+.kick{color:var(--gold);font-weight:700;font-size:.95rem;letter-spacing:.5px}
+h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:900;line-height:1.05;margin:8px 0 10px}
+h1 span{color:var(--red)}
+.sub{color:var(--muted);font-size:1.05rem;max-width:560px;line-height:1.6}
+.main{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:36px 0 44px}
+a.big{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--c);border-radius:14px;padding:26px 24px;transition:transform .15s,border-color .15s}
+a.big:hover{transform:translateY(-3px);border-color:var(--c)}
+a.big .tag{color:var(--c);font-weight:900;font-size:.85rem}
+a.big h2{font-size:1.6rem;font-weight:900;margin:6px 0 8px}
+a.big p{color:var(--muted);line-height:1.55;font-size:.97rem}
+a.big .go{display:inline-block;margin-top:14px;font-weight:700;color:var(--c)}
+h3{font-size:1.25rem;font-weight:900;margin-bottom:6px}
+.hint{color:var(--muted);font-size:.95rem;margin-bottom:14px}
+.list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin-bottom:34px}
+.list a{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-weight:500;transition:border-color .15s}
+.list a:hover{border-color:var(--gold)}
+.list a small{display:block;color:var(--muted);font-weight:400;font-size:.85rem}
+.ico{font-size:1.4rem;flex:none}
+footer{color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kick">חינוך קולנועי בגובה העיניים</div>
+  <h1>תוכנית <span>פלאש</span></h1>
+  <p class="sub">כל השיעורים, דפי הפעילות והמשימות של התוכנית במקום אחד. נפתח בכל מחשב ובכל טלפון.</p>
+
+  <div class="main">
+    <a class="big" href="program.html" style="--c:var(--gold)">
+      <div class="tag">התוכנית השנתית</div>
+      <h2>תוכנית פלאש</h2>
+      <p>כל השיעורים לפי נושאים: סיפור ודמויות, שפת הקולנוע, ז'אנרים, קולנוע וחברה, צורות והיברידיות, אנימה ומשחקים.</p>
+      <span class="go">לכל השיעורים ←</span>
+    </a>
+    <a class="big" href="advanced.html" style="--c:var(--red)">
+      <div class="tag">כיתות מלומדות</div>
+      <h2>פלאש מתקדם</h2>
+      <p>מסלול חזרה והעמקה למי שכבר עבר את התוכנית. בלוק 1: סיפור ודמויות.</p>
+      <span class="go">לתוכנית המתקדמת ←</span>
+    </a>
+  </div>
+
+  <h3>משימות להקרנה על הלוח</h3>
+  <p class="hint">מסך אחד בלי גלילה. מקרינים במסך מלא (F11), והתלמידים עובדים במחברת.</p>
+  <div class="list">
+    <a href="board-villain.html"><span class="ico">🦹</span><span>תמציאו נבל<small>6 שלבים לבניית נבל</small></span></a>
+    <a href="board-villain-backstory.html"><span class="ico">📜</span><span>סיפור הרקע של הנבל<small>כתיבת סיפור קצר, חלק ב'</small></span></a>
+    <a href="board-three-acts.html"><span class="ico">🎬</span><span>בנו סיפור בשלוש מערכות<small>פתיחה, עימות, פתרון</small></span></a>
+  </div>
+
+  <h3>דפים להדפסה</h3>
+  <p class="hint">פותחים ומדפיסים (Ctrl+P).</p>
+  <div class="list">
+    <a href="character-activity.html"><span class="ico">✍️</span><span>בניית דמות<small>דף פעילות</small></span></a>
+    <a href="three-acts-activity.html"><span class="ico">🧩</span><span>שלוש מערכות<small>דף פעילות</small></span></a>
+    <a href="true-story-activity.html"><span class="ico">📰</span><span>מבוסס על סיפור אמיתי<small>דף פעילות</small></span></a>
+    <a href="villain-file-print.html"><span class="ico">🗂️</span><span>תיק נבל<small>דף פעילות, 2 עמודים</small></span></a>
+    <a href="homework-game-on.html"><span class="ico">🎮</span><span>לשיעור הבא<small>דף שיעורי בית</small></span></a>
+  </div>
+
+  <footer>תוכנית פלאש · מתן גבר · 054-4842543</footer>
+</div>
+</body>
+</html>

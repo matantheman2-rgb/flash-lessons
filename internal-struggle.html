@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>המאבק הפנימי | שיעור פלאש</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: #fff;
+            line-height: 1.8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            color: #3498db;
+            margin-bottom: 25px;
+        }
+
+        .text-content {
+            font-size: 1.3em;
+            line-height: 2;
+            margin-bottom: 20px;
+            color: #ecf0f1;
+        }
+
+        .text-content strong {
+            color: #3498db;
+        }
+
+        .video-link {
+            display: block;
+            max-width: 750px;
+            margin: 30px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            border: 3px solid #3498db;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+        }
+
+        .video-link:hover {
+            transform: scale(1.05);
+        }
+
+        .video-link img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-link-text {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            padding: 15px;
+            text-align: center;
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .clouds-intro-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            margin: 40px 0;
+            border-radius: 25px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            z-index: 1;
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 100px;
+            z-index: 2;
+            transition: all 0.8s ease-out;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .cloud.animated {
+            animation: drift 20s ease-in-out infinite;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(15px); }
+        }
+
+        .cloud:hover {
+            transform: scale(1.1);
+            animation: none;
+        }
+
+        .cloud.dispersed {
+            opacity: 0;
+            transform: translateY(-200px) scale(0.5);
+            pointer-events: none;
+            animation: none;
+        }
+
+        .instruction-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            font-size: 2em;
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+            text-align: center;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .instruction-text.hidden {
+            opacity: 0;
+        }
+
+        .paragraph-container {
+            position: relative;
+            min-height: 200px;
+            margin: 30px 0;
+        }
+
+        .paragraph-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .heroes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .hero-bubble {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.3), rgba(41, 128, 185, 0.3));
+            padding: 20px;
+            border-radius: 50%;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #3498db;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1em;
+        }
+
+        .hero-bubble:hover {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.5), rgba(41, 128, 185, 0.5));
+        }
+
+        .hero-bubble.selected {
+            background: linear-gradient(135deg, #f39c12, #f1c40f);
+            border-color: #f39c12;
+            animation: moveToSky 1s ease-out forwards;
+        }
+
+        @keyframes moveToSky {
+            to {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+
+        .sky-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            margin: 40px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 25px;
+            overflow: hidden;
+            transition: background 2s ease;
+        }
+
+        .sky-container.clear {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.25), rgba(41, 128, 185, 0.25));
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border-right: 6px solid #3498db;
+        }
+
+        .message-board {
+            background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+            padding: 50px;
+            border-radius: 25px;
+            margin: 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message {
+            position: absolute;
+            font-size: 2em;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .message.show {
+            opacity: 1;
+        }
+
+        .change-message-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .change-message-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+
+        @media (max-width: 768px) {
+            .section-title { font-size: 1.8em; }
+            .clouds-intro-container { height: 400px; }
+            .heroes-container { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Opening with Rocky in Clouds -->
+        <div class="section">
+            <h2 class="section-title">לחצו על העננים!</h2>
+            <div class="clouds-intro-container" id="cloudsIntro">
+                <a href="https://www.youtube.com/watch?v=PNaTy5K4Pr0" target="_blank" class="video-bg">
+                    <img onerror="this.style.display='none'" src="https://img.youtube.com/vi/PNaTy5K4Pr0/maxresdefault.jpg" alt="Rocky" style="width: 100%; border-radius: 15px;">
+                </a>
+                <div class="instruction-text" id="instructionIntro">
+                    לחצו על העננים! ☁️
+                </div>
+            </div>
+        </div>
+
+        <!-- Rocky Explanation with Clouds -->
+        <div class="section">
+            <h2 class="section-title">🥊 רוקי - לנצח את עצמך</h2>
+            
+            <div class="paragraph-container" id="rockyPara1">
+                <div class="paragraph-content">
+                    <div class="text-content">
+                        <p>רוקי זה בחור מהרחוב שאף אחד לא מאמין בו. הוא עובד כגובה חובות, אין לו הרבה כסף, הוא לא ממש מצליח.</p>
+                    </div>
+                </div>
+                <div class="instruction-text" id="instructionRocky1" style="position: absolute;">לחצו על העננים! ☁️</div>
+            </div>
+
+            <div class="paragraph-container" id="rockyPara2">
+                <div class="paragraph-content">
+                    <div class="text-content">
+                        <p>פתאום הוא מקבל הזדמנות להתמודד נגד אלוף העולם באגרוף.</p>
+                        <p style="margin-top: 20px;">כל העולם אומר שהוא ייפול בסיבוב הראשון. אבל הקרב האמיתי של רוקי הוא לא נגד האלוף - הקרב שלו הוא מול עצמו. האם הוא מספיק טוב? האם הוא יכול להאמין בעצמו?</p>
+                    </div>
+                </div>
+                <div class="instruction-text" id="instructionRocky2" style="position: absolute;">לחצו על העננים! ☁️</div>
+            </div>
+
+            <div class="paragraph-container" id="rockyPara3">
+                <div class="paragraph-content">
+                    <div class="highlight-box">
+                        <p style="font-size: 1.4em; text-align: center;">
+                            בסוף, רוקי לא מנצח בקרב. אבל הוא עומד כל 15 הסיבובים.<br>
+                            הוא הוכיח משהו - <strong>לעצמו.</strong><br>
+                            זה הניצחון האמיתי.
+                        </p>
+                    </div>
+                </div>
+                <div class="instruction-text" id="instructionRocky3" style="position: absolute;">לחצו על העננים! ☁️</div>
+            </div>
+        </div>
+
+        <!-- Title Section -->
+        <div class="section">
+            <div class="paragraph-container" id="titlePara">
+                <div class="paragraph-content">
+                    <h1 style="font-size: 3em; text-align: center; color: #3498db; text-shadow: 2px 2px 10px rgba(0,0,0,0.5);">
+                        💪 המאבק הפנימי 💪
+                    </h1>
+                    <h2 style="font-size: 2em; text-align: center; color: #1abc9c; margin-top: 20px;">
+                        הסיפור שאנחנו מספרים לעצמינו
+                    </h2>
+                </div>
+                <div class="instruction-text" id="instructionTitle" style="position: absolute;">לחצו על העננים! ☁️</div>
+            </div>
+        </div>
+
+        <!-- Heroes Selection with Cloudy Sky -->
+        <div class="section">
+            <h2 class="section-title">מי הגיבור האהוב עליכם?</h2>
+            <p class="text-content" style="text-align: center; font-size: 1.4em;">
+                בחרו את הגיבור שהכי מעורר בכם השראה!<br>
+                <span style="font-size: 0.9em; color: #1abc9c;">ככל שתבחרו יותר גיבורים - העננים יתפזרו והשמיים יתגלו! ☁️→🌤️</span>
+            </p>
+            
+            <div class="heroes-container" id="heroesContainer">
+                <div class="hero-bubble" onclick="selectHero(this)">מיילס מורלס</div>
+                <div class="hero-bubble" onclick="selectHero(this)">בן טניסון</div>
+                <div class="hero-bubble" onclick="selectHero(this)">איירון מן</div>
+                <div class="hero-bubble" onclick="selectHero(this)">וונדר וומן</div>
+                <div class="hero-bubble" onclick="selectHero(this)">באטמן</div>
+                <div class="hero-bubble" onclick="selectHero(this)">בלאק פנתר</div>
+                <div class="hero-bubble" onclick="selectHero(this)">תור</div>
+                <div class="hero-bubble" onclick="selectHero(this)">סופרמן</div>
+                <div class="hero-bubble" onclick="selectHero(this)">רוקי</div>
+                <div class="hero-bubble" onclick="selectHero(this)">סימבה</div>
+                <div class="hero-bubble" onclick="selectHero(this)">מואנה</div>
+                <div class="hero-bubble" onclick="selectHero(this)">אלזה</div>
+                <div class="hero-bubble" onclick="selectHero(this)">מרידה</div>
+                <div class="hero-bubble" onclick="selectHero(this)">לוק סקייווקר</div>
+                <div class="hero-bubble" onclick="selectHero(this)">הארי פוטר</div>
+                <div class="hero-bubble" onclick="selectHero(this)">נארוטו</div>
+                <div class="hero-bubble" onclick="selectHero(this)">גוקו</div>
+                <div class="hero-bubble" onclick="selectHero(this)">סורה</div>
+                <div class="hero-bubble" onclick="selectHero(this)">לינק</div>
+                <div class="hero-bubble" onclick="selectHero(this)">סוניק</div>
+            </div>
+
+            <div class="sky-container" id="skyContainer">
+                <div class="instruction-text" id="instructionSky">
+                    בחרו גיבורים כדי לפזר את העננים! ☁️
+                </div>
+            </div>
+        </div>
+
+        <!-- What's Common with Clouds -->
+        <div class="section">
+            <h2 class="section-title">🤔 מה משותף לכל הגיבורים האלה?</h2>
+            
+            <div class="paragraph-container" id="commonPara1">
+                <div class="paragraph-content">
+                    <div class="text-content">
+                        <p style="font-size: 1.4em; margin-bottom: 30px;">
+                            כל הגיבורים האלה נלחמו בקרבות שונים. יש מי שנלחם נגד נבלים, יש מי שהציל את העולם, יש מי שניצח מפלצות.
+                        </p>
+                        <p style="font-size: 1.4em;">
+                            אבל יש משהו אחד שמשותף לכולם:
+                        </p>
+                    </div>
+                </div>
+                <div class="instruction-text" id="instructionCommon1" style="position: absolute;">לחצו על העננים! ☁️</div>
+            </div>
+
+            <div class="paragraph-container" id="commonPara2">
+                <div class="paragraph-content">
+                    <div class="highlight-box">
+                        <p style="font-size: 1.6em; text-align: center; line-height: 2;">
+                            <strong>הקרב האמיתי של כל גיבור הוא תמיד מול עצמו.</strong><br><br>
+                            לא משנה כמה חזק האויב - הקרב הכי קשה הוא בפנים.
+                        </p>
+                    </div>
+                </div>
+                <div class="instruction-text" id="instructionCommon2" style="position: absolute;">לחצו על העננים! ☁️</div>
+            </div>
+        </div>
+
+        <!-- Osho and Clouds -->
+        <div class="section">
+            <h2 class="section-title">☁️ המחשבות והעננים</h2>
+            
+            <div class="paragraph-container" id="oshoPara">
+                <div class="paragraph-content">
+                    <div class="text-content">
+                        <p>יש מורה רוחני ששמו אושו שאמר משהו חשוב על מחשבות.</p>
+                        <p style="margin-top: 20px;">הוא אמר: <strong>"המחשבות הן כמו עננים בשמיים."</strong></p>
+                        <p style="margin-top: 20px;">תחשבו על זה - עננים באים והולכים. לפעמים הם כבדים ואפורים, לפעמים הם נעלמים. אבל מאחורי כל עננים, תמיד יש שמיים.</p>
+                        <div class="highlight-box" style="margin-top: 30px;">
+                            <p style="font-size: 1.4em; text-align: center; line-height: 2;">
+                                המחשבות שלנו הן העננים - הן באות והולכות.<br>
+                                אבל <strong>אנחנו</strong>? אנחנו השמיים.<br><br>
+                                לא משנה כמה עננים כבדים יש - השמיים תמיד שם, מאחוריהם.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="instruction-text" id="instructionOsho" style="position: absolute;">לחצו על העננים! ☁️</div>
+            </div>
+        </div>
+
+        <!-- Viktor Frankl with Clouds -->
+        <div class="section">
+            <h2 class="section-title">📖 ויקטור פרנקל - אדם מחפש משמעות</h2>
+            
+            <div class="paragraph-container" id="franklPara">
+                <div class="paragraph-content">
+                    <div class="text-content">
+                        <p>ויקטור פרנקל היה פסיכולוג שעבר את המצב הכי קשה שאפשר לדמיין. הוא היה במחנות הריכוז בשואה.</p>
+                        <p style="margin-top: 20px;">שם הוא גילה משהו חשוב: <strong>אפשר לקחת מאדם הכל, אבל לא את הבחירה שלו איך להגיב.</strong></p>
+                        <p style="margin-top: 20px;">הוא כתב ספר שנקרא "אדם מחפש משמעות" על הרעיון הזה.</p>
+                    </div>
+                </div>
+                <div class="instruction-text" id="instructionFrankl" style="position: absolute;">לחצו על העננים! ☁️</div>
+            </div>
+        </div>
+
+        <!-- Life is Beautiful with Clouds -->
+        <div class="section">
+            <h2 class="section-title">🎪 החיים יפים</h2>
+            
+            <div class="paragraph-container" id="lifePara">
+                <div class="paragraph-content">
+                    <div class="text-content">
+                        <p>הסרט "החיים יפים" מספר על אבא וילד שנמצאים במצב הכי קשה שיכול להיות - מחנה ריכוז.</p>
+                        <p style="margin-top: 20px;">האבא בוחר לעשות משהו מדהים - הוא הופך את כל המצב הנורא למשחק בשביל הילד שלו. הוא משמר את התקווה, את האופטימיות, את החיים - למרות הכל.</p>
+                        <div class="highlight-box" style="margin-top: 30px;">
+                            <p style="font-size: 1.4em; text-align: center;">
+                                זו בחירה. לראות אור גם בחושך. להחליט איך אנחנו מסתכלים על המציאות.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="instruction-text" id="instructionLife" style="position: absolute;">לחצו על העננים! ☁️</div>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=Sp73297tlMY" target="_blank" class="video-link">
+                <img onerror="this.style.display='none'" src="https://img.youtube.com/vi/Sp73297tlMY/maxresdefault.jpg" alt="Life is Beautiful">
+                <div class="video-link-text">🎬 לחץ כאן לצפייה ביוטיוב - החיים יפים 🎬</div>
+            </a>
+        </div>
+
+        <!-- Secret of Life with Clouds -->
+        <div class="section">
+            <h2 class="section-title">☁️ סוד החיים</h2>
+            
+            <div class="text-content">
+                <p style="font-size: 1.3em; text-align: center; margin-bottom: 30px;">
+                    לחצו על העננים כדי למצוא את סוד החיים!
+                </p>
+            </div>
+
+            <div class="clouds-intro-container" id="finalClouds">
+                <a href="#" onclick="document.getElementById('secretOverlay').style.display='flex';return false;" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; text-decoration: none;">
+                    <div class="hero-bubble" style="width: 250px; height: 250px; font-size: 1.5em; background: linear-gradient(135deg, #f39c12, #f1c40f); border-color: #f39c12; animation: pulse 2s ease-in-out infinite;">
+                        💫 סוד החיים 💫
+                    </div>
+                </a>
+                <div class="instruction-text" id="instructionFinal">
+                    לחצו על העננים! ☁️
+                </div>
+            </div>
+        </div>
+
+        <!-- Closing with Clouds and Interactive Messages -->
+        <div class="section">
+            <h2 class="section-title">💙 לסיום</h2>
+            
+            <div class="paragraph-container" id="closingPara">
+                <div class="paragraph-content">
+                    <div class="text-content">
+                        <p style="font-size: 1.4em; line-height: 2;">
+                            אנחנו בתקופה מאתגרת. זה נכון. יש דברים קשים בחוץ.
+                        </p>
+                        <p style="font-size: 1.4em; line-height: 2; margin-top: 20px;">
+                            אבל בואו נמצא את הטוב. את הסתלבט. את האושר. את הצחוק.
+                        </p>
+                        <p style="font-size: 1.4em; line-height: 2; margin-top: 20px;">
+                            תהיו רגישים להורים שלכם, לסביבה שלכם, ובעיקר - לעצמכם.
+                        </p>
+                        <div class="highlight-box" style="margin-top: 40px;">
+                            <p style="font-size: 1.5em; text-align: center; line-height: 2;">
+                                אל תאמינו לזה שעכשיו קשה.<br>
+                                זה מה שהאויב רוצה - שנרגיש רע, שנרגיש חלשים.<br><br>
+                                אבל אנחנו <strong>לא</strong> חלשים.<br>
+                                אנחנו השמיים. והשמיים תמיד שם.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="instruction-text" id="instructionClosing" style="position: absolute;">לחצו על העננים! ☁️</div>
+            </div>
+
+            <div class="message-board" id="messageBoard">
+                <div class="message" id="message1" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
+                    המסע של אלף מייל מתחיל בצעד אחד 🥾
+                </div>
+                <div class="message" id="message2" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
+                    בן זיני מלך 👑
+                </div>
+                <div class="message" id="message3" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
+                    כשאתה נח, אתה שולט 🧘‍♂️
+                </div>
+                <div class="message" id="message4" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
+                    הדבר היחיד שלא משתנה הוא ששום דבר לא נשאר אותו דבר 🌊
+                </div>
+                <div class="message" id="message5" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
+                    אין על בן זיני 💪
+                </div>
+                <div class="message" id="message6" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
+                    טוב להתחיל, טוב יותר לסיים, הכי טוב לא לצאת לדרך 🎯
+                </div>
+                <div class="message" id="message7" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
+                    מי שיודע לא מדבר, מי שמדבר לא יודע 🤐
+                </div>
+                <div class="message" id="message8" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
+                    למה כל פעם יש בן זיני 😂
+                </div>
+                <div class="message" id="message9" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
+                    הזרימה היא הדרך הטבעית של הדברים 🌊
+                </div>
+                <div class="message" id="message10" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
+                    הגבוה ביותר הוא כמו מים - מזין את הכל מבלי להתחרות 💧
+                </div>
+                <div class="message" id="message11" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
+                    השלווה היא פרח העומד על שפת התהום 🌸
+                </div>
+                <div class="message" id="message12" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
+                    אל תחפש את האמת, רק הפסק להחזיק בדעות 🍃
+                </div>
+                <div class="message" id="message13" style="top: 40%; left: 50%; transform: translate(-50%, -50%);">
+                    הטבע לא ממהר, אך הכל מושג ✨
+                </div>
+                <div style="margin-top: 200px; position: relative; z-index: 10;">
+                    <button class="change-message-btn" onclick="changeMessage()">💫 קבלו עוד מסר 💫</button>
+                </div>
+            </div>
+
+            <p style="font-size: 1.5em; text-align: center; margin-top: 40px; color: #1abc9c;">
+                <strong>אוהב אתכם. 💙</strong>
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; padding: 40px 20px; opacity: 0.7;">
+            <p>תוכנית פלאש לקולנוע | מתן גבר © 2026</p>
+        </div>
+    </div>
+
+    <script>
+        // Generate clouds with optional animation - HOVER ONLY, NO CLICK
+        function generateClouds(containerId, instructionId, numClouds = 40, animate = false) {
+            const container = document.getElementById(containerId);
+            const instruction = document.getElementById(instructionId);
+            
+            // Hide instruction immediately
+            if (instruction) {
+                instruction.style.display = 'none';
+            }
+            
+            for (let i = 0; i < numClouds; i++) {
+                const cloud = document.createElement('div');
+                cloud.className = 'cloud' + (animate ? ' animated' : '');
+                
+                const width = Math.random() * 150 + 80;
+                const height = width * 0.6;
+                
+                cloud.style.width = width + 'px';
+                cloud.style.height = height + 'px';
+                cloud.style.left = Math.random() * 95 + '%';
+                cloud.style.top = Math.random() * 95 + '%';
+                
+                // Random animation delay for drifting effect
+                if (animate) {
+                    cloud.style.animationDelay = Math.random() * 5 + 's';
+                }
+                
+                cloud.innerHTML = `
+                    <div style="position: absolute; width: 60%; height: 60%; background: inherit; border-radius: 50%; top: 20%; left: 10%;"></div>
+                    <div style="position: absolute; width: 40%; height: 40%; background: inherit; border-radius: 50%; top: 10%; right: 15%;"></div>
+                `;
+                
+                // Only mouseenter - no click needed
+                cloud.addEventListener('mouseenter', function() {
+                    this.classList.add('dispersed');
+                });
+                
+                container.appendChild(cloud);
+            }
+        }
+
+        function checkClouds(containerId, instructionId) {
+            // No longer needed - instruction is hidden from start
+        }
+
+        // Hero selection - clears sky clouds
+        let selectedCount = 0;
+        const skyContainer = document.getElementById('skyContainer');
+        const skyClouds = [];
+        
+        // Hide sky instruction immediately
+        const skyInstruction = document.getElementById('instructionSky');
+        if (skyInstruction) {
+            skyInstruction.style.display = 'none';
+        }
+
+        // Generate sky clouds - REDUCED FOR PERFORMANCE
+        for (let i = 0; i < 30; i++) {
+            const cloud = document.createElement('div');
+            cloud.className = 'cloud animated';
+            
+            const width = Math.random() * 120 + 60;
+            const height = width * 0.6;
+            
+            cloud.style.width = width + 'px';
+            cloud.style.height = height + 'px';
+            cloud.style.left = Math.random() * 95 + '%';
+            cloud.style.top = Math.random() * 95 + '%';
+            cloud.style.animationDelay = Math.random() * 5 + 's';
+            
+            cloud.innerHTML = `
+                <div style="position: absolute; width: 60%; height: 60%; background: inherit; border-radius: 50%; top: 20%; left: 10%;"></div>
+                <div style="position: absolute; width: 40%; height: 40%; background: inherit; border-radius: 50%; top: 10%; right: 15%;"></div>
+            `;
+            
+            skyContainer.appendChild(cloud);
+            skyClouds.push(cloud);
+        }
+
+        function selectHero(bubble) {
+            if (!bubble.classList.contains('selected')) {
+                bubble.classList.add('selected');
+                selectedCount++;
+                
+                // Clear clouds progressively
+                const cloudsToRemove = Math.floor(selectedCount * 2.5);
+                for (let i = 0; i < cloudsToRemove && i < skyClouds.length; i++) {
+                    setTimeout(() => {
+                        skyClouds[i].classList.add('dispersed');
+                    }, i * 30);
+                }
+                
+                // Clear sky background when enough heroes selected
+                if (selectedCount > 8) {
+                    skyContainer.classList.add('clear');
+                }
+                
+                setTimeout(() => {
+                    bubble.style.display = 'none';
+                }, 1000);
+            }
+        }
+
+        // Message rotation
+        let currentMessage = 0;
+        const messages = ['message1', 'message2', 'message3', 'message4', 'message5', 'message6', 'message7', 'message8', 'message9', 'message10', 'message11', 'message12', 'message13'];
+        
+        function showMessage(index) {
+            messages.forEach((id, i) => {
+                const msg = document.getElementById(id);
+                if (i === index) {
+                    msg.classList.add('show');
+                } else {
+                    msg.classList.remove('show');
+                }
+            });
+        }
+
+        function changeMessage() {
+            currentMessage = (currentMessage + 1) % messages.length;
+            showMessage(currentMessage);
+        }
+
+        // Initialize all clouds - REDUCED FOR PERFORMANCE
+        generateClouds('cloudsIntro', 'instructionIntro', 30, true);
+        generateClouds('rockyPara1', 'instructionRocky1', 15, false);
+        generateClouds('rockyPara2', 'instructionRocky2', 15, false);
+        generateClouds('rockyPara3', 'instructionRocky3', 15, false);
+        generateClouds('titlePara', 'instructionTitle', 20, true);
+        generateClouds('commonPara1', 'instructionCommon1', 15, false);
+        generateClouds('commonPara2', 'instructionCommon2', 15, false);
+        generateClouds('oshoPara', 'instructionOsho', 20, false);
+        generateClouds('franklPara', 'instructionFrankl', 15, false);
+        generateClouds('lifePara', 'instructionLife', 20, false);
+        generateClouds('finalClouds', 'instructionFinal', 30, true);
+        generateClouds('closingPara', 'instructionClosing', 20, false);
+        
+        showMessage(0);
+    </script>
+<div id="secretOverlay" onclick="this.style.display='none'" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center;cursor:pointer"><img src="data:image/png;base64,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" style="max-width:80vw;max-height:80vh;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.6)"></div>
+</body>
+</html>

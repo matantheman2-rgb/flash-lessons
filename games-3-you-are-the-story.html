@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>משחקים חלק 3 - אתה הסיפור | פלאש</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: #0f0f23;
+            color: #fff;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        
+        .container { 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding: 20px;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 60px 20px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveGrid 20s linear infinite;
+        }
+        
+        @keyframes moveGrid {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .title {
+            font-size: 5em;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: titlePulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .subtitle {
+            font-size: 2em;
+            opacity: 0.9;
+            margin-top: 20px;
+        }
+        
+        .section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            padding: 80px 40px;
+            margin: 60px 0;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-title {
+            font-size: 3.5em;
+            font-weight: 900;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #667eea, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .text-content {
+            font-size: 1.6em;
+            line-height: 2;
+            margin: 30px 0;
+        }
+        
+        .concept-box {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(255, 193, 7, 0.2));
+            padding: 50px;
+            border-radius: 25px;
+            margin: 40px 0;
+            border-right: 8px solid #ff6b6b;
+        }
+        
+        .game-card {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border: 3px solid #667eea;
+            transition: all 0.3s ease;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.5);
+        }
+        
+        .video-container {
+            position: relative;
+            max-width: 900px;
+            margin: 50px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            border: 4px solid #667eea;
+        }
+        
+        .video-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .video-link {
+            display: block;
+            text-decoration: none;
+        }
+        
+        .video-caption {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 25px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .choice-demo {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(240, 147, 251, 0.3));
+            padding: 60px;
+            border-radius: 30px;
+            margin: 50px 0;
+            text-align: center;
+        }
+        
+        .choice-buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .choice-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px 60px;
+            border-radius: 15px;
+            font-size: 1.8em;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .choice-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.6);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .stat-card {
+            background: rgba(102, 126, 234, 0.2);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid #667eea;
+        }
+        
+        .stat-number {
+            font-size: 4em;
+            font-weight: 900;
+            color: #f093fb;
+            margin: 20px 0;
+        }
+        
+        .highlight {
+            color: #f093fb;
+            font-weight: bold;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-right: 50px;
+            margin: 50px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #667eea, #f093fb);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            padding-right: 40px;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #f093fb;
+            box-shadow: 0 0 20px #f093fb;
+        }
+        
+        .how-to-play {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 107, 107, 0.2));
+            padding: 50px;
+            border-radius: 25px;
+            margin: 50px 0;
+            border: 3px solid #ffd700;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+        }
+        
+        .step-number {
+            font-size: 3em;
+            font-weight: 900;
+            color: #ffd700;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .title { font-size: 3em; }
+            .section-title { font-size: 2.5em; }
+            .choice-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <h1 class="title">🎮 אתה הסיפור 🎮</h1>
+            <p class="subtitle">משחקים חלק 3 - Interactive Drama</p>
+            <p class="subtitle" style="font-size: 1.5em; margin-top: 30px;">הבחירות שלך משנות הכל!</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Opening -->
+        <div class="section">
+            <h2 class="section-title">💭 מה אם הסיפור היה שלך?</h2>
+            
+            <p class="text-content">
+                בסרט - <strong>אתה רק צופה.</strong> 📺
+            </p>
+            <p class="text-content">
+                במשחק רגיל - <strong>אתה רק משחק.</strong> 🎮
+            </p>
+            <p class="text-content" style="font-size: 2em; text-align: center; margin: 50px 0; color: #f093fb;">
+                <strong>אבל מה אם... אתה הבמאי של הסיפור? 🎬</strong>
+            </p>
+            
+            <div class="concept-box">
+                <h3 style="font-size: 2.5em; margin-bottom: 30px;">🎭 הז'אנר: Interactive Drama</h3>
+                <p class="text-content">
+                    <strong>מה זה?</strong> משחקים שבהם אתה בוחר את הסיפור!
+                </p>
+                <p class="text-content">
+                    🎬 <strong>קולנועי:</strong> נראה כמו סרט מדהים
+                </p>
+                <p class="text-content">
+                    💭 <strong>אינטראקטיבי:</strong> אתה מחליט מה קורה
+                </p>
+                <p class="text-content">
+                    🔄 <strong>משתנה:</strong> כל בחירה = סיפור אחר!
+                </p>
+            </div>
+        </div>
+
+        <!-- The Genre -->
+        <div class="section">
+            <h2 class="section-title">📚 הז'אנר - מהיכן זה בא?</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3 style="font-size: 2em; color: #f093fb;">2012 - The Walking Dead 🧟</h3>
+                    <p class="text-content">המשחק שהתחיל הכל! זומבים, בחירות קשות, והרבה דמעות.</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 style="font-size: 2em; color: #f093fb;">2015 - Life is Strange 🦋</h3>
+                    <p class="text-content">נערה עם כוח לחזור בזמן. כל בחירה משנה הכל!</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 style="font-size: 2em; color: #f093fb;">2018 - Detroit: Become Human 🤖</h3>
+                    <p class="text-content">רובוטים שרוצים להיות בני אדם. אלפי בחירות!</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 style="font-size: 2em; color: #f093fb;">2018 - Black Mirror: Bandersnatch 📺</h3>
+                    <p class="text-content">הסרט הראשון שאתה בוחר! נטפליקס משנה את הכללים!</p>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3 style="font-size: 2em; color: #f093fb;">2020 - Tell Me Why 🏔️</h3>
+                    <p class="text-content">תאומים חוזרים הביתה לפתור תעלומה מהעבר.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bandersnatch -->
+        <div class="section">
+            <h2 class="section-title">📺 Black Mirror: Bandersnatch</h2>
+            
+            <p class="text-content" style="font-size: 1.8em;">
+                <strong style="color: #f093fb;">2018 - הסרט שהפך את נטפליקס למשחק!</strong>
+            </p>
+            
+            <div class="concept-box">
+                <p class="text-content"><strong>הסיפור:</strong></p>
+                <p class="text-content">סטפן - צעיר שמפתח משחק וידאו ב-1984.</p>
+                <p class="text-content">אבל... משהו מוזר קורה.</p>
+                <p class="text-content" style="margin-top: 30px;"><strong>מה מיוחד?</strong></p>
+                <p class="text-content">🎯 <strong>אתה בוחר</strong> - מה הוא יאכל, לאן ילך, מה יגיד</p>
+                <p class="text-content">🔄 <strong>הסרט משתנה</strong> - 5 סופים שונים!</p>
+                <p class="text-content">⏱️ <strong>10 שניות להחליט</strong> - לחץ אמיתי!</p>
+            </div>
+
+            <div class="video-container">
+                <a href="https://www.youtube.com/watch?v=XfaXTsp_SF0" target="_blank" class="video-link">
+                    <img src="https://img.youtube.com/vi/XfaXTsp_SF0/maxresdefault.jpg" alt="Bandersnatch">
+                    <div class="video-caption">🎬 לחץ לצפייה - טריילר Bandersnatch! 🎬</div>
+                </a>
+            </div>
+
+            <div class="choice-demo">
+                <h3 style="font-size: 2.5em; margin-bottom: 30px;">💭 איך זה עובד?</h3>
+                <p class="text-content" style="font-size: 1.8em;">דוגמה לבחירה:</p>
+                <p class="text-content" style="margin-top: 20px;">"סטפן רעב. מה הוא יאכל?"</p>
+                
+                <div class="choice-buttons">
+                    <button class="choice-btn">🥣 דגני בוקר</button>
+                    <button class="choice-btn">🍞 טוסט</button>
+                </div>
+                
+                <p class="text-content" style="margin-top: 40px; font-size: 1.5em; color: #ffd700;">
+                    <strong>הבחירה שלך משנה את הסיפור!</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Life is Strange -->
+        <div class="section">
+            <h2 class="section-title">🦋 Life is Strange - המשחק שלנו היום!</h2>
+            
+            <div class="game-card">
+                <h3 style="font-size: 2.5em; color: #f093fb; margin-bottom: 30px;">מה המשחק?</h3>
+                
+                <p class="text-content"><strong>הגיבורה:</strong> מקס קולפילד - תלמידה בת 18</p>
+                <p class="text-content"><strong>הכוח-על:</strong> יכולה לחזור בזמן! ⏰</p>
+                <p class="text-content"><strong>הבעיה:</strong> החברה הטובה שלה נעלמה 💔</p>
+                <p class="text-content"><strong>המשימה:</strong> לפתור את התעלומה ולהציל אותה!</p>
+                
+                <div class="stats-grid" style="margin-top: 50px;">
+                    <div class="stat-card">
+                        <div style="font-size: 1.5em;">📅 שנה</div>
+                        <div class="stat-number">2015</div>
+                    </div>
+                    <div class="stat-card">
+                        <div style="font-size: 1.5em;">⭐ ציון</div>
+                        <div class="stat-number">9/10</div>
+                    </div>
+                    <div class="stat-card">
+                        <div style="font-size: 1.5em;">🏆 פרסים</div>
+                        <div class="stat-number">75+</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="concept-box" style="margin-top: 50px;">
+                <h3 style="font-size: 2.5em; margin-bottom: 30px;">💔 למה זה מיוחד?</h3>
+                
+                <p class="text-content">😭 <strong>רגשי מאוד</strong> - אנשים ממש בוכים!</p>
+                <p class="text-content">🎓 <strong>בית ספר תיכון</strong> - בולינג, ידידות, אהבה</p>
+                <p class="text-content">⏰ <strong>חזרה בזמן</strong> - אבל... לכל בחירה יש מחיר!</p>
+                <p class="text-content">🎨 <strong>יפה</strong> - כמו ציור שנע!</p>
+                <p class="text-content">🎵 <strong>מוזיקה מושלמת</strong> - פסקול מדהים!</p>
+            </div>
+
+            <div class="video-container" style="margin-top: 50px;">
+                <a href="https://www.youtube.com/watch?v=AURVxvIZrmU" target="_blank" class="video-link">
+                    <img src="https://img.youtube.com/vi/AURVxvIZrmU/maxresdefault.jpg" alt="Life is Strange">
+                    <div class="video-caption">🎬 לחץ לצפייה - טריילר Life is Strange! 🎬</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- How We Play -->
+        <div class="section">
+            <h2 class="section-title">🎮 איך נשחק ביחד?</h2>
+            
+            <div class="how-to-play">
+                <h3 style="font-size: 2.5em; margin-bottom: 40px; text-align: center;">📋 התוכנית:</h3>
+                
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h4 style="font-size: 2em; margin-bottom: 10px;">המורה משחק על המסך</h4>
+                        <p class="text-content">כולם רואים את הסיפור ביחד! 📺</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h4 style="font-size: 2em; margin-bottom: 10px;">מגיעה בחירה - עוצרים!</h4>
+                        <p class="text-content">המורה עוצר ושואל: "מה נעשה?" 🤔</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h4 style="font-size: 2em; margin-bottom: 10px;">אתם מצביעים!</h4>
+                        <p class="text-content">הרימו ידיים - רוב קובע! ✋</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div>
+                        <h4 style="font-size: 2em; margin-bottom: 10px;">רואים מה קורה!</h4>
+                        <p class="text-content">הסיפור ממשיך לפי הבחירה שלכם! 🎬</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div>
+                        <h4 style="font-size: 2em; margin-bottom: 10px;">דיון בסוף</h4>
+                        <p class="text-content">מה הרגשנו? מה היינו עושים אחרת? 💭</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why It Matters -->
+        <div class="section">
+            <h2 class="section-title">✨ למה זה חשוב?</h2>
+            
+            <div class="concept-box">
+                <p class="text-content" style="font-size: 1.8em;">
+                    <strong style="color: #f093fb;">משחקים אינטראקטיביים = עתיד הבידור!</strong>
+                </p>
+                
+                <p class="text-content" style="margin-top: 40px;">
+                    🎬 <strong>משלבים קולנוע ומשחקים</strong> - הכי טוב משני העולמות!
+                </p>
+                <p class="text-content">
+                    💭 <strong>אתה חלק מהסיפור</strong> - לא רק צופה!
+                </p>
+                <p class="text-content">
+                    🎭 <strong>מלמדים אמפתיה</strong> - מרגישים את הדמויות!
+                </p>
+                <p class="text-content">
+                    🧠 <strong>מפתחים חשיבה</strong> - כל החלטה חשובה!
+                </p>
+                <p class="text-content">
+                    ❤️ <strong>רגשיים</strong> - גורמים לבכות, לצחוק, לחשוב!
+                </p>
+            </div>
+            
+            <p class="text-content" style="font-size: 2em; text-align: center; margin-top: 60px; color: #ffd700;">
+                <strong>היום - אתם הסיפור! 🎮✨</strong>
+            </p>
+        </div>
+
+        <!-- Closing -->
+        <div class="section" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(240, 147, 251, 0.3)); text-align: center;">
+            <h2 class="section-title">🎬 מוכנים להתחיל? 🎬</h2>
+            
+            <p class="text-content" style="font-size: 2em;">
+                בואו נשחק את <span class="highlight">Life is Strange</span> ביחד!
+            </p>
+            <p class="text-content" style="font-size: 1.5em; margin-top: 30px;">
+                זכרו - <strong style="color: #f093fb;">הבחירות שלכם משנות הכל!</strong> 🦋
+            </p>
+        </div>
+
+        <div style="text-align: center; padding: 40px 20px; opacity: 0.7; margin-top: 60px;">
+            <p style="font-size: 1.2em;">תוכנית פלאש לקולנוע | מתן © 2026</p>
+        </div>
+    </div>
+</body>
+</html>

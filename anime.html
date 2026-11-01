@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אנימה - מיפן לעולם | שיעור פלאש</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            line-height: 1.8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 50px;
+            margin-bottom: 40px;
+            border-radius: 30px;
+            backdrop-filter: blur(15px);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .section-title {
+            font-size: 3em;
+            color: #ffd700;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+        }
+
+        .text-content {
+            font-size: 1.4em;
+            line-height: 2;
+            margin-bottom: 25px;
+        }
+
+        .video-link {
+            display: block;
+            max-width: 800px;
+            margin: 40px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+            border: 4px solid #ffd700;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+        }
+
+        .video-link:hover {
+            transform: scale(1.05);
+        }
+
+        .video-link img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-link-text {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            padding: 20px;
+            text-align: center;
+            color: #333;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .game-container {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 237, 78, 0.2));
+            padding: 40px;
+            border-radius: 25px;
+            margin: 40px 0;
+            border: 3px solid #ffd700;
+            text-align: center;
+        }
+
+        .game-title {
+            font-size: 2em;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .game-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            color: white;
+            padding: 20px 50px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .game-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+
+        .kamehameha-scene {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            border-radius: 25px;
+            overflow: hidden;
+            margin: 30px 0;
+        }
+
+        .character {
+            position: absolute;
+            left: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 4em;
+        }
+
+        .energy-blast {
+            position: absolute;
+            left: 15%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0px;
+            height: 40px;
+            background: radial-gradient(ellipse, #4facfe 0%, #00f2fe 100%);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(79, 172, 254, 1);
+            transition: width 1.5s ease-out;
+        }
+
+        .energy-blast.fired {
+            width: 80%;
+        }
+
+        .ninja-runner {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+        }
+
+        .ninja {
+            position: absolute;
+            left: -100px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 4em;
+            transition: left 3s linear;
+        }
+
+        .ninja.running {
+            left: 100%;
+        }
+
+        .odm-scene {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .odm-character {
+            position: absolute;
+            font-size: 3em;
+            transition: all 1s ease-in-out;
+        }
+
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .character-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            font-size: 1.3em;
+            position: relative;
+        }
+
+        .character-card:hover {
+            transform: scale(1.05);
+            border-color: #ffd700;
+        }
+
+        .vote-count {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ffd700;
+            color: #333;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .winner-banner {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #333;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            display: none;
+            animation: winner-pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes winner-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 237, 78, 0.3));
+            padding: 35px;
+            border-radius: 25px;
+            margin: 35px 0;
+            border-right: 6px solid #ffd700;
+        }
+
+        .stats-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 25px 0;
+            border: 3px solid #ffd700;
+        }
+
+        .genre-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .genre-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+            padding: 25px;
+            border-radius: 20px;
+            border: 2px solid #ffd700;
+        }
+
+        @media (max-width: 768px) {
+            .section-title { font-size: 2em; }
+            .character-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Opening -->
+        <div class="section">
+            <h1 class="section-title">🎌 אנימה - מיפן לעולם 🌏</h1>
+            
+            <div class="text-content">
+                <p style="font-size: 1.6em; text-align: center; line-height: 2;">
+                    איך תעשייה קטנה מיפן הפכה לאחת מהכוחות הגדולים ביותר בעולם הבידור?
+                </p>
+            </div>
+        </div>
+
+        <!-- Visual Timeline -->
+        <div class="section">
+            <h2 class="section-title">⏰ ציר הזמן - מיפן לעולם</h2>
+            
+            <div style="position: relative; padding: 40px 0;">
+                <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, #ffd700 0%, #ff6b6b 100%); transform: translateX(-50%);"></div>
+                
+                <div style="position: relative;">
+                    <!-- 1963 -->
+                    <div style="display: flex; align-items: center; margin-bottom: 60px; position: relative;">
+                        <div style="flex: 1; text-align: left; padding-left: 20px;">
+                            <a href="https://www.youtube.com/watch?v=QsIv3Se1eLo" target="_blank" style="text-decoration: none;">
+                                <div style="background: linear-gradient(135deg, #667eea, #764ba2); padding: 25px; border-radius: 20px; border: 3px solid #ffd700; transition: transform 0.3s ease; cursor: pointer;">
+                                    <h3 style="color: #ffd700; font-size: 1.8em; margin-bottom: 10px;">1963 - אסטרו בוי 🤖</h3>
+                                    <p style="font-size: 1.2em; color: #fff;">האנימה הראשונה בטלוויזיה!</p>
+                                    <p style="font-size: 1em; color: #ffd700; margin-top: 10px;">🎬 לחץ לצפייה</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div style="width: 40px; height: 40px; background: #ffd700; border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); border: 4px solid #fff; z-index: 2;"></div>
+                        <div style="flex: 1;"></div>
+                    </div>
+
+                    <!-- 1984 -->
+                    <div style="display: flex; align-items: center; margin-bottom: 60px; position: relative; flex-direction: row-reverse;">
+                        <div style="flex: 1; text-align: right; padding-right: 20px;">
+                            <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f); padding: 25px; border-radius: 20px; border: 3px solid #ffd700;">
+                                <h3 style="color: #ffd700; font-size: 1.8em; margin-bottom: 10px;">1984 - דרגון בול 🐉</h3>
+                                <p style="font-size: 1.2em;">גוקו משנה את המשחק!</p>
+                            </div>
+                        </div>
+                        <div style="width: 40px; height: 40px; background: #ff6b6b; border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); border: 4px solid #fff; z-index: 2;"></div>
+                        <div style="flex: 1;"></div>
+                    </div>
+
+                    <!-- 1988 -->
+                    <div style="display: flex; align-items: center; margin-bottom: 60px; position: relative;">
+                        <div style="flex: 1; text-align: left; padding-left: 20px;">
+                            <div style="background: linear-gradient(135deg, #4facfe, #00f2fe); padding: 25px; border-radius: 20px; border: 3px solid #ffd700;">
+                                <h3 style="color: #ffd700; font-size: 1.8em; margin-bottom: 10px;">1988 - סטודיו ג'יבלי 🌸</h3>
+                                <p style="font-size: 1.2em;">My Neighbor Totoro - אנימה הופכת לאומנות!</p>
+                            </div>
+                        </div>
+                        <div style="width: 40px; height: 40px; background: #4facfe; border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); border: 4px solid #fff; z-index: 2;"></div>
+                        <div style="flex: 1;"></div>
+                    </div>
+
+                    <!-- 2000s -->
+                    <div style="display: flex; align-items: center; margin-bottom: 60px; position: relative; flex-direction: row-reverse;">
+                        <div style="flex: 1; text-align: right; padding-right: 20px;">
+                            <div style="background: linear-gradient(135deg, #fa709a, #fee140); padding: 25px; border-radius: 20px; border: 3px solid #ffd700;">
+                                <h3 style="color: #ffd700; font-size: 1.8em; margin-bottom: 10px;">1999-2002 - נארוטו ווואן פיס 🍜🏴‍☠️</h3>
+                                <p style="font-size: 1.2em;">הדור החדש מגיע!</p>
+                            </div>
+                        </div>
+                        <div style="width: 40px; height: 40px; background: #fa709a; border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); border: 4px solid #fff; z-index: 2;"></div>
+                        <div style="flex: 1;"></div>
+                    </div>
+
+                    <!-- Western -->
+                    <div style="display: flex; align-items: center; margin-bottom: 60px; position: relative;">
+                        <div style="flex: 1; text-align: left; padding-left: 20px;">
+                            <div style="background: linear-gradient(135deg, #a8edea, #fed6e3); padding: 25px; border-radius: 20px; border: 3px solid #ffd700;">
+                                <h3 style="color: #333; font-size: 1.8em; margin-bottom: 10px;">2000s - כיבוש המערב 🌍</h3>
+                                <p style="font-size: 1.2em; color: #333;">אנימה מגיעה לאמריקה ואירופה!</p>
+                            </div>
+                        </div>
+                        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #a8edea, #fed6e3); border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); border: 4px solid #fff; z-index: 2;"></div>
+                        <div style="flex: 1;"></div>
+                    </div>
+
+                    <!-- Today -->
+                    <div style="display: flex; align-items: center; position: relative; flex-direction: row-reverse;">
+                        <div style="flex: 1; text-align: right; padding-right: 20px;">
+                            <div style="background: linear-gradient(135deg, #f093fb, #f5576c); padding: 25px; border-radius: 20px; border: 3px solid #ffd700;">
+                                <h3 style="color: #ffd700; font-size: 1.8em; margin-bottom: 10px;">היום - אטאק, דמון סלייר, דורורו ⚔️🔥</h3>
+                                <p style="font-size: 1.2em;">מיינסטרים עולמי!</p>
+                            </div>
+                        </div>
+                        <div style="width: 40px; height: 40px; background: #f093fb; border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); border: 4px solid #fff; z-index: 2;"></div>
+                        <div style="flex: 1;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manga -->
+        <div class="section">
+            <h2 class="section-title">📚 מנגה - מאיפה מתחיל הכל?</h2>
+            
+            <div class="text-content">
+                <p style="font-size: 1.4em;">לפני שיש אנימה - יש <strong style="color: #ffd700;">מנגה!</strong></p>
+                <p style="font-size: 1.3em; margin-top: 20px;">מנגה זה קומיקס יפני. אמן מצייר את הסיפור בשחור-לבן, פרק אחרי פרק.</p>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="font-size: 2em; color: #ffd700; margin-bottom: 25px;">התהליך: 📖 → 📺</h3>
+                
+                <div class="text-content" style="font-size: 1.3em;">
+                    <p><strong>שלב 1:</strong> אמן כותב ומצייר מנגה 🎨</p>
+                    <p style="margin-top: 15px;"><strong>שלב 2:</strong> המנגה מתפרסמת במגזינים 📰</p>
+                    <p style="margin-top: 15px;"><strong>שלב 3:</strong> אם זה מצליח → הופכים לאנימה! 📺</p>
+                    <p style="margin-top: 15px;"><strong>שלב 4:</strong> האנימה משדרת בטלוויזיה! ✨</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-size: 1.4em; margin-bottom: 20px;">רוצים לראות איך נראית מנגה?</p>
+                <a href="https://w61.onepiece-manga-online.net/manga/one-piece-chapter-398/" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #ffd700, #ffed4e); color: #333; padding: 20px 40px; border-radius: 50px; text-decoration: none; font-size: 1.3em; font-weight: bold; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: transform 0.3s ease;">
+                    📖 לחץ כאן לקרוא פרק מוואן פיס! 🏴‍☠️
+                </a>
+            </div>
+        </div>
+
+        <!-- Anime Genres -->
+        <div class="section">
+            <h2 class="section-title">📺 סוגי אנימה</h2>
+            
+            <div class="text-content">
+                <p style="font-size: 1.4em;">אנימה היא לא רק דבר אחד - יש הרבה סוגים שונים!</p>
+            </div>
+
+            <div class="genre-grid">
+                <div class="genre-card">
+                    <h3 style="color: #ffd700; font-size: 1.6em; margin-bottom: 15px;">⚔️ שונן (Shonen)</h3>
+                    <p style="font-size: 1.2em;">לבנים צעירים - הרבה קרבות ואקשן!</p>
+                    <p style="margin-top: 10px; color: #ffd700;"><strong>דוגמאות:</strong> דרגון בול, נארוטו, וואן פיס</p>
+                </div>
+
+                <div class="genre-card">
+                    <h3 style="color: #ffd700; font-size: 1.6em; margin-bottom: 15px;">💕 שוג'ו (Shoujo)</h3>
+                    <p style="font-size: 1.2em;">לבנות צעירות - רומנטיקה ויחסים!</p>
+                    <p style="margin-top: 10px; color: #ffd700;"><strong>דוגמאות:</strong> Fruits Basket, Sailor Moon</p>
+                </div>
+
+                <div class="genre-card">
+                    <h3 style="color: #ffd700; font-size: 1.6em; margin-bottom: 15px;">🧠 סיינן (Seinen)</h3>
+                    <p style="font-size: 1.2em;">למבוגרים - סיפורים עמוקים ומורכבים!</p>
+                    <p style="margin-top: 10px; color: #ffd700;"><strong>דוגמאות:</strong> אטאק און טיטאן, Tokyo Ghoul</p>
+                </div>
+
+                <div class="genre-card">
+                    <h3 style="color: #ffd700; font-size: 1.6em; margin-bottom: 15px;">🏫 Slice of Life</h3>
+                    <p style="font-size: 1.2em;">חיים רגילים - סיפורים על חיי היומיום!</p>
+                    <p style="margin-top: 10px; color: #ffd700;"><strong>דוגמאות:</strong> K-On!, Barakamon</p>
+                </div>
+
+                <div class="genre-card">
+                    <h3 style="color: #ffd700; font-size: 1.6em; margin-bottom: 15px;">🤖 מכה (Mecha)</h3>
+                    <p style="font-size: 1.2em;">רובוטים ענקיים!</p>
+                    <p style="margin-top: 10px; color: #ffd700;"><strong>דוגמאות:</strong> Gundam, Evangelion</p>
+                </div>
+
+                <div class="genre-card">
+                    <h3 style="color: #ffd700; font-size: 1.6em; margin-bottom: 15px;">🎭 פנטזיה</h3>
+                    <p style="font-size: 1.2em;">עולמות קסומים ויצורים מיתולוגיים!</p>
+                    <p style="margin-top: 10px; color: #ffd700;"><strong>דוגמאות:</strong> Fullmetal Alchemist</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dragon Ball -->
+        <div class="section" style="background: linear-gradient(135deg, rgba(255, 107, 53, 0.3), rgba(255, 159, 28, 0.3));">
+            <h2 class="section-title">🐉 דרגון בול - אגדת הכדורים</h2>
+            
+            <div class="text-content">
+                <p>גוקו - ילד קטן עם זנב שהופך לאחד הגיבורים החזקים בהיסטוריה!</p>
+                <p style="margin-top: 15px;">המסע שלו: מילד תמים → לוחם עולמי → מגן על כדור הארץ!</p>
+                <p style="margin-top: 15px;"><strong style="color: #ffd700;">המהלך המפורסם:</strong> קמהמהה! ⚡</p>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=4_c1plvN2HI" target="_blank" class="video-link">
+                <img src="https://img.youtube.com/vi/4_c1plvN2HI/maxresdefault.jpg" alt="Goku Kamehameha">
+                <div class="video-link-text">🎬 לחץ לצפייה - קמהמהה! 🎬</div>
+            </a>
+
+            <div class="game-container">
+                <h3 class="game-title">🎮 משחק: קמהמהה!</h3>
+                <p style="font-size: 1.2em; margin-bottom: 20px;">לחץ על הכפתור או לחץ SPACE ושגר קרן אנרגיה!</p>
+                <button class="game-btn" onclick="fireKamehameha()">⚡ קמהמהה! ⚡</button>
+                <div class="kamehameha-scene">
+                    <div class="character">🧍‍♂️</div>
+                    <div class="energy-blast" id="energyBlast"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recurring Themes -->
+        <div class="section">
+            <h2 class="section-title">🔄 מוטיבים חוזרים - השד בפנים</h2>
+            
+            <div class="text-content">
+                <p style="font-size: 1.4em;">באנימה יש נושאים שחוזרים שוב ושוב. אחד הכי מעניינים:</p>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="font-size: 2em; color: #ffd700; margin-bottom: 25px;">👹 השד בפנים</h3>
+                
+                <div class="text-content" style="font-size: 1.3em;">
+                    <p><strong style="color: #ffd700;">הרעיון:</strong> גיבור עם כוח חזק בפנים - לפעמים מפלצת, לפעמים שד.</p>
+                    <p style="margin-top: 20px;"><strong style="color: #ffd700;">נארוטו:</strong> הקיובי (שועל בעל 9 זנבות) כלוא בתוכו מאז שנולד. הוא צריך ללמוד לחיות עם הכוח הזה.</p>
+                    <p style="margin-top: 20px;"><strong style="color: #ffd700;">ג'וג'וטסו קייזן:</strong> יוג'י בולע אצבע של סוקונה (מלך הקללות) ועכשיו הוא חי בתוכו!</p>
+                    <p style="margin-top: 20px;"><strong style="color: #ffd700;">בלאק קלובר:</strong> אסטה יש שד אנטי-קסם שנותן לו כוח!</p>
+                    
+                    <p style="margin-top: 30px; font-size: 1.2em; font-style: italic;">
+                        💭 זה כמו שיש בכל אחד מאיתנו - חלק כהה, כוח שאנחנו לא תמיד מבינים. השאלה היא איך אנחנו משתמשים בו.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Naruto -->
+        <div class="section" style="background: linear-gradient(135deg, rgba(255, 159, 28, 0.3), rgba(255, 107, 53, 0.3));">
+            <h2 class="section-title">🍜 נארוטו - הנינג'ה שלא ויתר</h2>
+            
+            <div class="text-content">
+                <p>נארוטו אוזומאקי - הילד שכולם התעלמו ממנו רוצה להיות הוקאגה (המנהיג) של הכפר!</p>
+                <p style="margin-top: 15px;">המסע שלו: ילד בודד → נינג'ה חזק → גיבור העולם!</p>
+                <p style="margin-top: 15px;"><strong style="color: #ffd700;">המהלך המפורסם:</strong> רסנגן וצללים! 🌀</p>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=iwQKOoiy-XU" target="_blank" class="video-link">
+                <img src="https://img.youtube.com/vi/iwQKOoiy-XU/maxresdefault.jpg" alt="Naruto">
+                <div class="video-link-text">🎬 לחץ לצפייה - נארוטו בפעולה! 🎬</div>
+            </a>
+
+            <div class="game-container">
+                <h3 class="game-title">🎮 משחק: ריצת נינג'ה!</h3>
+                <p style="font-size: 1.2em; margin-bottom: 20px;">שלח את נארוטו לרוץ!</p>
+                <button class="game-btn" onclick="runNinja()">🏃‍♂️ רוץ! 🏃‍♂️</button>
+                <div class="ninja-runner">
+                    <div class="ninja" id="ninja">🏃‍♂️💨</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Anime as Art -->
+        <div class="section">
+            <h2 class="section-title">🎨 אנימה כאומנות - סגנונות שונים</h2>
+            
+            <div class="text-content">
+                <p style="font-size: 1.4em;">לא כל אנימה מצוירת אותו דבר! יש סגנונות שונים לחלוטין!</p>
+            </div>
+
+            <!-- Demon Slayer -->
+            <div class="highlight-box">
+                <h3 style="font-size: 2em; color: #ffd700; margin-bottom: 20px;">🔥 Demon Slayer - צבעים מרהיבים</h3>
+                <p style="font-size: 1.3em;">סגנון מלא צבעים, אנימציות מדהימות, ואפקטים ויזואליים מטורפים!</p>
+                <p style="font-size: 1.2em; margin-top: 15px;">כל תנועת חרב הופכת לציור חי!</p>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=pmanD_s7G3U" target="_blank" class="video-link">
+                <img src="https://img.youtube.com/vi/pmanD_s7G3U/maxresdefault.jpg" alt="Demon Slayer">
+                <div class="video-link-text">🎬 לחץ לצפייה - Demon Slayer! 🎬</div>
+            </a>
+
+            <!-- Ping Pong -->
+            <div class="highlight-box">
+                <h3 style="font-size: 2em; color: #ffd700; margin-bottom: 20px;">🏓 Ping Pong - אומנות מופשטת</h3>
+                <p style="font-size: 1.3em;">סגנון ציור ייחודי, קווים פשוטים, צבעים שטוחים - נראה כמו ציור יד!</p>
+                <p style="font-size: 1.2em; margin-top: 15px;">לא "יפה" במובן המסורתי - אבל מיוחד ומרגש!</p>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=8z_gkC8CPQU" target="_blank" class="video-link">
+                <img src="https://img.youtube.com/vi/8z_gkC8CPQU/maxresdefault.jpg" alt="Ping Pong">
+                <div class="video-link-text">🎬 לחץ לצפייה - Ping Pong! 🎬</div>
+            </a>
+
+            <!-- Hajime no Ippo -->
+            <div class="highlight-box">
+                <h3 style="font-size: 2em; color: #ffd700; margin-bottom: 20px;">🥊 Hajime no Ippo - ריאליזם ספורטיבי</h3>
+                <p style="font-size: 1.3em;">סגנון ריאליסטי, תנועות מדויקות, דגש על פיזיקה אמיתית של אגרוף!</p>
+                <p style="font-size: 1.2em; margin-top: 15px;">נראה כמו התמודדות אמיתית - כל מכה מורגשת!</p>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=WxrTu7fT1FY" target="_blank" class="video-link">
+                <img src="https://img.youtube.com/vi/WxrTu7fT1FY/maxresdefault.jpg" alt="Hajime no Ippo">
+                <div class="video-link-text">🎬 לחץ לצפייה - Hajime no Ippo! 🎬</div>
+            </a>
+        </div>
+
+        <!-- One Piece -->
+        <div class="section" style="background: linear-gradient(135deg, rgba(74, 144, 226, 0.3), rgba(110, 193, 228, 0.3));">
+            <h2 class="section-title">🏴‍☠️ וואן פיס - המסע לאוצר</h2>
+            
+            <div class="text-content">
+                <p>מונקי ד. לופי - פיראט עם כובע קש שרוצה למצוא את האוצר הגדול ביותר בעולם!</p>
+                <p style="margin-top: 15px;">המסע שלו: ילד מכפר קטן → קפטן צוות → אחד מהפיראטים החזקים!</p>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="font-size: 2em; color: #ffd700; margin-bottom: 20px;">🌊 העולם של וואן פיס</h3>
+                
+                <div class="text-content" style="font-size: 1.3em;">
+                    <p><strong style="color: #ffd700;">גול ד. רוג'ר:</strong> מלך הפיראטים הקודם. לפני שהוצא להורג, הוא אמר שהשאיר את כל האוצר שלו במקום אחד - "וואן פיס"!</p>
+                    
+                    <p style="margin-top: 20px;"><strong style="color: #ffd700;">פירות השטן:</strong> פירות מיוחדים שנותנים כוחות על! אבל - מי שאוכל אותם לא יכול לשחות!</p>
+                    
+                    <p style="margin-top: 20px;"><strong style="color: #ffd700;">הגומי גומי:</strong> לופי אכל את פרי הגומי - עכשיו הגוף שלו עשוי גומי! הוא יכול להימתח, להתנפח, ולקפוץ!</p>
+                    
+                    <p style="margin-top: 20px;"><strong style="color: #ffd700;">הסיפור:</strong> הסידרה הכי ארוכה! יותר מ-1000 פרקים ועוד ממשיכה!</p>
+                </div>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=nowY_icRZsQ" target="_blank" class="video-link">
+                <img src="https://img.youtube.com/vi/nowY_icRZsQ/maxresdefault.jpg" alt="One Piece">
+                <div class="video-link-text">🎬 לחץ לצפייה - לופי בקרב! 🎬</div>
+            </a>
+        </div>
+
+        <!-- Attack on Titan -->
+        <div class="section" style="background: linear-gradient(135deg, rgba(163, 63, 45, 0.3), rgba(120, 40, 31, 0.3));">
+            <h2 class="section-title">⚔️ אטאק און טיטאן - המלחמה בענקים</h2>
+            
+            <div class="text-content">
+                <p style="font-size: 1.3em;">בעולם שבו האנושות כלואה מאחורי חומות ענקיות, בני האדם חיים בשלווה.</p>
+                <p style="font-size: 1.3em; margin-top: 20px;">הם לא יצאו מהחומות כבר מאות שנים. בחוץ - ענקים שאוכלים בני אדם.</p>
+            </div>
+
+            <div class="highlight-box">
+                <p style="font-size: 1.5em; font-style: italic; text-align: center; color: #ffd700; margin-bottom: 15px;">
+                    "ON THAT DAY, HUMANITY RECEIVED A GRIM REMINDER..."
+                </p>
+                <p style="font-size: 1.3em; text-align: center;">
+                    "באותו יום, האנושות קיבלה תזכורת אכזרית..."
+                </p>
+            </div>
+
+            <div class="text-content">
+                <p style="font-size: 1.3em; margin-top: 25px;">יום אחד, מפלצות ענקיות שנקראות טיטנים פורצות את החומות.</p>
+                <p style="font-size: 1.3em; margin-top: 20px;">ארן יגר, ילד שחי בשלווה - רואה את העולם שלו מתמוטט. הוא מחליט להתגייס לצבא ולהילחם מול הטיטנים.</p>
+                <p style="font-size: 1.3em; margin-top: 20px;"><strong style="color: #ffd700;">הציוד:</strong> ציוד ODM - מכשיר שמאפשר לעוף בין הבניינים! 🪂</p>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="font-size: 2em; color: #ffd700; margin-bottom: 25px;">🧠 פילוסופיה: חירות או ביטחון?</h3>
+                
+                <div class="text-content" style="font-size: 1.3em;">
+                    <p><strong>השאלה המרכזית:</strong> האם אנחנו רק מקבלים את העולם כמו שהוא, או שאנחנו נלחמים?</p>
+                    <p style="margin-top: 20px;">בני האדם יכולים להישאר מאחורי החומות - בטוחים, אבל כלואים. בלי חופש.</p>
+                    <p style="margin-top: 20px;"><strong style="color: #ffd700;">ארן בוחר:</strong> לשבור את החומות. לצאת. להילחם. גם אם זה מסוכן!</p>
+                    <p style="margin-top: 20px; font-size: 1.2em; font-style: italic;">
+                        💭 זו קריאה לפעולה - אל מול פסיביות וקבלה של העולם כמו שהוא.
+                    </p>
+                </div>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=FoIZIicPlkw" target="_blank" class="video-link">
+                <img src="https://img.youtube.com/vi/FoIZIicPlkw/maxresdefault.jpg" alt="Attack on Titan">
+                <div class="video-link-text">🎬 לחץ לצפייה - שבירת החומות! 🎬</div>
+            </a>
+
+            <div class="game-container">
+                <h3 class="game-title">🎮 משחק: תנועת ODM!</h3>
+                <p style="font-size: 1.2em; margin-bottom: 20px;">שלח את הלוחם לעוף!</p>
+                <button class="game-btn" onclick="flyODM()">🪂 תעוף! 🪂</button>
+                <div class="odm-scene">
+                    <div class="odm-character" id="odmChar" style="left: 10%; top: 80%;">⚔️</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Movies -->
+        <div class="section">
+            <h2 class="section-title">🎬 מהטלוויזיה לקולנוע!</h2>
+            
+            <div class="text-content">
+                <p style="font-size: 1.4em;">אנימה לא נשארה רק בטלוויזיה - היא כבשה את הקולנוע!</p>
+            </div>
+
+            <div class="stats-box">
+                <h3 style="font-size: 2em; color: #ffd700; margin-bottom: 20px;">🏆 סרטי אנימה מפורסמים:</h3>
+                
+                <div class="text-content">
+                    <p><strong style="color: #ffd700;">Demon Slayer: Mugen Train</strong> - הרוויח <strong style="color: #ffd700;">500 מיליון דולר!</strong> 💰</p>
+                    <p style="margin-top: 15px;"><strong style="color: #ffd700;">Your Name</strong> - פצצה עולמית שריגשה מיליונים! 💕</p>
+                    <p style="margin-top: 15px;"><strong style="color: #ffd700;">Spirited Away</strong> - זכה באוסקר! 🏆</p>
+                </div>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=mOE08aj1dC4" target="_blank" class="video-link">
+                <img src="https://img.youtube.com/vi/mOE08aj1dC4/maxresdefault.jpg" alt="Demon Slayer Movie">
+                <div class="video-link-text">🎬 לחץ לצפייה - Demon Slayer הסרט! 🎬</div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=RKXsnbQt5M4" target="_blank" class="video-link">
+                <img src="https://img.youtube.com/vi/RKXsnbQt5M4/maxresdefault.jpg" alt="Princess Mononoke">
+                <div class="video-link-text">🎬 לחץ לצפייה - Princess Mononoke 🎬</div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=70NhEBzLKU8" target="_blank" class="video-link">
+                <img src="https://img.youtube.com/vi/70NhEBzLKU8/maxresdefault.jpg" alt="Spirited Away">
+                <div class="video-link-text">🎬 לחץ לצפייה - Spirited Away 🎬</div>
+            </a>
+        </div>
+
+        <!-- Financial Success -->
+        <div class="section">
+            <h2 class="section-title">💰 ההצלחה הכספית - המספרים המטורפים!</h2>
+            
+            <div class="highlight-box">
+                <h3 style="font-size: 2em; color: #ffd700; margin-bottom: 25px;">עובדות מטורפות:</h3>
+                
+                <div class="text-content" style="font-size: 1.3em;">
+                    <p>💵 <strong>תעשיית האנימה:</strong> 25 מיליארד דולר בשנה!</p>
+                    
+                    <p style="margin-top: 20px;">📚 <strong>וואן פיס:</strong> הסידרה שמכרה הכי הרבה מנגה בהיסטוריה! למעלה מ-500 מיליון עותקים!</p>
+                    
+                    <p style="margin-top: 20px;">🎮 <strong>דרגון בול:</strong> משחקי וידאו שעשו מיליארדי דולרים!</p>
+                    
+                    <p style="margin-top: 20px;">👕 <strong>נארוטו:</strong> מרצ'נדייז ברחבי העולם - חולצות, צעצועים, משחקים!</p>
+                    
+                    <p style="margin-top: 20px;">🌍 <strong>אטאק און טיטאן:</strong> מהאנימות הנצפות ביותר בעולם!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Solo Leveling -->
+        <div class="section" style="background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(75, 0, 130, 0.3));">
+            <h2 class="section-title">🇰🇷 סולו לבלינג - אנימה לא רק מיפן!</h2>
+            
+            <div class="text-content">
+                <p style="font-size: 1.4em;">אנימה התחילה ביפן - אבל היום גם מדינות אחרות יוצרות!</p>
+                <p style="font-size: 1.3em; margin-top: 20px;"><strong style="color: #ffd700;">סולו לבלינג</strong> - אנימה קוריאנית שהפכה להיט עולמי ב-2025!</p>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="font-size: 2em; color: #ffd700; margin-bottom: 20px;">📖 הסיפור:</h3>
+                
+                <div class="text-content" style="font-size: 1.3em;">
+                    <p><strong>סונג ג'ין-וו</strong> - הציד הכי חלש בעולם. כולם צוחקים עליו.</p>
+                    <p style="margin-top: 20px;">יום אחד הוא מקבל כוח מיוחד - הוא יכול לעלות רמות כמו במשחק וידאו!</p>
+                    <p style="margin-top: 20px;">הוא מתחיל לשחק <strong>"סולו"</strong> - לבד. והופך להיות החזק ביותר!</p>
+                    <p style="margin-top: 20px; font-size: 1.4em; color: #ffd700;"><strong>המנצחת הגדולה של 2025!</strong> 🏆</p>
+                </div>
+            </div>
+
+            <a href="https://www.youtube.com/watch?v=l9Zd8gBZC-s" target="_blank" class="video-link">
+                <img src="https://img.youtube.com/vi/l9Zd8gBZC-s/maxresdefault.jpg" alt="Solo Leveling">
+                <div class="video-link-text">🎬 לחץ לצפייה - Solo Leveling! 🎬</div>
+            </a>
+        </div>
+
+        <!-- Voting Game -->
+        <div class="section">
+            <h2 class="section-title">🗳️ הצבעה - מי הדמות האהובה עליכם?</h2>
+            
+            <div class="text-content">
+                <p style="font-size: 1.4em; text-align: center; margin-bottom: 30px;">
+                    לחצו על הדמויות כדי להצביע! (אפשר ללחוץ כמה שרוצים!)
+                </p>
+            </div>
+
+            <div class="character-grid">
+                <div class="character-card" onclick="voteCharacter(this, 'גוקו')">
+                    🐉 גוקו
+                    <div class="vote-count">0</div>
+                </div>
+                <div class="character-card" onclick="voteCharacter(this, 'נארוטו')">
+                    🍜 נארוטו
+                    <div class="vote-count">0</div>
+                </div>
+                <div class="character-card" onclick="voteCharacter(this, 'לופי')">
+                    🏴‍☠️ לופי
+                    <div class="vote-count">0</div>
+                </div>
+                <div class="character-card" onclick="voteCharacter(this, 'ארן')">
+                    ⚔️ ארן
+                    <div class="vote-count">0</div>
+                </div>
+                <div class="character-card" onclick="voteCharacter(this, 'טנג\'ירו')">
+                    🔥 טנג'ירו
+                    <div class="vote-count">0</div>
+                </div>
+                <div class="character-card" onclick="voteCharacter(this, 'וגטה')">
+                    ⚡ וגטה
+                    <div class="vote-count">0</div>
+                </div>
+                <div class="character-card" onclick="voteCharacter(this, 'ססקה')">
+                    ⚡ ססקה
+                    <div class="vote-count">0</div>
+                </div>
+                <div class="character-card" onclick="voteCharacter(this, 'זורו')">
+                    ⚔️ זורו
+                    <div class="vote-count">0</div>
+                </div>
+                <div class="character-card" onclick="voteCharacter(this, 'מיקאסה')">
+                    ⚔️ מיקאסה
+                    <div class="vote-count">0</div>
+                </div>
+                <div class="character-card" onclick="voteCharacter(this, 'נזוקו')">
+                    👹 נזוקו
+                    <div class="vote-count">0</div>
+                </div>
+                <div class="character-card" onclick="voteCharacter(this, 'ליוויי')">
+                    ⚔️ ליוויי
+                    <div class="vote-count">0</div>
+                </div>
+                <div class="character-card" onclick="voteCharacter(this, 'ג\'ין-וו')">
+                    💜 ג'ין-וו
+                    <div class="vote-count">0</div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="game-btn" onclick="showWinner()">🏆 הראה מנצח! 🏆</button>
+            </div>
+
+            <div class="winner-banner" id="winnerBanner"></div>
+        </div>
+
+        <!-- Closing -->
+        <div class="section">
+            <h2 class="section-title">✨ סיכום - אנימה היא יותר מבידור!</h2>
+            
+            <div class="highlight-box">
+                <div class="text-content" style="font-size: 1.4em; text-align: center; line-height: 2.2;">
+                    <p>אנימה היא <strong style="color: #ffd700;">תרבות שלמה</strong> 🎌</p>
+                    <p style="margin-top: 20px;">אנימה היא <strong style="color: #ffd700;">אומנות</strong> 🎨</p>
+                    <p style="margin-top: 20px;">אנימה היא <strong style="color: #ffd700;">השפעה על העולם כולו</strong> 🌍</p>
+                    <p style="margin-top: 40px; font-size: 1.6em; color: #ffd700;">
+                        מיפן הקטנה - לליבם של מיליארדים! 💙
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; padding: 40px 20px; opacity: 0.8;">
+            <p style="font-size: 1.2em;">תוכנית פלאש לקולנוע | מתן גבר © 2026</p>
+        </div>
+    </div>
+
+    <script>
+        // Prevent arrow keys from scrolling page
+        window.addEventListener('keydown', function(e) {
+            if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].indexOf(e.code) > -1) {
+                e.preventDefault();
+            }
+        }, false);
+
+        // Keyboard controls
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space') {
+                // Try to fire the appropriate game based on what's visible
+                fireKamehameha();
+            }
+        });
+
+        // Kamehameha
+        function fireKamehameha() {
+            const blast = document.getElementById('energyBlast');
+            if (blast) {
+                blast.classList.remove('fired');
+                setTimeout(() => blast.classList.add('fired'), 10);
+                setTimeout(() => blast.classList.remove('fired'), 2000);
+            }
+        }
+
+        // Ninja Run
+        function runNinja() {
+            const ninja = document.getElementById('ninja');
+            if (ninja) {
+                ninja.classList.remove('running');
+                setTimeout(() => ninja.classList.add('running'), 10);
+                setTimeout(() => ninja.classList.remove('running'), 3100);
+            }
+        }
+
+        // ODM
+        function flyODM() {
+            const char = document.getElementById('odmChar');
+            if (char) {
+                const positions = [
+                    {left: '80%', top: '20%'},
+                    {left: '50%', top: '10%'},
+                    {left: '20%', top: '30%'},
+                    {left: '10%', top: '80%'}
+                ];
+                
+                let index = 0;
+                const interval = setInterval(() => {
+                    if (index < positions.length) {
+                        char.style.left = positions[index].left;
+                        char.style.top = positions[index].top;
+                        index++;
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 1000);
+            }
+        }
+
+        // Voting System
+        const votes = {};
+
+        function voteCharacter(card, name) {
+            const voteCount = card.querySelector('.vote-count');
+            const currentVotes = parseInt(voteCount.textContent);
+            
+            if (currentVotes < 5) {
+                const newVotes = currentVotes + 1;
+                voteCount.textContent = newVotes;
+                votes[name] = newVotes;
+                
+                // Visual feedback
+                card.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 200);
+            }
+        }
+
+        function showWinner() {
+            let maxVotes = 0;
+            let winner = '';
+            
+            for (const [name, voteCount] of Object.entries(votes)) {
+                if (voteCount > maxVotes) {
+                    maxVotes = voteCount;
+                    winner = name;
+                }
+            }
+            
+            const banner = document.getElementById('winnerBanner');
+            if (winner && maxVotes > 0) {
+                banner.textContent = `🏆 הדמות המנצחת: ${winner} עם ${maxVotes} קולות! 🏆`;
+                banner.style.display = 'block';
+            } else {
+                banner.textContent = '📊 אין הצבעות עדיין! תתחילו להצביע! 📊';
+                banner.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
