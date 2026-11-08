@@ -19,6 +19,10 @@ section{padding:80px 6vw}
 .hero h1{font-size:clamp(2.1em,5.6vw,4em);line-height:1.15;max-width:18ch;position:relative}
 .names{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:30px;position:relative}
 .names span{border:1px solid rgba(242,237,225,.25);border-radius:30px;padding:6px 18px;font-weight:600}
+.heroes{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;margin-top:34px;position:relative}
+.hcard{width:min(28vw,300px);min-width:200px;margin:0}
+.hcard img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:16px;border:2px solid rgba(242,237,225,.2);box-shadow:0 12px 40px rgba(0,0,0,.5);display:block;background:#1a1a2a}
+.hcard figcaption{margin-top:10px;font-family:'Rubik';font-weight:700;font-size:1.25em}
 .scroll{margin-top:50px;color:var(--muted);animation:b 2s infinite;position:relative}
 @keyframes b{50%{transform:translateY(10px)}}
 .answer{text-align:center;min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
@@ -74,7 +78,7 @@ td:last-child{border-radius:10px 0 0 10px}
 <section class="hero">
   <div class="kicker">תוכנית פלאש מתקדמת</div>
   <h1 class="display">מה משותף לכל הגיבורים האלה?</h1>
-  <div class="names"><span>פו</span><span>הארי פוטר</span><span>פיטר פרקר</span></div>
+  <div class="heroes"><figure class="hcard"><img src="https://img.youtube.com/vi/uZX8trFzyl4/hqdefault.jpg" alt="פו" onerror="this.style.visibility='hidden'"><figcaption>פו</figcaption></figure><figure class="hcard"><img src="https://img.youtube.com/vi/p2_sA-aI9QA/hqdefault.jpg" alt="הארי פוטר" onerror="this.style.visibility='hidden'"><figcaption>הארי פוטר</figcaption></figure><figure class="hcard"><img src="https://img.youtube.com/vi/JaEzmEFIO7s/hqdefault.jpg" alt="פיטר פרקר" onerror="this.style.visibility='hidden'"><figcaption>פיטר פרקר</figcaption></figure></div>
   <p class="scroll">⬇ גללו למטה לתשובה</p>
 </section>
 
