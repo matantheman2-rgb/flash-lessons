@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>המשימה: שני קולות בראש | תוכנית פלאש</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden}
+body{
+  font-family:'Heebo',sans-serif;direction:rtl;color:#fff;
+  background:radial-gradient(ellipse at 85% 0%,#1d2a4a 0%,#0c1020 55%,#07080f 100%);
+  display:flex;flex-direction:column;
+  padding:3.2vh 3.5vw 3vh;gap:2.6vh;
+}
+.top{display:flex;align-items:center;justify-content:space-between}
+.top h1{font-size:min(5.6vw,10vh);font-weight:900;line-height:1}
+.top h1 span{color:#7fb4ff}
+.top p{font-size:min(1.7vw,3.1vh);color:#c9b8be;margin-top:1vh}
+.badge{border:0.35vw solid #7fb4ff;color:#7fb4ff;font-weight:900;font-size:min(1.9vw,3.4vh);padding:1vh 1.4vw;border-radius:0.6vw;transform:rotate(-6deg);text-align:center;line-height:1.15}
+.grid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:1.6vh 1.3vw;min-height:0}
+.card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:1vw;padding:2.2vh 1.4vw;display:flex;flex-direction:column;gap:1.2vh;min-height:0}
+.card h2{display:flex;align-items:center;gap:0.8vw;font-size:min(2.25vw,4.1vh);font-weight:900;line-height:1.15}
+.n{background:#7fb4ff;color:#0c1020!important;color:#fff;flex:none;width:min(3vw,5.4vh);height:min(3vw,5.4vh);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:min(1.7vw,3.1vh)}
+.card p{font-size:min(1.55vw,2.85vh);line-height:1.45;color:#d9cdd1}
+.card p b{color:#fff}
+.opts{display:flex;flex-wrap:wrap;gap:0.8vh 0.5vw}
+.opt{background:rgba(127,180,255,.14);border:1px solid rgba(127,180,255,.5);border-radius:2vw;padding:0.5vh 0.8vw;font-size:min(1.35vw,2.5vh);font-weight:700}
+.en{direction:ltr;text-align:left;font-size:min(1.8vw,3.3vh);font-weight:900;color:#ff8a9a}
+.bottom{display:flex;align-items:center;justify-content:center;gap:1.2vw;font-size:min(1.75vw,3.2vh);font-weight:700;color:#d9cdd1}
+.bottom b{color:#fff}
+.bottom .opt{font-size:min(1.6vw,2.9vh)}
+.v1,.v1 b{color:#ff8a7a!important}.v2,.v2 b{color:#8fe3b0!important}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div>
+    <h1>המשימה: שני <span>קולות</span> בראש</h1>
+    <p>הקרב האמיתי של כל גיבור הוא מול עצמו. במחברת, עם הדמות שיצרתם.</p>
+  </div>
+  <div class="badge">מאבק<br>פנימי</div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2><span class="n">1</span>רגע ההחלטה</h2>
+    <p>הדמות שלכם עומדת מול החלטה גדולה. <b>מה ההחלטה?</b></p>
+    <p>רוקי: לעלות לזירה מול האלוף, או לוותר.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">2</span>הקול שמפחד</h2>
+    <p class="v1"><b>מה הוא לוחש לה?</b></p>
+    <p>"אתה לא מספיק טוב." "כולם יצחקו עליך." "עדיף לא לנסות."</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">3</span>הקול שמאמין</h2>
+    <p class="v2"><b>מה הוא עונה?</b></p>
+    <p>מה הוא יודע על הדמות שהקול הראשון שוכח?</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">4</span>הוויכוח</h2>
+    <p>כתבו דיאלוג בין שני הקולות. <b>לפחות 6 שורות</b>, שורה לכל קול לסירוגין.</p>
+    <p>שהקול שמפחד יהיה משכנע. אחרת אין מאבק.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">5</span>מי מנצח?</h2>
+    <p>הדמות מחליטה. <b>מה היא עושה?</b></p>
+    <p>גם הפחד יכול לנצח. גם זה סיפור.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">6</span>השמיים</h2>
+    <p>המחשבות הן עננים, ואנחנו השמיים.</p>
+    <p><b>מה הדמות מבינה על עצמה בסוף?</b> משפט אחד.</p>
+  </div>
+</div>
+
+<div class="bottom">
+  <b>בונוס: בזוגות, קראו את הוויכוח מול הכיתה</b>
+  <span class="opt">אחד הקול שמפחד</span>
+  <span class="opt">אחד הקול שמאמין</span>
+</div>
+
+</body>
+</html>
