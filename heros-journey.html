@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מסע הגיבור וקשת הדמות | תוכנית פלאש</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;900&family=Heebo:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0d0d1a;--paper:#f2ede1;--gold:#e8b64a;--s1:#7fc8b8;--s2:#8fb4ff;--s3:#c79bff;--s4:#e0635a;--s5:#e8b64a;--muted:rgba(242,237,225,.62)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Heebo',sans-serif;background:var(--ink);color:var(--paper);direction:rtl;line-height:1.65}
+.display{font-family:'Rubik',sans-serif;font-weight:900}
+a{color:inherit}
+section{padding:80px 6vw}
+.wrap{max-width:960px;margin:0 auto}
+.hero{min-height:94vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 25%,rgba(127,200,184,.12),transparent 40%),radial-gradient(circle at 80% 30%,rgba(224,99,90,.12),transparent 40%),radial-gradient(circle at 50% 85%,rgba(232,182,74,.12),transparent 45%);pointer-events:none}
+.kicker{color:var(--gold);font-size:1.05em;margin-bottom:18px;position:relative}
+.hero h1{font-size:clamp(2.1em,5.6vw,4em);line-height:1.15;max-width:18ch;position:relative}
+.names{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:30px;position:relative}
+.names span{border:1px solid rgba(242,237,225,.25);border-radius:30px;padding:6px 18px;font-weight:600}
+.scroll{margin-top:50px;color:var(--muted);animation:b 2s infinite;position:relative}
+@keyframes b{50%{transform:translateY(10px)}}
+.answer{text-align:center;min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.answer .lbl{color:var(--muted);margin-bottom:18px}
+.answer h2{font-size:clamp(1.9em,4.6vw,3.2em);line-height:1.2}
+.answer h2 span{color:var(--gold)}
+.answer p{color:var(--muted);max-width:52ch;margin-top:22px;font-size:1.08em}
+.card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:34px 34px}
+.card h3{font-size:1.7em;margin-bottom:12px}
+.card p{font-size:1.06em;color:rgba(242,237,225,.85)}
+.card p+p{margin-top:10px}
+.big-quote{font-size:1.25em;border-right:4px solid var(--gold);padding-right:16px;margin-top:16px;color:var(--paper)!important}
+.wn{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.wn div{border-radius:14px;padding:22px}
+.wn .w{background:rgba(143,180,255,.1);border:1px solid rgba(143,180,255,.35)}
+.wn .n{background:rgba(232,182,74,.1);border:1px solid rgba(232,182,74,.4)}
+.wn b{display:block;font-family:'Rubik';font-size:1.25em;margin-bottom:6px}
+.wn .w b{color:var(--s2)}.wn .n b{color:var(--gold)}
+.arc{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:22px;flex-wrap:wrap;font-weight:700}
+.arc span{padding:8px 16px;border-radius:10px;background:rgba(255,255,255,.07)}
+.map{display:flex;gap:8px;margin-top:26px;flex-wrap:wrap;justify-content:center}
+.map div{flex:1;min-width:150px;text-align:center;border-radius:12px;padding:14px 8px;border-top:4px solid var(--c);background:rgba(255,255,255,.05)}
+.map b{display:block;font-family:'Rubik';color:var(--c);font-size:1.6em}
+.map small{color:var(--muted)}
+.stage{max-width:960px;margin:0 auto 26px;border-right:5px solid var(--c);background:rgba(255,255,255,.035);border-radius:4px 18px 18px 4px;padding:38px 36px}
+.stage .tag{font-family:'Rubik';font-weight:900;color:var(--c);font-size:.95em}
+.stage h3{font-size:clamp(1.6em,3.2vw,2.2em);margin:4px 0 6px}
+.stage .q{color:var(--muted);font-size:1.05em;margin-bottom:18px}
+.po{font-size:1.08em}
+.po b{color:var(--c)}
+.vid{display:inline-flex;align-items:center;gap:10px;margin-top:18px;background:linear-gradient(135deg,#c0392b,#8e44ad);color:#fff;text-decoration:none;font-weight:700;padding:13px 22px;border-radius:10px}
+.vid:hover{filter:brightness(1.1)}
+.alt{display:block;margin-top:8px;color:var(--muted);font-size:.85em}
+.act{font-size:.85em;color:var(--muted);margin-top:14px}
+.intro{text-align:center;padding:90px 6vw 30px}
+.intro h2{font-size:clamp(1.7em,3.6vw,2.5em)}
+.intro p{color:var(--muted);max-width:52ch;margin:10px auto 0}
+table{width:100%;border-collapse:separate;border-spacing:0 8px;margin-top:20px;font-size:1em}
+th{font-family:'Rubik';text-align:right;padding:10px 14px;color:var(--gold);font-size:1.1em}
+td{background:rgba(255,255,255,.05);padding:14px;vertical-align:top}
+td:first-child{border-radius:0 10px 10px 0;font-weight:700;color:var(--c);white-space:nowrap}
+td:last-child{border-radius:10px 0 0 10px}
+.vids{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.vids .vid{margin-top:0;font-size:.95em;padding:10px 16px}
+.bridge{text-align:center;padding:110px 6vw 130px}
+.bridge h2{font-size:clamp(1.7em,3.8vw,2.6em);max-width:24ch;margin:0 auto}
+.bridge p{color:var(--muted);max-width:50ch;margin:16px auto 0;font-size:1.08em}
+@media(max-width:700px){.wn{grid-template-columns:1fr}.stage,.card{padding:26px 20px}table{font-size:.9em}}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="kicker">תוכנית פלאש מתקדמת</div>
+  <h1 class="display">מה משותף לכל הגיבורים האלה?</h1>
+  <div class="names"><span>פו</span><span>הארי פוטר</span><span>פיטר פרקר</span></div>
+  <p class="scroll">⬇ גללו למטה לתשובה</p>
+</section>
+
+<section class="answer">
+  <div class="lbl">התשובה:</div>
+  <h2 class="display">כולם עוברים את <span>אותו מסע</span> בדיוק</h2>
+  <p>סרטים שונים, עולמות שונים, גיבורים שונים. אבל אם מסתכלים טוב, הסיפור שלהם בנוי לפי אותה תבנית.</p>
+</section>
+
+<section>
+  <div class="wrap card">
+    <h3 class="display">ג'וזף קמפבל ומסע הגיבור</h3>
+    <p>קמפבל היה חוקר אמריקאי שקרא מיתוסים וסיפורים עממיים מכל העולם: יוון, הודו, אפריקה, אמריקה. הוא גילה משהו מפתיע: כמעט כל סיפור גיבור, בכל תרבות, בנוי לפי אותה תבנית. הוא קרא לה <b>מסע הגיבור</b>.</p>
+    <p>ב-1949 הוא כתב על זה ספר, וכמה עשורים אחר כך ג'ורג' לוקאס השתמש ברעיונות שלו כשכתב את מלחמת הכוכבים. מאז, הוליווד משתמשת בתבנית הזאת שוב ושוב.</p>
+    <p class="big-quote">הגיבור יוצא מהבית, עובר הרפתקה, וחוזר הביתה. אבל הוא כבר לא אותו אדם.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap card">
+    <h3 class="display">קשת הדמות: מה הגיבור רוצה מול מה שהוא צריך</h3>
+    <p>מסע הגיבור הוא מה שקורה <b>בחוץ</b>. קשת הדמות היא מה שקורה <b>בפנים</b>: איך הגיבור משתנה לאורך הסיפור.</p>
+    <div class="wn">
+      <div class="w"><b>מה הוא רוצה</b>המטרה שהגיבור רודף אחריה. מה שהוא חושב שיעשה אותו מאושר.</div>
+      <div class="n"><b>מה הוא צריך</b>השיעור שהוא חייב ללמוד. לרוב הוא בכלל לא יודע שזה מה שחסר לו.</div>
+    </div>
+    <p style="margin-top:18px">בתחילת הסיפור הגיבור רודף אחרי מה שהוא <b>רוצה</b>. בסוף הוא מקבל את מה שהוא <b>צריך</b>. המרחק בין השניים הוא קשת הדמות.</p>
+    <div class="arc"><span>מי שהגיבור בהתחלה</span><span>←</span><span>המסע</span><span>←</span><span>מי שהגיבור בסוף</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap card" style="text-align:center">
+    <h3 class="display">המסע בחמישה שלבים</h3>
+    <div class="map">
+      <div style="--c:var(--s1)"><b>1</b>העולם הרגיל<br><small>פתיחה</small></div>
+      <div style="--c:var(--s2)"><b>2</b>הקריאה<br><small>פתיחה</small></div>
+      <div style="--c:var(--s3)"><b>3</b>המנטור<br><small>עימות</small></div>
+      <div style="--c:var(--s4)"><b>4</b>המבחן הגדול<br><small>עימות</small></div>
+      <div style="--c:var(--s5)"><b>5</b>החזרה<br><small>פתרון</small></div>
+    </div>
+    <p style="margin-top:18px">זוכרים את שלוש המערכות? מסע הגיבור יושב בדיוק עליהן.</p>
+  </div>
+</section>
+
+<div class="intro">
+  <h2 class="display">נעבור על המסע עם פו</h2>
+  <p>קונג פו פנדה, 2008. פנדה שמן ומגושם שחולם להיות לוחם קונג פו.</p>
+</div>
+
+<div style="padding:0 6vw">
+<div class="stage" style="--c:var(--s1)">
+  <div class="tag">שלב 1 · העולם הרגיל</div>
+  <h3 class="display">מי הגיבור לפני שהכול מתחיל?</h3>
+  <p class="q">ומה חסר לו בחיים?</p>
+  <p class="po">פו עובד במסעדת האטריות של אבא שלו. הוא מעריץ את חמשת הלוחמים האגדיים וחולם בלילות שהוא גיבור קונג פו. אבל ביום הוא מגיש מרק, ואף אחד, כולל הוא עצמו, לא מאמין שהוא יכול להיות משהו אחר.</p>
+  <p class="po" style="margin-top:10px"><b>מה חסר לו:</b> אמונה בעצמו.</p>
+  <a class="vid" href="https://www.youtube.com/watch?v=gWsMZPQiAaA" target="_blank" rel="noopener">▶ החלום של פו</a>
+  <a class="alt" href="https://www.youtube.com/results?search_query=Kung+Fu+Panda+Po+dream+opening+scene" target="_blank" rel="noopener">הסרטון לא עובד? חיפוש ביוטיוב</a>
+</div>
+
+<div class="stage" style="--c:var(--s2)">
+  <div class="tag">שלב 2 · הקריאה</div>
+  <h3 class="display">משהו קורה, והחיים משתנים</h3>
+  <p class="q">ולפעמים הגיבור בכלל רוצה לסרב.</p>
+  <p class="po">פו מגיע בטעות לטקס בחירת לוחם הדרקון, נופל מהשמיים באמצע הכיכר, והמאסטר אוגוויי מצביע עליו: <b>הוא הנבחר</b>. כולם בהלם, כולל פו. הוא לא יודע קונג פו, החמישה צוחקים עליו, והוא כמעט בורח הביתה.</p>
+  <a class="vid" href="https://www.youtube.com/watch?v=VRjDmMqHgd0" target="_blank" rel="noopener">▶ אוגוויי בוחר בפו</a>
+  <a class="alt" href="https://www.youtube.com/results?search_query=Kung+Fu+Panda+Oogway+chooses+Po+Dragon+Warrior" target="_blank" rel="noopener">הסרטון לא עובד? חיפוש ביוטיוב</a>
+</div>
+
+<div class="stage" style="--c:var(--s3)">
+  <div class="tag">שלב 3 · המנטור</div>
+  <h3 class="display">מישהו שמלמד אותו ודוחף אותו קדימה</h3>
+  <p class="q">המנטור רואה בגיבור משהו שהוא עוד לא רואה בעצמו.</p>
+  <p class="po">שיפו, המאסטר, בכלל לא רוצה ללמד את פו. אבל אוגוויי אומר לו להאמין. ואז שיפו מגלה סוד: פו מסוגל לעשות דברים מדהימים כשיש אוכל בתמונה. הוא מאמן אותו עם כופתאות, ופו פתאום לומד מהר.</p>
+  <p class="po" style="margin-top:10px"><b>אוגוויי:</b> "אתמול זו היסטוריה, מחר זו תעלומה, היום זו מתנה."</p>
+  <div class="vids">
+    <a class="vid" href="https://www.youtube.com/watch?v=GPY3lPM6raE" target="_blank" rel="noopener">▶ האימון עם הכופתאות</a>
+    <a class="vid" href="https://www.youtube.com/watch?v=ZtZ_IngGpPA" target="_blank" rel="noopener">▶ המשפט של אוגוויי</a>
+  </div>
+  <a class="alt" href="https://www.youtube.com/results?search_query=Kung+Fu+Panda+dumpling+training+Shifu" target="_blank" rel="noopener">הסרטון לא עובד? חיפוש ביוטיוב</a>
+</div>
+
+<div class="stage" style="--c:var(--s4)">
+  <div class="tag">שלב 4 · המבחן הגדול</div>
+  <h3 class="display">הרגע שבו נראה שהכול אבוד</h3>
+  <p class="q">הנקודה הכי נמוכה בסיפור.</p>
+  <p class="po">טאי לונג, הנבל, בורח מהכלא ומביס את חמשת הלוחמים. פו מקבל סוף סוף את מגילת הדרקון, הסוד שאמור לתת לו כוח אינסופי, פותח אותה, ו... <b>היא ריקה</b>. אין שום סוד. כולם בורחים מהעמק, ופו בטוח שהוא נכשל.</p>
+  <a class="vid" href="https://www.youtube.com/watch?v=iNvmPTISeO4" target="_blank" rel="noopener">▶ פו פותח את המגילה</a>
+  <a class="alt" href="https://www.youtube.com/results?search_query=Kung+Fu+Panda+Po+opens+Dragon+Scroll+blank" target="_blank" rel="noopener">הסרטון לא עובד? חיפוש ביוטיוב</a>
+</div>
+
+<div class="stage" style="--c:var(--s5)">
+  <div class="tag">שלב 5 · החזרה</div>
+  <h3 class="display">הגיבור חוזר, אבל הוא כבר אחר</h3>
+  <p class="q">זו קשת הדמות.</p>
+  <p class="po">אבא של פו מגלה לו את הסוד של המרק המפורסם שלו: <b>אין מרכיב סודי</b>. דברים הופכים למיוחדים כשמאמינים שהם מיוחדים. פו מבין שגם המגילה ריקה מאותה סיבה: הכוח היה בו כל הזמן. הוא חוזר, מביס את טאי לונג בדרך שרק הוא יכול, והופך ללוחם הדרקון.</p>
+  <a class="vid" href="https://www.youtube.com/watch?v=KfwTk1ngHQs" target="_blank" rel="noopener">▶ אין מרכיב סודי</a>
+  <a class="alt" href="https://www.youtube.com/results?search_query=Kung+Fu+Panda+there+is+no+secret+ingredient" target="_blank" rel="noopener">הסרטון לא עובד? חיפוש ביוטיוב</a>
+</div>
+</div>
+
+<section>
+  <div class="wrap card">
+    <h3 class="display">קשת הדמות של פו</h3>
+    <div class="wn">
+      <div class="w"><b>מה פו רוצה</b>להיות לוחם קונג פו אגדי, כמו הגיבורים שהוא מעריץ.</div>
+      <div class="n"><b>מה פו צריך</b>להאמין בעצמו, בדיוק כמו שהוא, בלי לנסות להיות מישהו אחר.</div>
+    </div>
+    <div class="arc"><span>"אני סתם פנדה שמן"</span><span>←</span><span>"אין מרכיב סודי. רק אני."</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap card">
+    <h3 class="display">אותו מסע, גיבורים אחרים</h3>
+    <p>עכשיו תראו איך הארי פוטר ופיטר פרקר עוברים בדיוק את אותם חמישה שלבים.</p>
+    <table>
+      <tr><th></th><th>הארי פוטר<br><small style="color:var(--muted);font-weight:400">אבן החכמים</small></th><th>פיטר פרקר<br><small style="color:var(--muted);font-weight:400">ספיידרמן: השיבה הביתה</small></th></tr>
+      <tr style="--c:var(--s1)"><td>העולם הרגיל</td><td>גר בארון מתחת למדרגות אצל דודים שמתעללים בו. אין לו משפחה ואין לו בית אמיתי.</td><td>תלמיד תיכון בקווינס שאחרי ההרפתקה עם הנוקמים מחכה כל יום לטלפון מטוני סטארק.</td></tr>
+      <tr style="--c:var(--s2)"><td>הקריאה</td><td>האגריד פורץ את הדלת: "אתה קוסם, הארי." מזמינים אותו להוגוורטס.</td><td>הוא מגלה עסקת נשק מסוכנת ברחוב, ומחליט לטפל בה לבד כדי להוכיח את עצמו.</td></tr>
+      <tr style="--c:var(--s3)"><td>המנטור</td><td>האגריד מכניס אותו לעולם הקוסמים, ודמבלדור שומר עליו מרחוק.</td><td>טוני סטארק. ואחרי שפיטר כמעט גורם לאסון, טוני לוקח לו את החליפה.</td></tr>
+      <tr style="--c:var(--s4)"><td>המבחן הגדול</td><td>הוא יורד לבד אל מתחת לבית הספר ועומד מול וולדמורט כדי להציל את אבן החכמים.</td><td>הנבל קובר אותו תחת הריסות של בניין שלם, בלי החליפה המיוחדת, והוא לבד.</td></tr>
+      <tr style="--c:var(--s5)"><td>החזרה</td><td>חוזר לדודים, אבל עכשיו הוא יודע מי הוא, יש לו חברים, ויש לו בית.</td><td>מסרב להצעה להצטרף לנוקמים. הוא מבין שהוא לא צריך את החליפה כדי להיות גיבור.</td></tr>
+    </table>
+    <div class="vids" style="margin-top:22px">
+      <a class="vid" href="https://www.youtube.com/watch?v=oIbJcBxkszQ" target="_blank" rel="noopener">▶ הארי: "אתה קוסם, הארי"</a>
+      <a class="vid" href="https://www.youtube.com/watch?v=JaEzmEFIO7s" target="_blank" rel="noopener">▶ פיטר: טוני לוקח את החליפה</a>
+      <a class="vid" href="https://www.youtube.com/watch?v=VX-V-Crp-R8" target="_blank" rel="noopener">▶ פיטר מרים את ההריסות</a>
+    </div>
+    <p class="big-quote" style="margin-top:24px">טוני סטארק לפיטר: "אם אתה כלום בלי החליפה, אז לא מגיע לך שתהיה לך."<br>זה בדיוק מה שפו לומד: הכוח לא נמצא בחליפה ולא במגילה. הוא בפנים.</p>
+  </div>
+</section>
+
+<section class="bridge">
+  <h2 class="display">עכשיו תורכם</h2>
+  <p>תחשבו על סרט או סדרה שאתם אוהבים. מי הגיבור? מה הוא רוצה, ומה הוא באמת צריך? ואיפה רואים אצלו את חמשת השלבים?</p>
+</section>
+
+</body>
+</html>
